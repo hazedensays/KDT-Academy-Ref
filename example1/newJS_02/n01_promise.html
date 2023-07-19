@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./n02_JScode/n01_promise.js"></script>
+</head>
+<body>
+    <h3>** Promise **</h3> 
+    <pre>
+         
+=> 지연함수 와 비동기연산(Ajax) 을 제어할 수 있도록 해주는 객체 
+   ( 지연함수: 지정한 시간 후에 실행 되도록 정의한 함수 )
+         
+=> JavaScript 에서 코드가 순차적으로 일어나는 처리를 동기처리,
+   특정 코드가 처리될때 까지 기다리지 않고 다음코드를 먼저 처리하는 것을 비동기처리 라고함.
+   이러한 비동기처리에서 콜백지옥(Callback Hell) 등의 문제를 해소하기 위해 사용하는 객체,
+   즉 비동기 처리에서 순차적 처리를 행하기 위해 사용되는 객체가 프로미스(Promise)이다.
+            
+=> Promise 의 처리 상태 3가지
+  - Pending(대기): Promise 객체를 생성하고, 처리성공 또는 처리실패 이전까지의 미완료 상태
+         
+- Fulfilled(이행): 처리가 성공적으로 이루어져 Promise 결과 값을 return 해준 상태
+  위의 콜백함수에서 어떠한 처리를 수행할테고, 이 처리가 성공하면 인자 값인 resolve 를 수행한다.
+   resolve( ) 를 수행하게 되면 Promise 객체는 Fulfilled(이행) 상태가 되는데,
+  Fulfilled(이행) 상태가 되면 아래와 같이 then() 을 이용해 처리 결과를 받아올 수 있다.
+             
+- Rejected(실패): 처리가 실패해 오류가 발생한 상태
+  콜백함수 처리가 실패되면 reject( ) 를 수행하여 Rejected(실패) 상태로 들어가게 된다.
+  Rejected(실패) 상태는 catch() 로 결과 값을 받아올 수 있다.   
+         
+=> Producer (생산자) 
+=> Consumer (소비자)      
+       </pre> 
+</body>
+</html>
