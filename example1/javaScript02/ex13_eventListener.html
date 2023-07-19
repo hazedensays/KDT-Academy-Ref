@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jsCode2/ex13.js"></script>
+</head>
+<body>
+    <pre><h3>
+** Event Basic **
+=> 이벤트속성, 이벤트리스너  : onclick
+  -> on 을 제외한부분을 이벤트이름, 이벤트타입 이라함
+
+=>  이벤트핸들러
+  -> 이벤트속성에 대응되는 함수   
+  -> onclick="start()
+
+=> 이벤트모델
+  -> dom객체 (Tag)의 이벤트리스너 와 이벤트핸들러 를 연결하는 방법
+  -> 1)인라인  2)인라인+스크립트  3)고전적(Traditional) 방식
+    <hr>
+
+** 실습 **
+
+1) 인라인
+<button onclick="alert('test1. 인라인')">이벤트 모델_1 = 인라인</button>
+
+2) 인라인 + 스크립트
+<button onclick="scriptTest(event)">이벤트 모델_2 = 인라인 + 스크립트</button>
+<!-- event라는 단어만 사용 가능 -->
+
+3) 고전적 방식과 this
+<button id="trad">이벤트 모델_3 = 고전적 방식</button>
+
+4) 기본 event 제거 (remove)
+<a href="http://naver.com" id="removeEvent">CommonEvent_remove_Test</a>
+
+
+    </h3></pre>
+
+
+
+</body>
+</html>

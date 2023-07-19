@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>** 내장함수 eval 을 이용한 계산기 **</title>
+<style>
+	button { width:50px; }
+</style>
+<script>
+	var expression = '' ;
+	var result = 0;  // 전역변수 -> 모든 function 에서 사용가능
+
+	// ** JS 에서 숫자인지 확인하기 
+	// => Number.isNan(n) 
+	//    n 이 숫자가 아니면 true, 숫자면 false 
+	// => Number.isInteger(n) 
+	//    n 이 정수이면 true, 아니면 false 
+	function input(n) {
+		// 결과 출력후 이어서 연산자가 입력되면 계속 연산하는 경우이고,
+		// 결과 출력후 이어서 숫자가 입력되면 새로운 연산으로 취급 -> 변수 클리어가 필요
+		// => 주의 : n -> '7'
+		if ( expression===result && Number.isInteger(parseInt(n))) {
+			expression = '' ;
+			result = 0;
+		}
+		
+		expression +=n; // 3+5*7...
+		document.getElementById("display").value = expression;
+	}
+	
+	function compute() {
+		result = eval(expression);
+		document.getElementById("display").value = result;
+		expression = result; // 결과를 출력했음을 표시하기위함
+	}
+	
+	function clearExpression() {
+		expression =''; result=0;
+		document.getElementById("display").value = '0';
+	}
+	
+	function backSpace() {
+		// => document.getElementById("display").value
+		// => 1234567 -> 123456 
+		// => substr(startIndex , 원하는길이) 
+		var s = document.getElementById("display").value;
+		expression = s.substr(0,(s.length-1));
+		document.getElementById("display").value = expression;
+	}
+
+</script>
+
+
+</head>
+<body>
+<h3>** 내장함수 eval 을 이용한 계산기 **</h3>
+=> eval : 문자열(3+5*2)을 수식으로 바꾸어서 계산을 해줌<br>
+=> eval("3+5*2") -> 연산결과 13 제공<br>
+<hr>
+* display : <br>
+<input id="display" value="0" size="25">
+<br>
+<button onclick="input('7')" >7</button>
+<!-- () 괄호 안에 있는 거 - 매개변수, 파라매터 -->
+<!-- 매개변수와 인수의 차이는 함수를 정의할 때 사용되는 변수를 매개변수,
+실제로 함수가 호출될 때 넘기는 변수값을 인수라고 한다. -->
+<button onclick="input('8')" >8</button>
+<button onclick="input('9')" >9</button>
+<button onclick="input('/')" >/</button>
+<br>
+<button onclick="input('4')" >4</button>
+<button onclick="input('5')" >5</button>
+<button onclick="input('6')" >6</button>
+<button onclick="input('*')" >*</button>
+<br>
+<button onclick="input('1')" >1</button>
+<button onclick="input('2')" >2</button>
+<button onclick="input('3')" >3</button>
+<button onclick="input('-')" >-</button>
+<br>
+<button onclick="input('0')" >0</button>
+<button onclick="input('+')" >+</button>
+<button onclick="input('(')" >(</button>
+<button onclick="input(')')" >)</button>
+<br>
+<button onclick="clearExpression()" >Clear</button>
+<button onclick="compute()" >Enter</button>
+<button onclick="backSpace()" style="width:105px;">BackSpace</button>
+</body>
+</html>

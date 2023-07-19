@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection - Set</title>
+    <script src="./n01_JScode/n05.js"></script>
+</head>
+<body>
+    <h3>** Set **</h3>
+
+    <pre>
+=> Set은 중복을 허용하지 않는 데이터(value) 들의 집합.
+=> Set은 수정 가능하며, 프로그램이 실행되는 동안 값의 추가나 삭제 가능함.
+  ( delete 성공시 true 를 반환하고 실패시 false 를 반환 )
+        
+<strong>** Set과 Array 의 차이점 **</strong>
+
+=> 값이 중복되지 않습니다 ( 중복값은 저장하지 않음 )
+  const mySet = new Set("abcd");
+  mySet.size; // 4
+  mySet.add("a");
+  mySet.size; // 4
+        
+=> 데이터 확인이 편리하고 빠름.
+  const mySet = new Set("abcd");
+  const myArray = [..."abcd"];
+            
+myArray.indexOf("a") !== -1 // true slow
+mySet.has("a")              // true fast   
+          
+=> Set은 인덱스 값으로 데이터 조회는 불가능
+  myArray[0]; // "a"
+  mySet[0];   // undefined
+        </pre>
+</body>
+</html>

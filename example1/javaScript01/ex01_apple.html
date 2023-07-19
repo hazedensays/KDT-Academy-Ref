@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>** JavaScript Start **</title>
+<script type="text/javascript">
+	function imageChange() {
+		// 현재 src값이 apple 이면 banana
+		// 현재 src값이 banana 면 apple 을 표시하도록 작성
+		// => 현재 img Tag 의 src 값을 전달받아야 함
+
+		var i = document.getElementById("image");
+		
+		// ** src 속성값은 == 으로 비교안됨 
+		// => src 속성값을 비교하는 match 를 이용
+		/* 
+		if (i.src=='../image/apple.png')  i.src='../image/banana.png';
+		else i.src='../image/apple.png'; 
+		*/
+		if (i.src.match('../images/apple.png'))  i.src='../images/banana.png';
+		else i.src='../images/apple.png';
+		//값이 일치하는지 살펴보는 내장된 메서드 match
+	}
+</script>
+
+</head>
+<body>
+<h3><pre>
+** JavaScript Start **
+=> 이벤트 리스너 속성에 자바스크립트 코드 작성하기
+
+1) Apple Click 하기
+<img src="../images/apple.png" onclick="this.src='../images/banana.png'">
+
+2) Apple 에 Mouse 올려보기 
+<img src="../images/apple.png" onmouseover="this.src='../images/banana.png'"
+	 width="100" height="130" onmouseout="this.src='../images/apple.png'">
+
+3) Toggle 방식 : function 적용
+<img src="../images/apple.png" onclick="imageChange()" id="image" >
+
+4) ex01_output 로 이동
+<a href="ex01_output.html" >ex01_output</a>
+</pre></h3>
+</body>
+</html>

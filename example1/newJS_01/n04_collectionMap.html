@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection - Map</title>
+    <script src="./n01_JScode/n04.js"></script>
+</head>
+<body>
+    <h2>** 컬렉션(Collections) 장점 **</h2> 
+    <pre>
+=> Object, Array를 사용하는 것 보다 최적화된 구현체를 제공
+=> ES6 : Map, Set, WeakMap, WeakSet
+
+<strong>** Map **</strong>
+
+<strong>=> 특징</strong>
+  - Key - Value 의 쌍으로 이루어진 컬렉션
+  - key 를 사용해서 value 를 get, set 할 수 있음
+  - key 들은 중복될 수 없음 : 하나의 key 에는 하나의 value 만 허용
+  - key 로 사용가능한 데이터 Type 
+    : string, symbol(ES6), object, function 등
+    : number 는 사용불가능
+
+<strong>=> 객체와 비교</strong>
+  - 객체는 속성 추가시 내장 속성과 이름 중복으로 충돌이 일어날 수 있음.
+  - 객체는 이터러블 규약을 따르지 않으나 맵은 따름 ( for ~ of 가능 )    
+  - 속성의 Key는 항상 문자열 이어야 함. (ES6 에서는 심볼도 가능함)
+  - 객체의 속성의 수를 알수 없음.(size나 length 같은 메서드가 없음)
+      </pre>
+</body>
+</html>
