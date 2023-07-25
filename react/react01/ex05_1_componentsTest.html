@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>** React Component02 : function 연습**</title>
+</head>
+<body>
+<!--     ** 과제
+    배열로 Data 를 전달받아 ul, li 로 출력하는 함수형 컴포넌트를 정의하고,
+    => 배열2개, 버튼2개 (재료, 조리법) 를 정의하여 출력하도록 완성하세요   
+    => Data 갯수는 5개이상 -->
+
+    <div id="reactContainer"></div>
+    <hr>
+    
+    <button onclick="dinner()">*찬미의 오스스메 저녁 메뉴*</button>
+    <button onclick="sleeping()">*꿀잠자는 방법*</button>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script>
+        const myRoutine = ({items}) =>
+            React.createElement("ul", {"className" : "MiMi_s_routine"},
+                        items.map((item, i) => React.createElement("li", {key: i}, item)));
+
+        let dinnerList = ["마라탕", "불닭볶음면", "마라엽떡"
+                            , "김치전", "훠궈", "마라샹궈"];
+
+        let deepSleep = ["뜨거운 물로 샤워를 한다."
+                        , "에어컨을 틀고 이불을 덮는다."
+                        , "좋아하는 클래식을 튼다."
+                        , "이불에 좋아하는 향수를 뿌린다.",
+                        , "책을 읽는다."];
+            
+        function dinner() {
+            ReactDOM.render(React.createElement(myRoutine, {items: dinnerList}, null)
+                                            , document.getElementById("reactContainer"));
+            }
+            
+        function sleeping() {
+            ReactDOM.render(React.createElement(myRoutine, {items: deepSleep}, null)
+                                            , document.getElementById("reactContainer"));
+            }
+    </script>
+</body>
+</html>
