@@ -83,6 +83,18 @@ function Body() {
                     <option key={"일론 머스크 자녀"}>일론 머스크 자녀</option>
                     <option key={"빌게이츠 자녀"}>빌게이츠 자녀</option>
                 </select>
+                
+{/*                 // => select
+                // -> html 과 차이점
+                //    selected 대신 value를 사용해 기본값 할당. (아래코드에서는 애플)
+                //    선택된 option 값을 가져오려면, onChange를 사용해야하며,
+                //    option 의 컨텐츠가 select 의 value 에 전달됨.
+                const [option, setOption] = useState('애플');
+                const jobChange = (e) => {
+                console.log('** select : value='+e.target.value);
+                // => select option 의 컨텐츠 값이 자동으로 value 속성에 전달됨.
+                setOption(e.target.value);
+                } */}
             </div>
         </div>
     );
