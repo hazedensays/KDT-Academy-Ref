@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <Header trip={trip}/>
-      <Body name={name} contry={"미국 캘리포니아"}/>
+      <Body name={name} country={"미국 캘리포니아"}/>
       <Footer/>
     </div>
   );

@@ -12,17 +12,25 @@
 //    HTML의 경우, <h1 style="color: palevioletred; background-color: paleturquoise;">
 // => 스타일파일 분리 : Body.css(컴포넌트 파일명과 동일) , import './Body.css'
 
-// ** import
-//    => 컴포넌트는 MyComp from real_File_path;
-//       내부 코드에서 MyComp 이름으로 인식
-//    => CSS는 real_File_path만 명시함 ⭐
-
-
+// ** 이벤트객체 활용 실습
 
 // ** Props, 컴포넌트에 값 전달하기
 // => Props(properties) 객체 : 부모에서 자식으로 값 전달
 // => 그러므로 Body 컴포넌트 Props로 값을 전달하기 위해서는
 //    APP 컴포넌트에서 전달해야 함 (name 값을 Body로 전달)
+
+// ** import
+//    => 컴포넌트는 MyComp from real_File_path;
+//       내부 코드에서 MyComp 이름으로 인식
+//    => CSS는 real_File_path만 명시함 ⭐
+
+// ** React Event (Html 과 차이점) 
+// => 이벤트 핸들러 카멜표기  
+// => 콜백함수처럼 함수 그자체를 전달
+// => onClick={onClickHandler}
+// => 기본이벤트 제거 ( return false 대신 e.preventDefault() 명시적으로 호출해야함 )
+
+
 
 
 // ** Event 
@@ -46,9 +54,17 @@ function Body(props) {
     // 부모로부터 전달된 props 확인
     //console.log (`Body, props : ${props}`);
 
+
+    const {name, country} = props;
+
     //***이벤트 핸들러
-    function btnTest() {
+/*     function btnTest() {
         alert ("** Event Test... 응 구라야~ ㅋㅋ **");
+    } */
+
+    const btnTest = (e) => {
+        alert ("** Event Test... 응 구라야~ ㅋㅋ ** => " + e.target.name);
+        console.log (`** clickTest e 객체 확인 => ${e.type}`);
     }
 
 
@@ -64,10 +80,12 @@ function Body(props) {
                 <h1 style = {{color: "palevioletred", backgroundColor: "paleturquoise", paddingTop: "10px", paddingBottom: "10px"}}>
                     ** Body : JSX TEST **</h1>
 
-                <p>** props.name: {props.name}, props.contry: {props.contry} </p>
+                <p>** props.name: {props.name}, props.country: {props.country} </p>
                 <p>** 산술식: n1 + n2 = {n1 + n2}</p>
                 <p>** 문자식: s1 + s2 = {s1 + s2}</p>
                 <p>** 논리식: OR = {b1 || b2}, AND = {b1 && b2}</p>
+                <p>** 관계식: n1과 n2 중에 뭐가 클까요~? (n1이 크면 true) {n1 > n2}</p>
+                <p>** props 구조분해 적용 name={name}, country={country}</p>
     
                 {/* 
                 <p>** Object: obj = {obj}</p>
@@ -90,10 +108,11 @@ function Body(props) {
                     <h1>** Body : JSX TEST **</h1>
                     <p>집 가고 싶어요~</p>
                     <img src={img1}/>
-                    <button onClick={btnTest}>클릭 한번으로 집가기</button>
+                    <button onClick={btnTest} name="goHome_btn">클릭 한번으로 집가기</button>
+                    <button onClick={btnTest} name="goTrip_btn">클릭 한번으로 여행가기</button>
                 </div>
                 
-                <div>"최상위 Tag 규칙 : React.Fragment Tag로 감싸줌"</div>
+                <div>"최상위 Tag 규칙 : React.Fragment Tag로 감싸줌, 랜더링 되지 않으므로 div 대신 사용"</div>
             </React.Fragment>
         )
     }
