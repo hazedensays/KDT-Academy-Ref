@@ -12,13 +12,27 @@ import {useState} from "react";
 
 function Body() {
     //state test 1
+    // => 1) state 변수 count를 출력
+    // => 2) count2를 1씩 증가시키는데, 5가 증가하면 리랜더링 하도록 수정
+    let count2 = 0;
     const [count, setCount] = useState(0);
     const onIncrease = () => {
-        setCount(count + 1);
+        setCount(count + 1); //count+=1; setCount(count + 1)의 count 값에는 영향이 없음
 
-        if (count >= 100) {
+        if (count2 >= 100) {
             alert (`나랑 결혼할래? 👰💗🤵`);
             setCount(0);
+            count2 = 0;
+        } else {
+            // test.1
+            count2 += 1;
+            console.log (`state_count Test => ${count2}`);
+
+            // test.2 : count2의 값 5의 배수일 때 setCount() 호출
+            if (count2 % 5 == 0) {
+                setCount(count2);
+            }
+
         }
     }
 
@@ -29,9 +43,19 @@ function Body() {
         if (count <= 0) {
             alert (`0으로 내려가면 헤어지는거야!!!!!!🤬🤬🤬`);
             setCount(0);
-        } 
-    }
+            count2 = 0;
+        } else {
+            // test.1
+            count2 -= 1;
+            console.log (`state_count Test => ${count2}`);
 
+            // test.2 : count2의 값 5의 배수일 때 setCount() 호출
+            if (count2 % 5 == 0) {
+                setCount(count2);
+            }
+        }
+    }
+ 
 
     //state test 2 - 다양한 input Tag
     //text (textarea도 동일함, value 속성값으로 전달)
@@ -65,7 +89,7 @@ function Body() {
             <p>** 우리의 사랑은 몇 퍼센트?! **</p>
 
             <button onClick={onIncrease}>+💖</button>
-            <span>Love💕 = {count}%</span>
+            <span>Love💕 = {count2}%</span>
             <button onClick={onDecrease}>-💔</button>
 
             <div>
@@ -83,8 +107,8 @@ function Body() {
                     <option key={"일론 머스크 자녀"}>일론 머스크 자녀</option>
                     <option key={"빌게이츠 자녀"}>빌게이츠 자녀</option>
                 </select>
-                
-{/*                 // => select
+                `   `
+{/*                 01// => select
                 // -> html 과 차이점
                 //    selected 대신 value를 사용해 기본값 할당. (아래코드에서는 애플)
                 //    선택된 option 값을 가져오려면, onChange를 사용해야하며,

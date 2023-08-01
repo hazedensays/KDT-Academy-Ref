@@ -13,6 +13,7 @@ function Header(props) {
             (구라임 사실 p임ㅋㅋ)</p>
 
             {/* <p>난 j이기 때문에 예약은 모두 {props.trip}했어요~</p>  이건 오류 */}
+            <p>memo는 {props.trip.memo.length}개 있어요.</p>
         </header>
     );
 }

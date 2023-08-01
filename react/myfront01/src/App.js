@@ -14,7 +14,8 @@ function App() {
   const trip = {
       country: "베트남",
       days: "7일",
-      reservation: "완료"
+      reservation: "완료",
+      memo: ["메롱", "바보", "킼키"]
   };
 
   return (

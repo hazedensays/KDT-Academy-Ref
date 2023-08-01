@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>**기초실력 다지기**</title>
+    <script>
+        /*
+        1. 순차정렬(sort)과 반복문
+        => Data 구분
+           기본 자료형 ( 단일값 : 정수, 실수, 문자, boolean..등)
+           배열, Map, Set (Map, Set 자료를 관리하기 편리하기 위해 사용)
+
+           -> 기본 알고리즘: sort, search
+        */
+
+       let s1 = 10, s2 = 20, s3 = 30, s4 = 12, s5 = 100;
+       let point = [100, 555, 200, 300, 111];
+       let temp = 0;
+
+       for (let i = 0; i < point.length; i++) {
+        for (let j = i + 1; j < point.length; j++) {
+            // console.log (`[${point[i]}, ${point[j]}]`);
+
+            if (point[i] > point[j]) {  // '>':오름차순 '<':내림차순
+                temp = point[i];
+                point[i] = point[j];
+                point[j] = temp;
+            }
+            console.log (`[${point[i]}, ${point[j]}]`);
+        }
+        console.log("\n");
+    }
+
+        console.log(point);
+
+        // 배열 : in -> index
+        for (let p in point) {
+            console.log (point[p]);
+        }
+
+        // 배열 : of -> value
+        for (let p of point) {
+            console.log (p);
+        }
+
+        /*
+        ** 과제
+        => student 객체(속성: name, score)를 생성자 함수를 이용해서 구현
+        => 인스턴스 3개 생성 후 배열에 담기
+        => score 순으로 출력하기 (sort메서드 사용 X)
+         */
+
+         function Student(name, score) {
+            this.name = name;
+            this.score = score;
+
+            this.info = function() {
+                return (`이름은 ${this.name}, 점수는 ${this.score}`);
+            }
+         }
+
+         const student1 = new Student('지드래곤', 100);
+         const student2 = new Student('태양', 90);
+         const student3 = new Student('대성', 80);
+
+         let arr = new Array(3);
+
+         arr[0] = student1;
+         arr[1] = student2;
+         arr[2] = student3;
+
+
+         let tmp = 0;
+
+         for (let i = 0; i < arr.length; i++) {
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[i].score < arr[j].score) {
+                    tmp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tmp;
+                }
+            }
+         }
+
+         for (let i in arr) {
+            console.log (`${parseInt(i) + 1} = ${arr[i].info()}`);
+         }
+
+        // => students 배열에 map 적용해서 score 배열 만들기
+        //    score+index*100의 값을 가진 score 배열로 만들어 출력하기
+        //    (주의 : students 배열은 성적순 정렬된 상태임)
+
+        let arrMap = arr.map((number, index) => {
+                return (number.score + index * 100); //number이 객체이기 때문에 score값을 쓰기 위해 number.score로 접근
+        });
+
+        console.log("메롱");
+        console.log(`arrMap = ${arrMap}`);
+
+
+
+
+        
+
+
+
+    </script>
+</head>
+
+<body>
+    <h2>**기초실력 다지기**</h2>
+    <pre>
+        1. 순차정렬(sort)과 반복문
+    </pre>
+</body>
+
+</html>
