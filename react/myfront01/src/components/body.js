@@ -107,7 +107,7 @@ function Body() {
                     <option key={"일론 머스크 자녀"}>일론 머스크 자녀</option>
                     <option key={"빌게이츠 자녀"}>빌게이츠 자녀</option>
                 </select>
-                `   `
+
 {/*                 01// => select
                 // -> html 과 차이점
                 //    selected 대신 value를 사용해 기본값 할당. (아래코드에서는 애플)

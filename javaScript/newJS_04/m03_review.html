@@ -100,6 +100,16 @@
 
 
 
+        let point1 = [100, 555, 200, 300, 111];
+
+        // => point 순으로 출력하기 (정현님 코드)
+        for (let i = 0; i < point.length - 1; i++) {    //인덱스 i는 0부터 4까지 반복문 실행
+            for (let j = point.length - 1; j > i; j--) {    //인덱스 j는 4부터 1까지 반복문 실행
+                console.log(`${point[i]}, ${point[j]}`);
+            }fm
+            if (i < point.length - 2) console.log('-------');
+        }
+
 
         
 
