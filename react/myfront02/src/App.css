@@ -1,0 +1,16 @@
+div {
+  text-align: center;
+  background-color: cornsilk;
+  color: darkcyan;
+  margin-top: 1rem;
+}
+
+button {
+  color: palevioletred;
+  border: none;
+  background-color: rgb(159, 218, 198);
+  margin: 0.2rem;
+  margin-top: 1.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
