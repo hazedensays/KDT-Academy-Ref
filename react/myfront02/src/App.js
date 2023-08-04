@@ -26,9 +26,8 @@
 // => 5) Update(리랜더링)시에만 호출하도록 변경
 // => 6) UnMount 제어
 
-import logo from './logo.svg';
 import './App.css';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Controllerr from './components/Controllerr';
 import Viewer from './components/Viewer';
 
@@ -54,14 +53,14 @@ function App() {
   // useEffect(() => {console.log (`** useEffect test2 => count: ${count}, text: ${text} **`);}, [count, text]);
   // useEffect(() => {console.log (`** useEffect test2 => text: ${text}**`);}, [text]);
 
-  useEffect(()=>{console.log(`useEffect test2) count = ${count} text = ${text}`);
+  useEffect(()=>{console.log(`** useEffect test2 => count: ${count} text: ${text} **`);
   },[text]);
 
 /*   3. 두번째 인수가 없는 useEffect 정의 후 비교
   => 콜백함수를 실행시켜주는 조건값이 제시되지 않은 경우
   => 랜더링 할때마다 호출됨 */
   useEffect(()=>{
-    console.log(`useEffect test3) 배열없음 count = ${count} text = ${text}`);
+    console.log(`** useEffect test3 배열없음 => count = ${count} text = ${text} **`);
   });
 
 
@@ -71,16 +70,63 @@ function App() {
     ( 처음 한번만 실행됨 확인 )*/
   useEffect(() => {
     // alert("Hello, pingping");
-    console.log(`useEffect test4) 빈배열 count = ${count}`)}
+    console.log(`** useEffect test4 빈배열 => count = ${count} **`)}
     , []);
 
 /*   5. Update(리랜더링)시에만 호출하도록 변경
-  => 콜백함수를 실행시켜주는 조건값이 제시되지 않은 경우
-  => 랜더링 할때마다 호출됨 */
+  => 위 3번 랜더링에서 최초 랜더링(마운팅시점)만 제외시켜주면 됨 */
+
+  // => 최초 랜더링(마운트)인지 확인하고 아닌 경우에만 출력
+  // => 그러므로 최초 랜더링(마운트)인지 판별하는 변수를 정의하고
+  //    초기값을 false로 설정
+  //    Ref 객체로 생성
+  //    (Ref 객체는 DOM요소 참조뿐만 아니라 컴포넌트의 변수로도 활용됨)
+
+  const didMountRef = useRef(false);
+
+  useEffect(() => {
+    if (!didMountRef.current){    //if (didMountRef.current == false){}
+      // 최초 랜더링(마운트) 시점 -> 출력하지 않고 return (callback 함수 종료)
+      didMountRef.current = true;
+      return;
+    } else {
+      console.log (`** useEffect test5 Update =>  count: ${count}, text: ${text} **`);
+    }
+  });
+
+/*   6. UnMount 제어
+  => 클린업(CleanUp)
+     특정함수가 실행되고 종료된 후 미처 정리하지못한 사항을 정리하는것
+  => 클린업 필요성 Test : useEffect (setInterval 사용하고 배열 없는) 추가
+  */
+
+//  useEffect(() => {setInterval(() => {console.log (`** 깜빡 **`)}, 1000)});
+ // 랜더링할 때 마다 호출 (3번)
+
+ // => 클린업 함수 추가
+ useEffect(() => {
+    const intervalId = setInterval(() => {console.log("**깜빡**");}, 1000);
+    return() => {
+      console("** 클린업 함수 **");
+      clearInterval(intervalId);
+    }});
 
 
 
+ // => 두번째 인자 배열이 없으므로 랜더링 할때마다 콜백함수 실행됨
+  // => 콜백함수에서 호출한 setInterval 에 의해 1초마다 콘솔출력됨
+  // => 그러나 + , - 클릭으로 리랜더링이 일어나면, 1초 상관없이 출력됨
+  // => 콜백함수에서 호출한 setInterval 에 의해 1초마다 콘솔출력됨
+  // => 이유 : setInterval 을 계속 호출하므로 복수의 setInterval 이 계속 생성되기때문
+  //           호출한 setInterval 을 종료시켜주지 않았기 때문
+  //          (setInterval 은 clearInterval 을 호출해서 종료시켜야 멈춤)
+  // => 해결 : useEffect 의 클린업 기능
 
+  // => 클린업 함수
+  //    - useEffect 의 콜백함수에서 return 하는 함수
+  //    - 콜백함수를 재호출하기 전에 실행됨,
+  // => 그러므로 이를 이용하여 리랜더링 할때마다 새 setInterval 생성하고 
+  //    기존 setInterval 은 삭제하도록 할 수 있다.  
 
 
 
