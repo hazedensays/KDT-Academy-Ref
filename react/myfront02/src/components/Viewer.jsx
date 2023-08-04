@@ -12,7 +12,7 @@ import React from "react";
 // => 객체 구조분해 적용
 const Viewer = ({count}) => {
 
-    console.log ("** Viewer Update !! **");
+    // console.log ("** Viewer Update !! **");
 
     return(
         <div>

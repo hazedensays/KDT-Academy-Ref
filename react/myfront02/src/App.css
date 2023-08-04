@@ -14,3 +14,10 @@ button {
   border-radius: 2rem;
   cursor: pointer;
 }
+
+input {
+  border-radius: 2rem;
+  border: palegreen 2px solid;
+  outline: none;
+  color: darkcyan;
+}

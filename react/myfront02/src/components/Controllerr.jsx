@@ -55,7 +55,7 @@ const Controllerr= ({onChangeState}) => {
       (n) => { onChangeState(n); }
 */
 
-    console.log ("** Controllerr Update !! **");
+    // console.log ("** Controllerr Update !! **");
 
     return (
         <div>
