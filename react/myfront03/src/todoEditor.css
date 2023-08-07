@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.todoEditor {
+  border: 3px solid rgb(247, 186, 206);
+  border-radius: 30px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.todoEditor .editor_wrapper {
+    width: 80%;
+    display: flex;
+    margin: 0 auto;
+    gap: 10px;
+  }
+
+  .todoEditor h4 {
+    margin-bottom: 0.8rem;
+  }
+  
+  .todoEditor input {
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .todoEditor input:focus {
+    outline: none;
+    border: 1px solid #1f93ff;
+  }
+  
+  .todoEditor button {
+    cursor: pointer;
+    width: 80px;
+    border: none;
+    background-color: #1f93ff;
+    color: white;
+    border-radius: 50px;
+  }

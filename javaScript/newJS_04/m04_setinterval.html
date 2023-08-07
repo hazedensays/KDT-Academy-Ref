@@ -18,18 +18,34 @@
 
 <script>
     let span = document.getElementById("span");
-    //setInterval("doRotate()", 200); // "200/1000초 주기로"
+
+    // => 10회전하면 자동으로 멈추도록 설정
+    // => 1회전 할 때마다 count값 1씩 증가하고, 10이면 멈추기
+    //    (코드는 콜백함수 doRotate()에서 확인 가능)
+
+
 
     let count = 0;
     let timerId = setInterval("doRotate()", 200);
+    //setInterval("doRotate()", 200); // "200/1000초 주기로"
     span.onclick = () => {clearInterval(timerId);}
 
     function doRotate(){
-      let str = span.innerHTML;
-      let firstChar = str.substr(0, 1);
-      let remains = str.substr(1, str.length-1);
-      str = remains + firstChar;
-      span.innerHTML = str; 
+        // 1회전의 의미
+        // => 첫 글자가 뒤쪽으로 옮겨지는 과정을 글자 길이만큼 반복하는 것
+    
+        let str = span.innerHTML;
+        let firstChar = str.substr(0, 1);
+        let remains = str.substr(1, str.length-1);
+        str = remains + firstChar;
+        span.innerHTML = str; 
+
+        count++;
+        
+        if (count >= (str.length*10)) {
+            clearInterval(timerId);
+            console.log (`** count => ${count}`);
+        }
     }
 
 </script>

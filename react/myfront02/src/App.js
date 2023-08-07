@@ -30,6 +30,7 @@ import './App.css';
 import { useState, useEffect, useRef } from "react";
 import Controllerr from './components/Controllerr';
 import Viewer from './components/Viewer';
+import Even from './components/Even';
 
 function App() {
   const[count, setCount] = useState(0); 
@@ -103,13 +104,24 @@ function App() {
 //  useEffect(() => {setInterval(() => {console.log (`** 깜빡 **`)}, 1000)});
  // 랜더링할 때 마다 호출 (3번)
 
- // => 클린업 함수 추가
- useEffect(() => {
+// => 6-1. 클린업(CleanUp) 이해 (setInterval 활용)
+// => 클린업 함수 추가
+/*  useEffect(() => {
     const intervalId = setInterval(() => {console.log("**깜빡**");}, 1000);
     return() => {
       console("** 클린업 함수 **");
       clearInterval(intervalId);
-    }});
+    }}); */
+
+//=> 6-2. 클린업(CleanUp)을 이용한 언마우느 제어하기
+ // => count 값이 짝수면  
+  //    "짝수 입니다" 를 출력하는 컴포넌트 (Even.jsx) 를 만든다.
+  // => 이를 이용하여 조건부 랜더링 구현 
+  //    ( import, <Even /> 랜더링코드 추가 )
+  // => Even 에 useEffect 를 추가해서 언마운트 메시지 출력하기
+
+
+
 
 
 
@@ -137,6 +149,9 @@ function App() {
       <div>
         <div><input value={text} onChange={onChangeText}/></div>
         <Viewer count={count}/>
+        {count % 2 === 0 && <Even></Even>}
+         {/* && : 앞쪽의 조건식이 참이면 뒤쪽 리턴값 랜더링
+                 ( 거짓이면 아무것도 랜더링하지않음 ) */}
         <Controllerr onChangeState={onChangeState}/>
       </div>
     </div>

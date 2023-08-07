@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header {
+    border: 3px solid rgb(247, 186, 206);
+    border-radius: 30px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+.header h1 {
+    color: skyblue;
+    margin-bottom: 0px;
+}

@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+.todoList {
+  border: 3px solid rgb(247, 186, 206);
+  border-radius: 30px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.todoList h4 {
+    margin-bottom: 0.8rem;
+}
+
+.searchBar {
+    width: 400px;
+  box-sizing: border-box;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 1rem;
+}
+
+.searchBar:focus {
+    outline: none;
+    border: 1px solid #1f93ff;
+  }
