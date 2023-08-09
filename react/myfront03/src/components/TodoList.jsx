@@ -20,7 +20,7 @@ import { useState } from "react";
 import "../todoList.css";
 import TodoItems from "./TodoItems";
 
-const TodoList = ({todo}) => {
+const TodoList = ({todo, onUpdate, onDelete}) => {
     const[search, setSearch] = useState('');
     const onChangeSearch = (e) => {
         setSearch(e.target.value);
@@ -59,7 +59,9 @@ const getSearchResult = () => {
 
                 {/* 3. 배열(todo)에 filter() 적용 */}
                 {/* => TodoItems로 전달하기 전, filter() 처리하고, 처리된 배열을 map()으로 전달 */}
-                {getSearchResult().map((it) => {return (<TodoItems key={it.id} {...it}/>)})}
+                {getSearchResult().map((it) => {return (<TodoItems key={it.id} {...it}
+                                                                   onUpdate={onUpdate}
+                                                                   onDelete={onDelete}/>)})}
             </div>
         </div>
     );

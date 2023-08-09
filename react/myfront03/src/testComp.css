@@ -1,0 +1,25 @@
+.reducerDiv {
+    border: 3px solid skyblue;
+    border-radius: 50px;
+    padding: 1rem;
+    margin: 0.8rem;
+}
+
+.reducerDiv h3 {
+    color: rgb(20, 93, 189);
+}
+
+.reducerDiv h4 {
+    color: rgb(112, 202, 222);
+}
+
+
+.btn button {
+    border: none;
+    border-radius: 70px;
+    margin-right: 0.3rem;
+    /* margin-bottom: 2rem; */
+    background-color: pink;
+    color: rgb(39, 149, 192);
+    width: 40px;
+}
