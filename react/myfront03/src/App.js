@@ -87,7 +87,7 @@ const mockTodo = [
     content: "당장 집가기",
     createDate: new Date().getTime()
   }
-]
+];
 
 function reducer(state, action) {
   switch (action.type) {
