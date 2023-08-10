@@ -1,0 +1,32 @@
+.App *{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.App {
+    color: rgb(12, 120, 65);
+    background-color: gainsboro;
+    padding: 2rem;
+}
+
+.App h2 {
+    margin-bottom: 1rem;
+}
+
+.App ul {
+    list-style: none;
+}
+
+.App li {
+    margin-bottom: 0.5rem;
+}
+
+.App a {
+    color: rgb(61, 155, 92);
+    text-decoration: none;
+}
+
+.active {
+    background-color: rgb(189, 189, 189);
+}
