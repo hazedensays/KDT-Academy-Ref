@@ -41,6 +41,21 @@
 // => path 매칭 규칙
 //    앞부분만 일치(exact 옵션사용) -> 정확히 일치 (exact 옵션사용불가)
 
+// ** Routing
+// => 경로를 지정하는 과정
+// ** Page Routing
+// => 요청에 따라 적절한 페이지를 반환하는 과정
+// => 이때 웹 페이지를 어디서 만드느냐에 따라 
+//    SSR(Server Side Rendering), CSR(Client Side Rendering) 로 나뉘며,
+//    리액트는 SPA(Single Page Application) 이며 CSR 방식을 채택하고 있다.
+// => 두 방법 모두 장단점이 있으므로 서비스의 목적에 따라 적절한 방식을 채택한다.
+// => CSR 은 처음접속시 Html 과 JS 에플리케이션을 함께 제공받기 때문에 처음접속은 느리지만,  
+//    이후 페이지 이동은 브러우저에서 교체하므로 훨씬 빠르다. 
+
+ {/* => 여러 Route 컴포넌트를 감싸며,
+               현재 주소창에 입력된 url 경로와 동일한 Route 컴포넌트를 페이지에 랜더링 함. 
+            => switch ~ case 구문과유사함.    */}
+
 import './App.css';
 import Home from './pages/Home';
 import Topics from './pages/Topics';
