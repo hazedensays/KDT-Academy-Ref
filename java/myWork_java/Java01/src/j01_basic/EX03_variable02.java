@@ -21,7 +21,6 @@ public class EX03_variable02 {
 		System.out.printf("s1 = > %s, s2 = > %s\n", s1, s2);
 		System.out.println();
 
-		
 		// ** 기본 자료형의 Wrapper Class
 		// => 기본 자료형을 지원해주는 클래스 (모든 기본 자료형에 있음)
 		// 해당 클래스명은 기본 자료형의 첫 글자를 대문자로 하면 됨
@@ -36,39 +35,40 @@ public class EX03_variable02 {
 		System.out.println("float => " + Float.MIN_VALUE + "~" + Float.MAX_VALUE);
 		System.out.println("double => " + Double.MIN_VALUE + "~" + Double.MAX_VALUE);
 		System.out.println();
-		
-		
+
 		// ** 오버플로우(overflow) / 언더플로우(underflow)
 		// 1) 정수형
 		// => 컴파일, 런타임 오류 없음
 		short sMax = Short.MAX_VALUE;
 		short sMin = Short.MIN_VALUE;
-		
+
 		// => short 의 오버플로우(overflow) Test : 최소값과 동일
 		System.out.printf("short 의 오버플로우 Test1 -> sMax = %d, sMax + 1 = %d\n", sMax, sMax + 1);
-		System.out.printf("short 의 오버플로우 Test2 -> sMax = %d, sMax + 1 = %d\n", sMax, (short)(sMax + 1));
+		System.out.printf("short 의 오버플로우 Test2 -> sMax = %d, sMax + 1 = %d\n", sMax, (short) (sMax + 1));
 		System.out.println();
-		
+
 		// => short 의 언더플로우(underflow) Test : 최대값과 동일
 		System.out.printf("short 의 언더플로우 Test1 -> sMin = %d, sMin + 1 = %d\n", sMin, sMin - 1);
-		System.out.printf("short 의 언더플로우 Test2 -> sMin = %d, sMin + 1 = %d\n", sMin, (short)(sMin - 1));
+		System.out.printf("short 의 언더플로우 Test2 -> sMin = %d, sMin + 1 = %d\n", sMin, (short) (sMin - 1));
 		System.out.println();
-		
+
 		// 2) 실수형
 		// => by zero Test
 		// => 컴파일, 런타임 오류 없음
 		float f = 1234.567f;
-		System.out.println("** 실수형 by 0, 나누기 연산자 => " + (f/0));
+		System.out.println("** 실수형 by 0, 나누기 연산자 => " + (f / 0));
 		// Infinity (무한수) -> 오버플로우(overflow)
-		
-		System.out.println("** 실수형 by 0, 나머지 연산자 => " + (f%0));
+
+		System.out.println("** 실수형 by 0, 나머지 연산자 => " + (f % 0));
 		// NaN (Not a Number) -> 언더플로우(underflow)
-		
+
 		// 비교 : 정수형의 by zero
-		System.out.println("** 정수형 by 0, 나누기 연산자 => " + (sMax/0));
-		System.out.println("** 정수형 by 0, 나머지 연산자 => " + (sMax%0));
-		
-		
+		// => 컴파일 오류는 없지만, 런타임 오류는 발생
+		// Exception in thread "main" java.lang.ArithmeticException: / by zero
+		// at j01_basic.EX03_variable02.main(EX03_variable02.java:68)
+		System.out.println("** 정수형 by 0, 나누기 연산자 => " + (sMax / 0));
+		System.out.println("** 정수형 by 0, 나머지 연산자 => " + (sMax % 0));
+
 	}
 
 }
