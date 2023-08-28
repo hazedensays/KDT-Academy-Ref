@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>**Redux Test**</title>
+    <script src="https://unpkg.com/redux@latest/dist/redux.js"></script>
+    <script>
+    // 1) Action 만들기
+    function addColor(color) {
+        return {
+            type: "ADD",
+            color: color
+        }
+    }
+
+    function removeColor(color) {
+        return {
+            type: "REMOVE",
+            color: color
+        }
+    }
+
+    // 2) Reducer 만들기
+    // => Arrays.concat(arr)-배열들의 결합
+    //    arr1.concat(arr2)
+    function FavoriteColors(state, action) {
+        if (state === undefined) {
+            state = [];
+        }
+        switch (action.type) {
+            case "ADD" : { return state.concat(action.color)}
+            case "REMOVE" : { return state.filter((it) => it != action.color)}
+            default: return state;
+        }
+    }
+
+    // 3) Store 생성
+    // => 주요메서드
+    //    dispatch(), getState(), subscribe()
+    let store = Redux.createStore(FavoriteColors);
+
+    // 4) render 추가
+    // => 상태값이 변경될 때마다 실행(호출) : store, subscribe(콜백함수)
+    store.subscribe(render);
+    function render() {
+        console.log (`favoriteColors render => ${store.getState()}`);
+    }
+
+    // 4) 실행
+    // => Action 을 Store 에 전달 : Store 의 dispatch 메소드
+    store.dispatch(addColor("skyblue"));
+    store.dispatch(addColor("hotpink"));
+    store.dispatch(addColor("yellowgreen"));
+    store.dispatch(addColor("purple"));
+    store.dispatch(addColor("coral"));
+
+    console.log (`favoriteColors => ${store.getState()}`);
+
+    store.dispatch(removeColor("yellowgreen"));
+    console.log(`** favoriteColors remove Green => ${store.getState()}`);
+
+
+    </script>
+</head>
+
+<body>
+    <h2>** Redux Test **</h2>
+    <h3>Favorite Colors</h3>
+</body>
+
+</html>
