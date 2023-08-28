@@ -58,6 +58,10 @@ public class Ex01_Hello {
 		System.out.println("저는 고작 " + age + "이에요.");
 		System.out.println("위에 내용은 일부 " + b + " 입니다. ㅋㅋ");
 		
+		//문자가 포함된 "+" 연산은 모두 문자열 연산으로 취급
+		 System.out.println("100 + 200의 합 => " + 100 + 200);
+		 System.out.println("100 + 200의 합 => " + (100 + 200)); //우선순위 설정
+		
 		
 	}
 
