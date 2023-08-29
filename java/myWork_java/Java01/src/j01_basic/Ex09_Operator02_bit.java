@@ -12,7 +12,7 @@ public class Ex09_Operator02_bit {
 		System.out.println("x >> y : " + (x >> y));
 		// x를 오른쪽으로 y만큼 이동
 		// 1010 -> 0101 -> 0010 -> 0001 : (답 : 1)
-e
+		
 		System.out.println("x << y : " + (x << y));
 		// x를 왼쪽으로 y만큼 이동
 		// 1010 -> 1 0100 -> 10 1000 -> 101 0000 : (답 : 80)
