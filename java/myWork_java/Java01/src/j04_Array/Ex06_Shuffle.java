@@ -1,5 +1,8 @@
 package j04_Array;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class Ex06_Shuffle {
 
 	public static void main(String[] args) {
@@ -13,6 +16,18 @@ public class Ex06_Shuffle {
 		// ** 복습: 연습문제 5-4
 		// ** 예습: 교재6장 160p~175p 를 읽고
 		// => 클래스, 객체, 인스턴스를 간단히 비교 & 요약 해오세요 ~~
+
+		int arr[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		System.out.println(Arrays.toString(arr));
+		Random rn = new Random();
+
+		for (int i = 0; i < 100; i++) {
+			int n = rn.nextInt(9) + 1;
+			int temp = arr[0];
+			arr[0] = arr[n];
+			arr[n] = temp;
+		}
+		System.out.println(Arrays.toString(arr));
 
 	}
 
