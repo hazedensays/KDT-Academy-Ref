@@ -34,7 +34,6 @@ public class Ex05_Lotto2Sort {
 		System.out.println("Arrays.sort : numArr => " + Arrays.toString(numArr));
 
 		int temp = 0;
-		int max = numArr[0], min = numArr[0];
 
 		// 내림차순 =======================================================
 		for (int i = 0; i < numArr.length; i++) {
