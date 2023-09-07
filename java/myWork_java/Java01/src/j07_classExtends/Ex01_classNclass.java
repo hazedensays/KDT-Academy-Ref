@@ -19,6 +19,12 @@ public class Ex01_classNclass {
 		// 1)집합(has-a)
 		// => Ex01_classNclass 클래스와 Ex01_Car 클래스 관계
 		System.out.println("** 1) 집합(has-a) => " + car);
+		
+		// => Student와 Car 클래스의 관계
+		Ex01_Student s1 = new Ex01_Student("0001", "김하제", 99);
+		System.out.println("** main student =>" + s1);
+		System.out.println("** main car_color => " + s1.car.color);
+		System.out.println("** main car2_color => " + Ex01_Student.car2.color);  //static변수이기 때문에 클래스명으로 접근해야함
 
 		// 2)사용(use)
 		// => Ex01_classNclass 클래스가 메서드 인자의 형식으로 Ex01_Car를 사용한 경우

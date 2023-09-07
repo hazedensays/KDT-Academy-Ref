@@ -1,28 +1,46 @@
 package j07_classExtends;
 
-public class Ex01_Car {
+/*
+		** final
+		=> class : 상속금지 (종단 클래스, String이 대표적)
+		=> 메서드 : 오버라이딩 금지
+		=> 필드(변수) : 상수
+	
+ */
 
-	// ** 맴버변수, 필드(field) : 속성 
+
+//public final class Ex01_Car {		// => class : 상속금지 (종단 클래스)
+	public class Ex01_Car {
+
+	// ** 맴버변수, 필드(field) : 속성
 	public int speed;
 	public int mileage;
-	public String color="Yellow";
-	
+	public String color = "Yellow";
+	public static final String COUNTRY = "USA";
+
 	// ** 생성자
-	public Ex01_Car() {}
-	
+	public Ex01_Car() {
+		System.out.println("** Car default 생성자");
+	}
+
 	public Ex01_Car(int speed, int mileage, String color) {
 		this.speed = speed;
 		this.mileage = mileage;
 		this.color = color;
-	}
-	
-	
-	// ** 맴버메서드 (Method, function, procedure)
-	public void speedUp() {	speed+=10; }
-	public void speedDown() { speed-=10; }
-	
-	public String toString() {
-		return "[ speed="+speed+" mileage="+mileage+" color="+color+" ]";
+		System.out.println("** Car 초기화 생성자");
 	}
 
-}//class
+	// ** 맴버메서드 (Method, function, procedure)
+	public void speedUp() {
+		speed += 10;
+	}
+
+	public final void speedDown() {
+		speed -= 10;
+	}
+
+	public String toString() {
+		return "[ speed=" + speed + " mileage=" + mileage + " color=" + color + " ]";
+	}
+
+}// class
