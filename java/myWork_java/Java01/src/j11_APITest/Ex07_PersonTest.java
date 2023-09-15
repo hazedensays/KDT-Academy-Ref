@@ -1,5 +1,6 @@
 package j11_APITest;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 //** Person
@@ -52,9 +53,9 @@ class Person {
 		String[] str = idNo.split("-");
 		int firstNum = Integer.parseInt(str[1].substring(0, 1));
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		
+
 		int yearOfBirth;
-		
+
 		if (firstNum == 1 || firstNum == 2) {
 			yearOfBirth = 1900 + Integer.parseInt(str[0].substring(0, 2));
 		} else if (firstNum == 3 || firstNum == 4) {
@@ -62,7 +63,7 @@ class Person {
 		} else {
 			yearOfBirth = 1800 + Integer.parseInt(str[0].substring(0, 2));
 		}
-		
+
 		int currentAge = currentYear - yearOfBirth;
 		return currentAge;
 	}// calcAge()
@@ -81,7 +82,7 @@ class Person {
 			return 'W';
 		}
 	}// Whatgender()
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -107,8 +108,22 @@ class Person {
 		System.out.println("번호 : " + getIdNo());
 		System.out.println("나이 : " + age);
 		System.out.println("성별 : " + gender);
-		
+
 	}// infoPrint()
+
+	static void ageSort(Person[] pArr) {
+		Person temp;
+
+		for (int i = 0; i < pArr.length; i++) {
+			for (int j = i + 1; j < pArr.length; j++) {
+				if (pArr[i].age < pArr[j].age) {
+					temp = pArr[i];
+					pArr[i] = pArr[j];
+					pArr[j] = temp;
+				}
+			}
+		}
+	}// ageSort
 
 }// class Person
 
@@ -116,18 +131,19 @@ public class Ex07_PersonTest {
 
 	public static void main(String[] args) {
 		Person pArr[] = new Person[5];
-		
+
 		pArr[0] = new Person("010711-4123456", "김찬미");
 		pArr[1] = new Person("880711-2894561", "박찬미");
 		pArr[2] = new Person("450711-1546512", "이찬미");
 		pArr[3] = new Person("090711-4457588", "홍찬미");
 		pArr[4] = new Person("140711-1847686", "최찬미");
-
+		
+		Person.ageSort(pArr);
+		
 		for (int i = 0; i < pArr.length; i++) {
 			pArr[i].infoPrint();
 			System.out.println();
 		}
-		
 
 	}
 
