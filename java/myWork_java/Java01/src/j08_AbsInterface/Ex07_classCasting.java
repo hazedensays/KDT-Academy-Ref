@@ -2,15 +2,20 @@ package j08_AbsInterface;
 
 //*** 클래스의 형변환
 //=> 자동 형변환 (형변환 생략가능)
-// 조상 <- 자손 (Up_Casting)
+//   조상 <- 자손 (Up_Casting)
 
 //=> 명시적 형변환 (형변환 생략불가능)
-// 자손 <- 조상 (Down_Casting)
-// 실제적 클래스타입이 변환가능한 경우에만 적용됨 
+//  자손 <- 조상 (Down_Casting)
+//  실제적 클래스타입이 변환가능한 경우에만 적용됨 
 // (변환불가능한 경우에는 컴파일 오류 없어도 런타임 오류(ClassCastException) 발생)
 
 //Animal => Mammal 포유류  => PetAnimal
 //Animal => Reptil 파충류 
+
+// ** 복습 (교재 예제 입력하고 실행 해보기)
+// => 249p 예제7_7
+// => 253p 예제7_8
+// => 253p 예제7_11
 
 class Animal2 {
 	String name;
@@ -40,70 +45,54 @@ class Reptile extends Animal2 {
 public class Ex07_classCasting {
 
 	public static void main(String[] args) {
-		// Test1
+		// Test1.
 		PetAnimal dog = new PetAnimal();
+		// => instanceof Test 
+		if (dog instanceof PetAnimal) System.out.println("** dog 는 PetAnimal 입니다. **");
+		if (dog instanceof Mammal) System.out.println("** dog 는 Mammal 입니다. **");
+		if (dog instanceof Animal2) System.out.println("** dog 는 Animal2 입니다. **");
 		
-		// => instanceof Test
-		if (dog instanceof PetAnimal) {
-			System.out.println("dog는 PetAnimal 입니다.");
-		} else {
-			System.out.println("dog는 PetAnimal이 아닙니다.");
-		}
-		if (dog instanceof Mammal) {
-			System.out.println("dog는 Mammal 입니다.");
-		} else {
-			System.out.println("dog는 Mammal이 아닙니다.");
-		}
-		if (dog instanceof Animal2) {
-			System.out.println("dog는 Animal2 입니다.");
-		} else {
-			System.out.println("dog는 Animal2이 아닙니다.");
-		}
+		// Test2. class Up_Casting Test
+		Animal2 an1 = new PetAnimal(); // 조상<-후손 : Up_Casting, 자동
+		//an1 = new Reptile(); // 모든후손은 교체가능 (다형성 적용가능)
 		
-		// Test2 - class UpCasting Test
-		Animal2 an1 = new PetAnimal();		//조상 <- 후손 : UpCasting (자동)
-		//an1 = new Reptile();		// 모든 후손은  교체 가능 (다형성 적용 가능)
+		//PetAnimal pa = new Animal2(); // 후손<-조상 : Down_casting, XXXX
 		
-		//PetAnimal pa = new Animal2();		//조상 -> 후손 : DownCasting (안됨)
-		
-		// => 생성자 종류에 따른 Animal 인스턴스 비교 (an1, an2) 비교
-		// => 모두 UpCasting 허용됨
+		// => 생성자 종류에 따른 Animal 인스턴스(an1, an2) 비교
+		// => 모두 Up_Casting 허용됨.
 		Animal2 an2 = new Animal2();
-		//an1 = dog;
-		//an2 = dog;		// an2 = new PetAnimal()
+		//an1=dog;
+		//an2=dog; // an2 = new PetAnimal() 과 동일효과
 		
-		// Test3 - class DownCasting Test
+		// Test3. Down_casting
 		// => 가능한 경우에만 명시적으로 허용
-		System.out.println("DownCasting Test");
-		an1.breath();
+		System.out.println("** Down_casting Test **");
+		an1.breath(); // Animal2 에 정의된 맴버만 접근 가능
 		PetAnimal cat = null;
-		cat = (PetAnimal)an1;		//PetAnimal(후손) Type <- Animal2(조상) Type
-		cat.checking();		// PetAnimal에 정의된 멤버 접근 가능
+		cat = (PetAnimal)an1; // PetAnimal(후손) Type <- Animal2(조상) Type
+		cat.checking(); // PetAnimal 에 정의된 맴버 접근가능 
+		
+		// cat = (Reptile)an1; -> 형제로 형변환은 안됨 
 		
 		//cat = (PetAnimal)an2;
 		//cat.checking();
-		// => 컴파일 오류 없음, 런타임 오류 있음 ( java.lang.ClassCastException)
-		// 		: 위 72, 73행 있을 때 (정상 실행) / 없을 때(런타임 오류) 비교해보기
-		// => 그러므로 instanceof 연산자로 확인 후 DownCasting 적용해야 함
-		
+		// => 컴파일오류 없음, 런타임오류_ClassCastException
+		//    ( 위 60행 있을때(정상실행), 없을때(런타임오류) 비교 )
+		// => 그러므로 instanceof 연산자로 확인 후 Down_Casting 적용
 		if (an2 instanceof PetAnimal) {
 			cat = (PetAnimal)an2;
-			System.out.println("** an2는 PetAnimal 입니다.");
-		} else {
-			System.out.println(" an2는 PetAnimal이 될 수 없습니다.");
-		}
+			System.out.println("** true: an2는 PetAnimal 입니다 **");
+		}else System.out.println("** false: an2는 PetAnimal 이 될수없습니다 **"); 
 		
+		     
 		// ** 인스턴스의 class Type 확인하기
-		// => Object에 정의된 getClass() 메서드 이용
-		System.out.println("** dog의 ClassType => " + dog.getClass().getName());
-		System.out.println("** cat의 ClassType => " + cat.getClass().getName());
-		System.out.println("** an1의 ClassType => " + an1.getClass().getName());
-		System.out.println("** an2의 ClassType => " + an2.getClass().getName());
+		// => Object 에 정의된 getClass() 메서드 이용
+		System.out.println("** dog 의 Class Type => "+dog.getClass().getName());
+		System.out.println("** cat 의 Class Type => "+cat.getClass().getName());
+		System.out.println("** an1 의 Class Type => "+an1.getClass().getName());
+		System.out.println("** an2 의 Class Type => "+an2.getClass().getName());
 		
-		System.out.println("** Program End **");
-		
-		
-		
+		System.out.println("** Program Stop **");
 	} //main
 
 } //class
