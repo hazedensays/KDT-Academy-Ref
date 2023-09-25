@@ -1,0 +1,181 @@
+=================================================
+-------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+===========================================
+
+***  참조(외래) 키 설정 
+=> Reference (Foreign) Key
+=> Parent & Child Table SQL 구문 처리 순서 중요 
+	-> Create, Drop, Truncate, insert, update, delete 등
+=> 실습 
+	-> 1. 참조(외래) 키 설정 전  ( Student , Jo )
+	-> 2. 참조(외래) 키 설정 후  ( Student2 , Jo2 )  
+	-> 3. 참조(외래) 키 설정 + Cascade 적용 : Parent Table 의 처리결과 자동적용 ( Student3 , Jo3 )
+
+-------------------------------------------------------------------------------------
+*** 실습1. 참조(외래) 키 설정 전
+=> Foreign 키 설정 하지않는 경우
+	- Table 생성 순서 무관
+	- insert 순서 무관 ( Child_Table 먼저 insert ) 
+
+=> Table 만들기
+	-> student 
+	create table student(
+	sno int  auto_increment,
+	name varchar(10) not null,
+	age int(3),
+	jno int(1),
+	info varchar(30),
+	point float(5,2) default 100,
+	Primary Key(sno),
+	Check(age>15 and age<100)
+   	);
+
+	-> jo
+	create table jo (
+	jno int(1),
+	jname varchar(10) not null,
+	captain int not null,
+	project varchar(20) not null,
+	slogan varchar(30) not null,
+	Primary Key(jno),
+	Foreign Key(captain) References student2(sno)
+	);
+
+=> insert ( 각자 본인의 입력문 작성, 조장은 조 입력문도 작성하기 )
+
+
+
+
+=> student,  jo 확인
+	- select * from student;
+	- select * from jo;
+=> Table 목록 확인 : show tables;
+
+=> Insert : jo Table 에 student 에 없는 captain 입력
+	- insert into jo values(9, 'Test조', 99, 'project_name','slogan');
+	  select * from jo ;
+	- 입력가능함 : Data 의 무결성 오류 확률이 높아짐
+
+=> Update, Dlete 
+	- student Table 에서는 jo 에서 사용하고 있는 조장번호 Data 의 수정, 삭제 가능함 
+	- Data 의 무결성 오류 확률이 높아짐
+	- 17 번 student 의 sno 를 77로 변경
+	  update student set sno=77 where sno=17;  // jo 에는 student 에 없는 17번 조장이 있게됨.
+
+=> 결론: Data 의 무결성 보장을 위해  참조(외래) 키 설정의 필요성 확인
+
+-------------------------------------------------------------------------------------
+*** 실습2. Foreign (참조, 외래) 키 설정
+=> insert 순서중요 ( Child_Table 먼저 insert -> 오류 ) 
+
+=> Table 만들기 ( create Table, Data 는 from student, jo )
+	-> student2 (Table level 로 제약조건 설정하기)
+	create table student2(
+	sno int  auto_increment,
+	name varchar(10) not null,
+	age int(3),
+	jno int(1),
+	info varchar(30),
+	point float(5,2) default 100,
+	Primary Key(sno),
+	Check(age>15 and age<100)
+   	);
+
+	-> jo2
+	create table jo2 (
+	jno int(1),
+	jname varchar(10) not null,
+	captain int not null,
+	project varchar(20) not null,
+	slogan varchar(30) not null,
+	Primary Key(jno),
+	Foreign Key(captain) References student2(sno)
+	);
+
+=>  제약 조건 확인
+SELECT constraint_name, constraint_type
+FROM information_schema.table_constraints
+WHERE table_name = 'jo2' ;
+
+	-> Data insert
+	insert into student2 select * from student;
+	select * from student2;
+	
+	insert into jo2 select * from jo ;
+	( ERROR 1452 (23000): Cannot add or update a child row:... )
+	--> student2 77 , 17로 수정 & jo table 의 조장 99번을 수정 하던지 student2 에 입력하던지 ..... 
+	--> update student2 set sno=17 where sno=77;
+	--> insert into student2 values(99, "침착맨", 44, 9, "안녕하세요 침착맨입니다.", 500.5); 
+	      update student2 set point=New_Value where sno=99;
+	select * from jo2;
+
+=> 참조관계 확인
+	-> 각자 조장님 삭제해보기 (student2 에서) 
+		DELETE FROM student2 WHERE sno=13; // ERROR 1451 (23000): Cannot delete or update
+		Delete from student2 where sno = 14; // ERROR 1451
+	-> 각자 조장님 sno 수정 해보기 (student2 에서) 
+		update student2 set sno=88 where sno=15; //ERROR 1451 (23000): Cannot
+		update student2 set sno = 700 where sno=17; // ERROR 1451
+	-> 비교 , 조장이 아닌경우 삭제해보기 (student2 에서) 
+		delete from student2 where sno=10;  // OK
+	-> 비교 , 조장이 아닌경우 sno 수정해보기 (student2 에서) 
+		update student2 set sno=100 where sno=3; // OK
+		update student2 set sno=200 where name='배수지';
+ 
+=> 결론: 참조관계로 인하여 delete , update 가 불편한 경우
+	( 일괄 관리해도 되는 경우에는 일괄적인 관리필요 ->  On Cascade )  
+	
+-------------------------------------------------------------------------------------
+*** 실습3. 참조(외래) 키 설정 + ON Delete Cascade ON Update Cascade
+=> create (Parent Table 먼저) , insert (Child Table 먼저) 
+=> On Cascade
+	- 무결성을 유지하면서 Update 또는 Delete 를 일괄관리하도록 해줌
+	- 수정, 삭제시에 Child Data 에 동시 적용
+	( Child Data 가 존재하는 Parent Data 도 수정, 삭제 가 가능)
+
+=> Table 만들기 ( create Table3, Data 는 from student2, jo2 )
+
+	-> student3 (Table level 로 제약조건 설정하기)
+	create table student3(
+	sno int  auto_increment,
+	name varchar(10) not null,
+	age int(3),
+	jno int(1),
+	info varchar(30),
+	point float(5,2) default 100,
+	Primary Key(sno),
+	Check(age>15 and age<100)
+   	);
+
+	-> jo3
+	create table jo3 (
+	jno int(1),
+	jname varchar(10) not null,
+	captain int not null,
+	project varchar(20) not null,
+	slogan varchar(30) not null,
+	Primary Key(jno),
+	Foreign Key(captain) References student3(sno)
+			On Delete Cascade
+			On Update Cascade
+	);
+
+=>  제약 조건 확인
+SELECT constraint_name, constraint_type
+FROM information_schema.table_constraints
+WHERE table_name = 'jo3' ;
+
+=> Data insert  ( from studen2, jo2 )
+	-> insert into student3 select * from student2;
+	-> insert into jo3 select * from jo2;
+	-> select * from student3 ;   
+	    select * from jo3;
+=> Update Test (student3에서 조의 조장님의 sno 수정해보기 )
+	-> update student3 set sno=111 where sno=15;  // jo3의 captain 변경 확인 
+	-> update student3 set sno=999 where sno=2;	
+=> Delete Test (student3에서 조장님 삭제해보기 )
+	-> DELETE FROM student3 WHERE name='정동렬'; // jo3에서도 해당조 삭제 확인  
+	-> delete from student3 where name='조종윤';
+
