@@ -1,0 +1,150 @@
+
+=======================================================================
+  Sub Query  
+=======================================================================
+=> 종류 : single row S , multi row S, multi column S, correlated(상관 관계) S
+
+** 과제 :  
+	-> 이름이 "배수지" 인 학생과 같은 조원 출력하기
+	select sno, name, jno from student2 
+	where jno=( select jno from student2 where name="배수지" ) ;
+
+	-> 조이름이 "코드림" 조의  조원 sno, name, jno  출력하기
+	select sno, name, jno from student2
+   	where jno=( select jno from jo2 where jname="코드림"); 
+
+	-> student2 에서 sno, name, age, jno 출력하기
+	    출력조건은 "한신준" 의 age 보다 크거나 같은 학생들을 age 역순(Descending)
+	select sno, name, age, jno from student2 
+	where age >= (select age from student2 where name = '한신준') order by age desc;
+
+=> subQuery -> query문이 query문을 포함
+	select  id, name, lev from mymember
+      		where lev=(select lev from mymember where id='banana') ;
+
+----------------------------------------------------------------------
+***  Join 기능을 Sub Query 로 처리하기
+----------------------------------------------------------------------
+
+=> jo 에서 조장 name 출력할때 join 사용
+	select j.jno, jname, captain, s.name from jo2 j, student2 s where j.captain=s.sno; 
+	select j.jno, jname, captain, s.name from jo2 j  Left Outer Join student2 s On j.captain=s.sno; 
+
+=> Sub Query 적용 (join 과 비교)
+	select jno, jname, captain, 
+	( select name from student2 where sno=captain ) 조장이름 from jo2;
+
+----------------------------------------------------------------------
+***  Join + Sub Query
+----------------------------------------------------------------------
+=> student2 에서 name="연아람" 인 학생의 age 보다 age 값이 작거나 같은 학생들의 sno, name, age, jno, jname 출력하기
+	select sno, name, age, s.jno, j.jname from student2 s LEFT OUTER JOIN jo2 j ON s.jno = j.jno
+  	where age<=(select age from student2 where name="연아람")
+   	order by age;
+
+
+========================================================= 
+=========================================================
+ *** 그룹함수 와 GROUP BY ~ Having
+---------------------------------------------------------------------------------------------
+
+=> 그룹함수: count(*) row 갯수  ,  sum(?)  ,  avg(?)  ,  max(?)  ,  min(?)
+=> GROUP BY : 그룹단위로 묶기
+=> Having: 그룹함수 를 대상으로하는 조건 지정
+=> where : table 에 존재하는 컬럼으로 조건지정
+     
+	-> 전체
+	count :  *  모든 record count , 컬럼명 해당컬럼에 값이 있는 record 만 count
+                       -> 예: count(jno)  조가 있는 학생만 count  
+	select count(*), sum(age) , avg(age), max(age), min(age) from student;
+	select count(point), sum(age) , avg(age), max(age), min(age) from student;
+
+	select jno, count(point), sum(age) , avg(age), max(age), min(age) from student;
+	// -> ERROR 1140 (42000): In aggregated query without GROUP BY,........
+
+	
+	-> 조별 통계
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student GROUP BY jno order by jno ;  // OK
+	select jno, id, count(*), sum(age) , avg(age), max(age), min(age) from student GROUP BY jno;  
+	// OK , 그러나 snum 출력의 의미가 없음. 
+	
+	-> 조별 통계 + 조건
+	- jno 가 2 초과 인 경우만 출력
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student
+	where jno >2 
+	GROUP BY jno 
+	order by jno ; 
+
+	- 조별 인원이 4인 경우만 출력  ( count(*)=4 )
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student
+	where  count(*)=4
+	GROUP BY jno 
+	order by jno ;    // ERROR 1111 (HY000): Invalid use of group function
+
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student
+	GROUP BY jno having  count(*)=4
+	order by jno ;    // OK
+
+	-> 조별 통계 + 조건 (그룹함수 를 대상으로하는 조건  sum(age) > 110  ) 
+	    ** where 조건 : from 뒤에오는 Table 에 존재하는 컬럼으로 조건줄때 사용
+	    ** having 조건 : 그룹함수 또는 그룹핑 컬럼 을 대상으로하는 조건
+
+	-> where , having 모두 사용 
+	student 의 age>27 을 대상으로 count(*) > 2인 경우 의 group 통계
+
+	select s.jno, jname, count(*), sum(age) , avg(age), max(age), min(age) 
+	from student s, jo j
+	where  age>27  AND  s.jno=j.jno
+	GROUP BY jno having  count(*)>0
+	order by jno ; 
+
+	-> where 조건 : Error
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student3 GROUP BY jno where sum(age) > 110 ;
+	: ERROR 1064 (42000): You have an error in your SQL syntax; .......use near 'where sum(age) > 110' at line 1
+
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student3 where sum(age) > 110 GROUP BY jno  ;
+	: ERROR 1111 (HY000): Invalid use of group function
+
+	-> having 	
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student3 having sum(age) > 110 GROUP BY jno  ;
+	: ERROR 1064 (42000): You have an error in your SQL syntax; ... use near 'GROUP BY jno' at line 1
+
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student3 GROUP BY jno having avg(age) > 26 ;
+	
+	** 연습
+	그룹 + 조건 : jno < 5  ( jno 는 having, where 모두 적용가능 ) 
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student3 GROUP BY jno having jno < 5 ; // OK
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student3 where jno < 5 GROUP BY jno ;  // OK
+	
+	** having, where 모두 적용 하기
+	-> group + 조건1 sum(age)>110 + 조건2 age>25 인 학생들 대상
+	select jno, count(*), sum(age) , avg(age), max(age), min(age) from student3
+	where age > 25
+	GROUP BY jno
+	Having  sum(age)>110 ;  // OK
+
+*** 주말 과제 ( Group + Join ) 
+	-> 조별 통계목록에 조이름 출력하기 
+	select s.jno, jname, count(*), sum(age), avg(age), max(age), min(age) 
+	from student3 s, jo3 j
+   	where s.jno = j.jno 
+  	GROUP BY jno;	
+
+*** AUTO_Increment 값 확인하기
+	select LAST_INSERT_ID() from student where snum = LAST_INSERT_ID() ;
+
+	-> insert 에 적용
+	insert into student values(LAST_INSERT_ID()+1,'홍길동',29,2); 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*이클립스 단축키
+ ctrl + s, ctrl + shift + s : 저장관련
+ ctrl + F11 : 실행
+ ctrl + a : 현재 파일내용 전체 선택
+ ctrl + shift + f : 자동 들여쓰기
+ ctrl + space bar : 자동완성
+ ctrl + shift + c : 주석/주석해제
+ ctrl + z : 실행 취소
+ ctrl + y : 실행 취소한걸 다시 실행
+ ctrl + d : 현재 커서가 위치한 한줄을 삭제
+--------------------------------------------------------------------------------   

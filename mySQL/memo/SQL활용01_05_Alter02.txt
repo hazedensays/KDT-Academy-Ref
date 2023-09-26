@@ -1,0 +1,194 @@
+==========================================
+2. 테이블 구조변경 (필드 추가 , 수정, 이름변경, 삭제)
+-----------------------------------------------------------------------
+
+=> ALTER  Table table명 ADD 컬럼명 타입 ;
+	alter table mytest3 add score int default 100;
+	select *  from mytest3;
+
+=> ALTER  Table table명 Drop Column 컬럼명  ;
+	alter table mytest2 drop column score ;
+
+=> ALTER  Table table명 Rename Column 컬럼명 to new컬럼명  ;
+	alter table friends rename column addr to address ;
+
+=> ALTER  Table table명 Modify 컬럼명 타입 ;
+	( 컬럼크기, 컬럼타입, not null 부여 )
+
+-----------------------------------------------------------------------
+
+** ADD 
+=> 준비
+	-> Table 확인하기 : show tables;
+	-> student 를 이용해서  test Table 만들기 (구조 & Data 복사) 
+	    create table test select * from student;  
+	   ( 단, 제약조건은 복사 되지않음 )
+
+=>   제약 조건 확인 
+SELECT constraint_name, constraint_type
+FROM information_schema.table_constraints
+WHERE table_name = 'test' ;  
+
+=> 제약조건 추가 
+	1) Primary Key
+	alter table test ADD Primary Key(sno);	
+
+	-> 현재 : seq 에 중복 data 가 있는 상태 
+	ERROR : Duplicate entry '3' for key 'mytest1.PRIMARY'
+	-> 해결 : delete from  ~~  ;  // 중복자료 삭제 또는 수정후
+	
+	2) test 의 name에 unique 조건추가
+	alter table test ADD unique (name);
+
+	3) test 의 age 에 check 조건추가
+	alter table test ADD check(age>15 and age<100);
+
+	4) not null Test (info 에) 
+	-> not null 은 column_level 속성이라 ADD 불가능하고 Modify 로 처리
+	alter table test ADD not null(info); // ERROR 1064 (42000):
+
+	5) Foreign Key ( test 의 jno 와  jo 의 jno )
+	alter table test ADD Foreign Key(jno) References jo(jno);
+	-> 확인 ( jo Table 에서 1조 delete )
+	delete from jo where jno=1;  //ERROR 1451 (23000): Cannot ....
+	
+=> 컬럼 추가 :
+	-> test 에 주소 추가 :  address varchar(20) 
+	alter table test ADD address varchar(20) default '경기도 성남시' ;
+	->  test 에 score 컬럼  float(7,3) 추가
+	alter table test ADD score float(7,3) not null ;
+
+-----------------------------------------------------------------------
+
+** DROP : 컬럼 삭제
+=> test 에서 score 삭제하기
+	alter table test Drop Column score;   	
+ 	 
+=> test 에서 jno 삭제하기
+	alter table test Drop Column jno;
+	-> ERROR 1828 (HY000): Cannot drop column...
+	-> 제약조건 ( Foreign Key) 삭제후 가능
+
+=> test 에서 age 삭제하기 (check 제약조건있음)
+	alter table test Drop Column age; // OK
+ 
+=> 확인:  select * from test;
+-----------------------------------------------------------------------
+ 
+** RENAME : 컬럼명 수정 
+=> test 에서 address 를 addr1 로 변경
+	alter table test Rename Column address to addr1;
+
+=>  P.Key 인 sno -> member_id 로 변경하기 
+	alter table test Rename Column sno to member_id; // OK
+
+-----------------------------------------------------------------------
+
+** MODIFY
+=> Data 가 없는 경우에는 대부분 수정 가능
+     Data 가  있는 경우에는 Data를 담을수 있어야 수정 가능함.
+ 
+=> 제약조건 변경
+	-> student , age 의 check(age>0 and age<200) 변경
+	alter table student Modify age int check(age>0 and age<200); 
+
+	-> 제약조건명으로 수정하기 (Mysql 지원 안됨)
+	-> student 의 제약 조건명 확인  
+SELECT constraint_name, constraint_type
+FROM information_schema.table_constraints
+WHERE table_name = 'student' ;  // student_chk_1
+
+=> 컬럼 Type, 길이 수정
+
+** Test Table 에 Data (record, row, tuple) 가 없는경우 대부분 허용됨
+	실수-> 정수
+	alter table mymember2 modify weight number(10) ;  
+	문자 -> 정수 
+	alter table mymember2 modify birthd number(10) ; 
+	문자 -> 실수
+	alter table mymember2 modify password number(7,3);
+	축소변환
+	alter table mymember2 modify name varchar(10) ;
+
+** Test Table 에 Data (record, row, tuple) 가 있는경우
+	-> 기존의 Data를 담을수 있어야 수정 가능함.
+
+=> name 10 -> 5  : downsizing  기존의  자료들이 5를 넘지않으면 : OK
+	alter table test Modify name varchar(5); // OK
+	alter table test Modify name varchar(2); // ERROR 1265....
+	( MySql 한글 한글자 크기: 1 )
+
+=> varchar -> char ( name 으로 )
+	-->test, name으로
+	 
+=> 실수형-> 정수형 으로 변경 (  모든 Data 에 소수이하값이 없는 경우 가능 )
+	--> test 의 point 를 int(20) 으로    
+	 
+	
+=> 정수형-> 문자형 으로 변경 (data 손실이 없으면 가능)
+	--> test의 point(100) 를 varchar(5) 로 변경
+	 
+
+=> 실수형-> 문자형 으로 변경
+	--> student3의 point(500.50) 를 varchar(4) 로 변경 (작은 길이)
+	 
+ 	--> student3의 point(500.50) 를 varchar(6) 로 변경
+ 
+
+=> 문자형 -> 실수, 정수형
+	--> 문자 -> 정수 : test 의 point (100) 를 int(3) 으로
+ 
+	--> 문자 -> 정수 : test 의 name ('홍길동') 을 int(3) 으로
+		
+	--> 문자 -> 실수 : student3 의 point (500.50) 를 float(7,3) 으로 
+ 
+
+=> 문자열 -> 문자열
+	-> DownSize ( test 의 info 크기를 10 으로 )
+
+	-> UpSize ( test 의 addr1 크기를 50 으로 )
+	alter table test Modify addr1 varchar(50) ; 
+
+------------------------------------------------------------------------------------------------
+
+=> 연습
+	-> Foreign Key 에 ON Update Cascade  와 ON Delete Cascade 추가 하기
+	-> 현재 test  Table 에는 Foreign Key만 설정되어있는 상태
+
+	-> test Table 의 제약조건 확인
+SELECT constraint_name, constraint_type
+FROM information_schema.table_constraints
+WHERE table_name = 'test' ; 
+
+	
+
+==========================================
+-----------------------------------------------------------------------
+3.  테이블명 변경
+
+=> ALTER  Table 원래이름 Rename  To New이름
+ 	-> alter table test rename to newtest;
+	-> alter table newtest rename to test;
+
+==========================================
+-----------------------------------------------------------------------
+4. 테이블 삭제
+
+=> TRUNCATE 
+-> data 만 모두 삭제됨  (조건 없이 모든 데이터를 delete 하는것과 동일결과)
+-> DDL 이므로 rollback 안됨 -> 즉시 DB 에 반영
+   (DML 명령 으로 조건 없이 모든 데이터를 delete 하는것과의 차이점)
+ 
+=> DROP : 삭제 (data, 구조 모두 삭제)
+-> drop table test;
+-> 확인  desc test; 
+
+=> 참조관계인 Table 삭제 ( Truncate , Drop)
+	-> Foreign Key 설정: student2 와 jo2 Table 
+	
+	-> Foreign Key + On Cascade 설정: student3 와 jo3 Table 
+
+				
+=> 결론 : On Cascade 설정은 DML 에만 적용됨
+
+=================================================
