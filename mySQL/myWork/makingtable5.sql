@@ -713,14 +713,60 @@ select sno, name, birthday from student where substr(birthday, 6, 2) = "08";
 select sno, name, age from student where substr(name, 1, 1) in ("김", "이", "박");
 select sno, name, RPAD(substr(name, 1, 1), char_length(name), "*") name2 from student; 
 select sno, name, birthday, DATE_FORMAT(birthday, '%Y년 %m월 %d일') 생일 from student;
+use mydb;
+select sno, CONCAT(substr(name,1,1), '**') name, birthday from student;
 
-
-
-
-
-
-
-
-
+select sno, name, jno, IF(jno=7,'관리자','학생') ifTest from student;
+select sno, name, jno, IF((jno%2=0), "짝수조", "홀수조") ifTest from student;
+select sno, name, jno, if (jno = 1, "일조",
+					   if  (jno = 2, "이조",
+					   if  (jno = 3, "삼조",
+					   if (jno = 4, "사조",
+					   if  (jno = 5, "오조", "칠조"))))) 조이름 from student;
+select sno, name, jno, address, IFNull(address, "에러") from student;
+show tables;
+create table student5 select * from student where 1 = 2;
+desc student5;
+select Max(sno), Max(sno) + 1 from student5;
+select Max(sno), Max(sno) + 1, IFNULL(Max(sno), 0) from student5;
+insert into student5(sno, name, age, jno)
+values ((select * from (select IFNULL(Max(sno), 0) + 1 from student5) as temp), "김김김", 22, 7);
+select * from student5;
+select sno, name, point,
+Case When point > 200 and point < 500  Then "VVIP"
+When point >= 150 and point <= 200 Then "VIP"
+When point < 150 Then "normal"
+Else "Error"
+End Grade
+from student;
+select sno, name, point,
+Case When point between 201 and 500  Then "VVIP"
+	 When point between 150 and 200 Then "VIP"
+     When point < 150 Then "normal"
+     Else "Error"
+     End Grade
+     from student;
+select sno, name, s.jno from student s
+where EXISTS ( select jno from jo j where j.jno=s.jno );
+select sno, name, jno from student where exists (select * from jo where captain = sno);
+select * from jo;
+select sno, name, jno, "조없음" info from student s where Not Exists (select * from jo j where j.jno = s.jno);
+select sno, name, jno, replace(info, info, "조없음") as info from student s where Not Exists (select * from jo j where j.jno = s.jno);
+update student s set info = "조없음" where not exists (select * from jo j where j.jno = s.jno);
+select * from student;
+select sno, name, jno from student
+where jno IN (1, 4, 5);
+select sno, name, jno from student
+where sno in (select captain from jo where captain = sno);
+select sno, name, s.jno,
+Case When Exists(select 1 from jo where captain = sno ) Then  "조장"
+Else "조원"
+End 구성	
+from student s;
+select * from jo;
+desc jo;
+desc student;
+alter table student drop column address;
+desc student;
 
 

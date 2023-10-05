@@ -41,7 +41,7 @@ public class DBConnection {
 			String url = "jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
 			 	// => allowPublicKeyRetrieval=true : local DB open 하지 않아도 connection 허용
 				// => localhost -> 동일값(ip주소) @127.0.0.1
-			Connection cn = DriverManager.getConnection(url, "root", "mysql");
+			Connection cn = DriverManager. getConnection(url, "root", "mysql");
 				// 네트워크 통신은 데이터를 주고받는 데 있어서 송신자와 수신자 사이의 통로를 필요로 함
 				// 이러한 통로는 포트(port)라고 불리며, 각 포트에는 고유한 번호가 할당됨
 			System.out.println("** JDBC Connection 성공");
