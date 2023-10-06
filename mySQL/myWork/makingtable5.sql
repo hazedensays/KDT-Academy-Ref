@@ -768,5 +768,25 @@ desc jo;
 desc student;
 alter table student drop column address;
 desc student;
+select * from student;
+start transaction;
+update student set name = "홍길동";
+select * from student;
+rollback;
+select * from student;
+delete from student where sno = 31;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
