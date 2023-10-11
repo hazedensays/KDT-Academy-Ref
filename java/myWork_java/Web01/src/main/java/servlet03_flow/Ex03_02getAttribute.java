@@ -47,7 +47,7 @@ public class Ex03_02getAttribute extends HttpServlet {
 	      out.print("<h3> rName: "+rName+"</h3>");
 	      out.print("<h3> rAge : "+rAge+"</h3>"); 
 	      
-	      out.print("<h2>** 3) session.getAttribute 값 확인 **</h2>");
+	      out.print("<h2>** 3) session.getAttribute 값 확인 **</h2>"); 
 	      out.print("<h3> sID : "+sId+"</h3>");
 	      out.print("<h3> sName: "+sName+"</h3>");
 	      out.print("<h3> sAge : "+sAge+"</h3>"); 
