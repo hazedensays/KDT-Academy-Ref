@@ -13,7 +13,11 @@
 
 <img alt="" src="./images/SSC_20231008110757.jpg" width="400" height = "300">
 <hr>
-&nbsp;<a href = "/Web01/helloS">Hello Servlet</a>
-&nbsp;<a href = "/Web01/lifecycle">Servlet LifeCycle</a>
+&nbsp;<a href = "/Web01/helloS">Hello Servlet</a><br>
+&nbsp;<a href = "/Web01/lifecycle">Servlet LifeCycle</a><br>
+&nbsp;<a href = "/Web01/flow01">flow01</a><br>
+&nbsp;<a href = "/Web01/servletTestForm/flow02_TestForm.jsp">flow02_TestForm.jsp</a><br>
+&nbsp;<a href = "/Web01/sessioni">SessionInfo</a><br>
+&nbsp;<a href = "/Web01/01set">Scope Test</a><br>
 </body>
 </html>

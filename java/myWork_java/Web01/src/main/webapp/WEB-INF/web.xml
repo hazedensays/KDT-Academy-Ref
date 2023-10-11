@@ -29,16 +29,12 @@
   	<url-pattern>/77</url-pattern>
   </servlet-mapping>
   
-  <!-- 설정파일 "xml" or 소스코드 "@" 
-  	=> url 매핑
-  	
-  	- xml
-  	: 확장성이 좋음
-  	: xml의 네임스페이스(태그)를 사용하여 편리하게 작성 가능
-  	
-  	- Annotation
-  -->
-  
+  <!-- 
+  ** Session Time 설정
+  => 분단위, 0 또는 음수를 사용하면 무한 시간 -->
+  <session-config>
+  	<session-timeout>0</session-timeout>
+  </session-config>
   
   
 </web-app>
