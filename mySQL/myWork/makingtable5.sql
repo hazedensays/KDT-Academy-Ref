@@ -775,13 +775,13 @@ select * from student;
 rollback;
 select * from student;
 delete from student where sno = 31;
-
-
-
-
-
-
-
+drop table member;
+create table member as
+select * from student;
+desc member;
+alter table member change sno id varchar(10);
+alter table member modify point double(5, 2);
+alter talbe member add password varchar(10);
 
 
 

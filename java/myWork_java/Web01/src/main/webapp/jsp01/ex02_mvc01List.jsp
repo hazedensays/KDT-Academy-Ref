@@ -20,7 +20,7 @@
 	List<StudentDTO> list = service.selectList();
 %>
 
-<table border = "1" style = "width : 90%;">
+<table border = "1" style = "width : 90%">
 	<tr bgcolor="hotpink"> 
 		<th>sno</th>
 		<th>name</th>
