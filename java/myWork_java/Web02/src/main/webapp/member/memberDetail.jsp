@@ -11,42 +11,54 @@
 	<h2>** Web_MVC2 Student Detail **</h2>
 
 	<table border="1" style="width: 90%">
-		<c:if test="${not empty requestScope.apple}">
+		<c:if test="${not empty requestScope.mDetail}">
 			<tr height="40">
-				<th bgcolor="hotpink">sno</th>
-				<td>${requestScope.apple.sno}</td>
+				<th bgcolor="hotpink">id</th>
+				<td>${requestScope.mDetail.id}</td>
+			</tr>
+			<tr height="40">
+				<th bgcolor="hotpink">password</th>
+				<td>${requestScope.mDetail.password}</td>
 			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">name</th>
-				<td>${requestScope.apple.name}</td>
+				<td>${requestScope.mDetail.name}</td>
 			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">age</th>
-				<td>${requestScope.apple.age}</td>
+				<td>${requestScope.mDetail.age}</td>
 			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">jno</th>
-				<td>${requestScope.apple.jno}</td>
+				<td>${requestScope.mDetail.jno}</td>
 			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">info</th>
-				<td>${requestScope.apple.info}</td>
+				<td>${requestScope.mDetail.info}</td>
 			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">point</th>
-				<td>${requestScope.apple.point}</td>
+				<td>${requestScope.mDetail.point}</td>
 			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">birthday</th>
-				<td>${requestScope.apple.birthday}</td>
+				<td>${requestScope.mDetail.birthday}</td>
+			</tr>
+			<tr height="40">
+				<th bgcolor="hotpink">rid</th>
+				<td>${requestScope.mDetail.rid}</td>
 			</tr>
 		</c:if>
 
-		<c:if test="${empty requestScope.apple}">
+		<c:if test="${empty requestScope.mDetail}">
 			<tr>
 				<td colspan="2">출력할 데이터 없음</td>
 			</tr>
 		</c:if>
 	</table>
+	<hr>
+	
+	<a href="javascript:history.go(-1)">go back</a>
+	<a href="/Web02/index.jsp">go home</a>&nbsp;&nbsp;&nbsp;
 </body>
 </html>

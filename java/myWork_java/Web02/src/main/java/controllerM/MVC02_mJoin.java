@@ -26,35 +26,40 @@ public class MVC02_mJoin extends HttpServlet {
 		// request Parameter 처리
 		request.setCharacterEncoding("UTF-8");
 		
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		int age = Integer.parseInt(request.getParameter("age"));
 		int jno = Integer.parseInt(request.getParameter("jno"));
 		String info = request.getParameter("info");
 		double point = Double.parseDouble(request.getParameter("point"));
 		String birthday = request.getParameter("birthday");
+		String rid = request.getParameter("rid");
 		
 		MemberService service = new MemberService();
 		MemberDTO dto = new MemberDTO();
 		
+		dto.setId(id);
+		dto.setPassword(password);
 		dto.setName(name);
 		dto.setAge(age);
 		dto.setJno(jno);
 		dto.setInfo(info);
 		dto.setPoint(point);
 		dto.setBirthday(birthday);
-		
+		dto.setName(rid);
 		
 		// 2) 결과 처리
-		// => 성공 : 로그인 유도 (loginForm으로 -> "servletTestForm/flowEx04_LoginForm.jsp")
-		// => 실패 : 재가입 유도 (joinForm으로 -> "jsp99_mvcTest/mvc2_sJoin.jsp")
-		String uri = "servletTestForm/flowEx04_LoginForm.jsp";
+		// => 성공 : 로그인 유도 (loginForm으로 -> "member/loginForm.jsp")
+		// => 실패 : 재가입 유도 (joinForm으로 -> "member/memberJoin.jsp")
+		String uri = "member/loginForm.jsp";
 		
 		if (service.insert(dto) > 0) {
 			// 성공
 			request.setAttribute("message", "회원가입이 완료되었습니다. 로그인 후 이용 바랍니다.");
 		} else {
 			// 실패
-			uri = "jsp99_mvcTest/mvc2_sJoin.jsp";
+			uri = "member/memberJoin.jsp";
 			request.setAttribute("message", "회원가입을 실패하였습니다. 재가입 바랍니다.");
 		}
 		

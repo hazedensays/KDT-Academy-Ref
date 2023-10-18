@@ -30,7 +30,7 @@ public class MVC2_mList extends HttpServlet {
 		// 2) View로 처리 전달
 		// => 처리 결과를 JSP가 인식할 수 있도록 준비 (-> setAttribute)
 		// => 역할 전달 (Forward)
-		request.setAttribute("mlist", list);
+		request.setAttribute("mList", list);
 		request.getRequestDispatcher("member/memberList.jsp").forward(request, response);
 
 	}// doGet

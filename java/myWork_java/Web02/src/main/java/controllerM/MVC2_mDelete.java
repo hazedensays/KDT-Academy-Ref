@@ -23,7 +23,7 @@ public class MVC2_mDelete extends HttpServlet {
 			throws ServletException, IOException {
 		// 1) 요청 분석 & Service
 		// => 삭제할 대상 (request의 Parameter로 전달됨)
-		int sno = Integer.parseInt(request.getParameter("sno"));
+		String id = request.getParameter("id");
 		MemberService service = new MemberService();
 		MemberDTO dto = new MemberDTO();
 		dto.setId(id);
@@ -35,12 +35,12 @@ public class MVC2_mDelete extends HttpServlet {
 		// int count = service.delete(dto); -> 굳이 변수에 담지 않아도 됨
 		if (service.delete(dto) > 0) {
 			// 성공
-			request.setAttribute("message", sno + "님의 정보가 삭제되었습니다.");
+			request.setAttribute("message", id + "님의 정보가 삭제되었습니다.");
 		} else {
-			request.setAttribute("message", sno + "님, 다시 삭제를 시도하세요.");
+			request.setAttribute("message", id + "님, 다시 삭제를 시도하세요.");
 		}
 		
-		request.getRequestDispatcher("list2").forward(request, response);
+		request.getRequestDispatcher("/mlist").forward(request, response);
 		
 	}// doGet
 

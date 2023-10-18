@@ -822,6 +822,7 @@ update member set id='papipu' where id='15';
 update member set id='bae87' where id='7';
 update member set id='wri' where id='6';
 update member set id = "zzaeminy" where id = "4";
-
-
+desc member;
+select * from member;
+update member set name = "관리자" where id = "admin";
 

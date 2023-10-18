@@ -10,8 +10,18 @@
 <body>
 	<h2>** Web_MVC2 Member Join**</h2>
 
-	<form action="/Web01/join" method="get">
+	<form action="/Web02/join" method="get">
 		<table border="1" style="width: 90%">
+			<tr height="40">
+				<th bgcolor="hotpink">id</th>
+				<td><input type="text" name="id" placeholder="영문, 10글자 이내"
+					size="20"></td>
+			</tr>
+			<tr height="40">
+				<th bgcolor="hotpink">password</th>
+				<td><input type="password" name="password"
+					placeholder="영문, 숫자, 특수문자" size="20"></td>
+			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">name</th>
 				<td><input type="text" name="name" placeholder="한/영문 입력"
@@ -47,23 +57,26 @@
 				<td><input type="text" name="birthday" size="20"></td>
 			</tr>
 			<tr height="40">
-				<td colspan = "2">
-					<input type="submit" value="가입">&nbsp;&nbsp;&nbsp;
-					<input type="reset" value="취소">
-				</td>
+				<th bgcolor="hotpink">rid</th>
+				<td><input type="text" name="rid" placeholder="추천인 입력"
+					size="20"></td>
+			</tr>
+			<tr height="40">
+				<td colspan="2"><input type="submit" value="가입">&nbsp;&nbsp;&nbsp;
+					<input type="reset" value="취소"></td>
 			</tr>
 		</table>
 	</form>
 	<hr>
-	
+
 	<c:if test="${not empty message}">
 		=> ${message}
 	</c:if>
 	<hr>
-	
-	<a href="/Web01/javascript:history.go(-1)">go back</a>
-	<a href="/Web01/index.jsp">go home</a>&nbsp;&nbsp;&nbsp;
-	
-	
+
+	<a href="javascript:history.go(-1)">go back</a>
+	<a href="/Web02/index.jsp">go home</a>&nbsp;&nbsp;&nbsp;
+
+
 </body>
 </html>

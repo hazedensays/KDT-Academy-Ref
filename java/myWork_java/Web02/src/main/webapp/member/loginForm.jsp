@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>** Member Login Form **</h2>
-	<form action="/Web01/login" method="get">
+	<form action="/Web02/login" method="get">
 		<table>
 			<tr height="40">
 				<td><label for="id">Id</label></td>
@@ -17,7 +17,7 @@
 			</tr>
 			<tr height="40">
 				<td><label for="password">Password</label></td>
-				<td><input type="text" id="password" name="password"></td>
+				<td><input type="password" id="password" name="password"></td>
 			</tr>
 			<tr height="40">
 				<td></td>
@@ -34,13 +34,6 @@
 	<c:if test="${not empty requestScope.message}">
 	message : ${requestScope.message}
 	</c:if>
-
-
-
-
-
-
-
 
 </body>
 </html>

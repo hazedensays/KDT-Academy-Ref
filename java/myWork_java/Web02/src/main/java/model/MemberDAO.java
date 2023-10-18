@@ -149,7 +149,7 @@ public class MemberDAO {
 
 	// ** delete ==============================================================
 	public int delete(MemberDTO dto) {
-		sql = "delete from student where id = ?";
+		sql = "delete from member where id = ?";
 
 		try {
 			pst = cn.prepareStatement(sql);
