@@ -825,4 +825,7 @@ update member set id = "zzaeminy" where id = "4";
 desc member;
 select * from member;
 update member set name = "관리자" where id = "admin";
-
+SELECT * FROM CAR_RENTAL_COMPANY_CAR
+WHERE OPTIONS
+LIKE "네비게이션"
+order by d;
