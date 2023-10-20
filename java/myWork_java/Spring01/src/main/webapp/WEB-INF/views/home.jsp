@@ -17,8 +17,8 @@
 </c:if>
 <hr>
 <a href = "mlist">MList</a>
-<a href = "mlistsp">MList</a>
-<a href = "mdetailsp">MList</a>
+<a href = "mlistsp">mlistsp</a>
+<a href = "mdetailsp">mdetailsp</a>
 
 </body>
 </html>
