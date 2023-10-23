@@ -1,4 +1,4 @@
-package j02_ifSwitch;
+package j03_forWhile;
 
 // ** 반복문 의 3요소 : 반복자의 초기값, 조건식(true or false), 증감식
 // => for : for(초기값; 조건식; 증감식)
@@ -9,7 +9,7 @@ package j02_ifSwitch;
 // ** 반복자(iterator)
 // => 반복문에서 횟수를 count 하는 변수
 
-public class LoopBasic {
+public class Ex01_LoopBasic {
 
 	public static void main(String[] args) {
 		// ** 과제

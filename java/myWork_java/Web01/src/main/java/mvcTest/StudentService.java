@@ -7,38 +7,34 @@ public class StudentService {
 	StudentDAO dao = new StudentDAO();
 	
 	// ** selectList
-	public List<StudentDTO> selectList() {
+	public List<StudentDTO> selectList(){
 		return dao.selectList();
 	}
 	
 	// ** selectOne
-	public StudentDTO selectOne(StudentDTO sVO) {
-		return dao.selectOne(sVO);
+	public StudentDTO selectOne(StudentDTO vo) {
+		return dao.selectOne(vo);
 	}
 	
-	// ** Group 적용
-	public List<GroupDTO> groupList() {
-		return dao.groupList();
-	}
 	
-	// ** insert
+	// insert
 	public int insert(StudentDTO dto) {
 		return dao.insert(dto);
 	}
 	
-	// ** update
+	// update
 	public int update(StudentDTO dto) {
 		return dao.update(dto);
 	}
 	
-	// ** delete
+	// delete
 	public int delete(StudentDTO dto) {
 		return dao.delete(dto);
 	}
 	
-	// ** Transaction Test
+	// transactionTest
 	public void transactionTest() {
 		dao.transactionTest();
 	}
 	
-} // StudentService
+}
