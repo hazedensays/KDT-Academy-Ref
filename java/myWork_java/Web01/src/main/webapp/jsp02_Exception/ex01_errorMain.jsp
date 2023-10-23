@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%-- <%@ page errorPage = "ex01_errorMessage.jsp" %>	 --%>
+    pageEncoding="UTF-8"%>
+<%-- <%@ page errorPage="ex01_errorMessage.jsp" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<pre>
-		<h2>
+<pre><h2>
 ** Exception Main **
 => 1) WebPage 별로
    -> WebPage 의 page 디렉티브에서 정의
@@ -30,8 +29,7 @@
 
 3) ArithmeticException : Exception Type
    => by Zero
-   123/0 = <%=123 / 0%> 
-</h2>
-	</pre>
+   123/0 = <%=123/0%> 
+</h2></pre>
 </body>
 </html>

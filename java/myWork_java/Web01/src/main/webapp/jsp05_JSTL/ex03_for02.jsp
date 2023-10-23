@@ -21,7 +21,7 @@
 </pre>
 <b>
 <c:forEach var="i" begin="1" end="10" step="1" varStatus="vs">
-   ${i}${vs.last?"":", "}
+	${i}${vs.last?"":", "}
 </c:forEach>
 
 
@@ -38,35 +38,35 @@
 </pre>
 =>결과 1<br>
 <table border="1" style="text-align:center; width:90%;">
-   <tr style="background-color:black; color:white;">
-      <th>index</th>
-      <th>count</th>
-   </tr>
-   <c:forEach var="i" begin="1" end="10" step="1" varStatus="vs">
-      <c:if test="${i%2==0}">
-         <tr>
-            <td>${vs.index}</td>
-            <td>${vs.count}</td>
-         </tr>
-      </c:if>
-   </c:forEach>
+	<tr style="background-color:black; color:white;">
+		<th>index</th>
+		<th>count</th>
+	</tr>
+	<c:forEach var="i" begin="1" end="10" step="1" varStatus="vs">
+		<c:if test="${i%2==0}">
+			<tr>
+				<td>${vs.index}</td>
+				<td>${vs.count}</td>
+			</tr>
+		</c:if>
+	</c:forEach>
 </table>
 
 <br>
 =>비교 (조건: 2부터 2씩 증가)
 <table border="1" style="text-align:center; width:90%;">
-   <tr style="background-color:black; color:white;">
-      <th>index</th>
-      <th>count</th>
-   </tr>
-   <c:forEach var="i" begin="2" end="10" step="2" varStatus="vs">
-      <c:if test="${i%2==0}">
-         <tr>
-            <td>${vs.index}</td>
-            <td>${vs.count}</td>
-         </tr>
-      </c:if>
-   </c:forEach>
+	<tr style="background-color:black; color:white;">
+		<th>index</th>
+		<th>count</th>
+	</tr>
+	<c:forEach var="i" begin="2" end="10" step="2" varStatus="vs">
+		<c:if test="${i%2==0}">
+			<tr>
+				<td>${vs.index}</td>
+				<td>${vs.count}</td>
+			</tr>
+		</c:if>
+	</c:forEach>
 </table>
 
 
@@ -80,17 +80,17 @@
 ............30 -->
 
 <c:forEach var="i" begin="1" end="30" step="1" varStatus="vs">
-   ${i}${i%5==0?"<br/>":","}
+	${i}${i%5==0?"<br/>":","}
 </c:forEach>
 <br><br>
 => Table (중첩 for 구문)<br>
 <table>
    <c:forEach var="i" begin="1" end="26" step="5" >
-      <tr align="right">
-         <c:forEach var="j" begin="${i}" end="${i+4}" step="1">
-            <td width="50">${j}</td>
-         </c:forEach>
-      </tr>
+	   <tr align="right">
+	      <c:forEach var="j" begin="${i}" end="${i+4}" step="1">
+	         <td width="50">${j}</td>
+	      </c:forEach>
+	   </tr>
    </c:forEach>
 </table>
 </body>

@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%
-   String[] menu={"삼겹살","짜장면","샤브샤브","제육볶음","냉면"};
-   pageContext.setAttribute("menuList", menu);
+	String[] menu={"삼겹살","짜장면","샤브샤브","제육볶음","냉면"};
+	pageContext.setAttribute("menuList", menu);
 %>
 </head>
 <body>
@@ -32,27 +32,27 @@
 <b>
 Test 1) <br>
 <c:forEach var="menu" items="${menuList}">
-   ${menu},&nbsp;
+	${menu},&nbsp;
 </c:forEach>
 
 Test 2) varStatus 속성 호라용
 <table border="1" style="text-align:center; width:90%;">
-   <tr style="background-color:black; color:white;">
-      <th>menu</th>
-      <th>index</th>
-      <th>count</th>
-      <th>first</th>
-      <th>last</th>
-   </tr>
-   <c:forEach var="menu" items="${menuList}" varStatus="vs">
-      <tr>
-         <td>${menu}</td>
-         <td>${vs.index}</td>
-         <td>${vs.count}</td>
-         <td>${vs.first}</td>
-         <td>${vs.last}</td>
-      </tr>
-   </c:forEach>
+	<tr style="background-color:black; color:white;">
+		<th>menu</th>
+		<th>index</th>
+		<th>count</th>
+		<th>first</th>
+		<th>last</th>
+	</tr>
+	<c:forEach var="menu" items="${menuList}" varStatus="vs">
+		<tr>
+			<td>${menu}</td>
+			<td>${vs.index}</td>
+			<td>${vs.count}</td>
+			<td>${vs.first}</td>
+			<td>${vs.last}</td>
+		</tr>
+	</c:forEach>
 </table>
 <br>
 Test 3) 과제
@@ -61,10 +61,10 @@ Test 3) 과제
    . 단, 마지막에는 마침표를 표시하세요 ~~
    
 <ul>
-   <c:forEach var="menu" items="${menuList}" varStatus="vs">
-      <li <c:if test="${vs.first==true}">style="color:blue"</c:if>>${menu}<c:if test="${vs.last==false}">,</c:if><c:if test="${vs.last==true}">.</c:if>
-      </li>
-   </c:forEach>
+	<c:forEach var="menu" items="${menuList}" varStatus="vs">
+		<li <c:if test="${vs.first==true}">style="color:blue"</c:if>>${menu}<c:if test="${vs.last==false}">,</c:if><c:if test="${vs.last==true}">.</c:if>
+		</li>
+	</c:forEach>
 </ul>
 
 -- 선생님 코드 --

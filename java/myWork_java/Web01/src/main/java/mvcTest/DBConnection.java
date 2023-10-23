@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 //** Connection 객체 생성
 //=> 일반적인 생성문 
 // Connection cn = new Connection_구현클래스() -> XXX
-//=> DB 연결정보를이용해서 생성후 그 생성값을 전달받음   
+//=> DB 연결정보를이용해서 생성후 그 생성값을 전달받음
 
 //** Connection 생성과정
 //=> Class.forName : JDBC 드라이버 로딩
@@ -27,35 +27,36 @@ import java.sql.DriverManager;
 // 사용할 애플리케이션에 대해 사용가능한 JDBC(Java Database Connectivity) 드라이버 세트를 관리함.
 
 public class DBConnection {
-	
+   
 	public static Connection getConnection() {
-		
-		// ** Error Message
-        // => 드라이버 오류 : java.lang.ClassNotFoundException: com.mysql.cj.jdbc.Driver1
-        // => portNumber 오류 : ~~Communications link failure
-        // => DBName 오류 : java.sql.SQLSyntaxErrorException: Unknown database 'mydb1'
-        // => 계정, PW 오류 : java.sql.SQLException: Access denied for user 'root1'@'localhost' (using password: YES)
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
-			 	// => allowPublicKeyRetrieval=true : local DB open 하지 않아도 connection 허용
-				// => localhost -> 동일값(ip주소) @127.0.0.1
-			Connection cn = DriverManager. getConnection(url, "root", "mysql");
-				// 네트워크 통신은 데이터를 주고받는 데 있어서 송신자와 수신자 사이의 통로를 필요로 함
-				// 이러한 통로는 포트(port)라고 불리며, 각 포트에는 고유한 번호가 할당됨
-			System.out.println("** JDBC Connection 성공");
-			return cn;
-		} catch (Exception e) {
-			System.out.println("** JDBC Connection Exception => " + e.toString());
-			return null;
-		}
-		
-		
-		
-	}
-	
-	
-	
-	
-}
+	      
+	      // ** Error Message
+	      // => 드라이버 오류 : java.lang.ClassNotFoundException: com.mysql.cj.jdbc.Driver1
+	      // => portNumber 오류 : ~~Communications link failure
+	      // => DBName 오류 : java.sql.SQLSyntaxErrorException: Unknown database 'mydb1'
+	      // => 계정,PW 오류 : java.sql.SQLException: Access denied for user 'root1'@'localhost' (using password: YES)
+	      
+	      try {
+	         Class.forName("com.mysql.cj.jdbc.Driver");
+	         // => Connector mysql-connector-j-8.1.0.jar 내에서 "com.mysql.cj.jdbc.Driver" 를 찾음
+	         //    그러므로 실행전에 프로젝트에 ~.jar 연동   
+	         String url="jdbc:mysql://localhost:3306/mydb?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true";
+	         // => allowPublicKeyRetrieval=true : local DB open 하지 않아도 connection 허용
+	         // => localhost -> 동일값(ip주소) @127.0.0.1
+	         
+	         Connection cn = DriverManager.getConnection(url, "root", "whthdus0212@");
+	         System.out.println("*** JDBC Connection 성공 **");
+	         return cn;
+	      } catch (Exception e) {
+	         System.out.println("*** JDBC Connection Exception => "+e.toString());
+	         return null;
+	      }
+	      
+	   } //getConnection
+
+      
+   }
+   
+   
+   
+   

@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>** JSTL if(조건분기) Test Main **</title>
 </head>
 <body>
-	<h2>** JSTL if(조건분기) Test Main **</h2>
-	<pre>
+<h2>** JSTL if(조건분기) Test Main **</h2>
+<pre>
 => if, choose (java 의 switch ~ case)
 
 1) if
@@ -24,9 +24,9 @@
 => test 속성에 EL을 이용해서 조건지정
 => EL 관계식 활용 : 모든 Type 에 "==" 사용가능
 </pre>
-	<hr>
-	<br> => Java Code 와 비교<br>
-	<%   String color=request.getParameter("color");
+<hr><b>
+=> Java Code 와 비교<br>
+<%   String color=request.getParameter("color");
    if (color.equals("1")) { %>
       <span style="color:red;">Red 선택</span>
 <%    }else if (color.equals("2")) { %>   
@@ -39,28 +39,41 @@
       <span style="color:purple;">선택 오류</span>
 <% } %>
 <br><br>
-=> if Tag<br>
-<c:if test="${param.color == 1}">
-	<span style="color:red;">Red 선택</span>
+=> JSTL if Tag<br>
+<c:if test="${param.color==1}">
+	<span style="color:red;">red 선택</span>
 </c:if>
-<c:if test="${param.color == 2}">
-	<span style="color:green;">Green 선택</span>
+<c:if test="${param.color==2}">
+	<span style="color:green;">green 선택</span>
 </c:if>
-<c:if test="${param.color == 3}">
-	<span style="color:blue;">Blue 선택</span>
+<c:if test="${param.color==3}">
+	<span style="color:blue;">blue 선택</span>
 </c:if>
-<c:if test="${param.color == 4}">
-	<span style="color:yellow;">Yellow 선택</span>
+<c:if test="${param.color==4}">
+	<span style="color:yellow;">yellow 선택</span>
 </c:if>
-<c:if test="${param.color == 5 || empty param.color}">
-	<span style="color:red;">Error 또는 No Choice</span>
-</c:if>
+<c:if test="${param.color==5 || empty param.color}">
+	<span style="color:purple;">선택값이 없거나 선택 오류</span>
+</c:if><br/>
 
-
-
-
-
-
+=> choose Tag <br/>
+<c:choose>
+	<c:when test="${param.color==1}">
+		<span style="color:red;">red 선택</span>
+	</c:when>
+	<c:when test="${param.color==2}">
+		<span style="color:green;">green 선택</span>
+	</c:when>
+	<c:when test="${param.color==3}">
+		<span style="color:blue;">blue 선택</span>
+	</c:when>
+	<c:when test="${param.color==4}">
+		<span style="color:yellow;">yellow 선택</span>
+	</c:when>
+	<c:otherwise>
+		<span style="color:purple;">선택값이 없거나 선택 오류</span>
+	</c:otherwise>
+</c:choose>
 
 </body>
 </html>

@@ -1,0 +1,16 @@
+** member Table Create
+=> student의 컬럼과 Data 활용
+=> 구조
+   private String id; // 추가, Primary Key
+   private String password; // 추가, not null
+   private String name;
+   private int age;
+   private int jno;
+   private String info;
+   private double point;
+   private String birthday;
+   private String rid;  // 추천인 추가
+   
+=> 제약조건
+	-> Primary Key
+	-> not null

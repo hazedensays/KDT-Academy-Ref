@@ -25,61 +25,52 @@ import javax.servlet.http.HttpServletResponse;
 //  => 현재의 요청에 대해 응답 -> 재요청 -> 처리
 
 @WebServlet("/flow02")
-public class Ex01_Flow02 extends HttpServlet {
+public class Ex01_flow02 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
-	public Ex01_Flow02() {
-		super();
-	}
+    public Ex01_flow02() {
+        super();
+    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
-		// 1. 요청 분석
-		// => uri가 forward 방식인가 redirect인가 확인
-		int pageNum = Integer.parseInt(request.getParameter("page"));
-		String send = request.getParameter("send");
-		String uri = "";
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//** PageFlow 실습
+		//=> testForm: servletTestForm/flow02_TestForm.jsp
+		
+		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-
-		out.println("<h2 style = 'color : hotpink;'> ** Forward / Redirect Test ** </h2>");
-
-		switch (pageNum) {
-		case 1:
-			uri = "helloS";
-			break;
-		case 2:
-			uri = "lifecycle";
-			break;
-		case 3:
-			uri = "servletTestForm/form03_Check.jsp";
-			break;
-		case 4:
-			uri = "servletTestForm/form04_Select.jsp";
-			break;
+		
+		int page = Integer.parseInt(request.getParameter("page"));
+		String send = request.getParameter("send");
+		String uri="";
+		switch(page) {
+			case 1: uri = "helloS"; break;
+			case 2: uri = "lifeCycle"; break;
+			case 3: uri = "servletTestForm/form03_Check.jsp"; break;
+			case 4: uri = "servletTestForm/form04_Select.jsp"; break;
 		}
+		/*
+		if(send.equals("f")) {
+			request.getRequestDispatcher(uri).forward(request, response);
+		}else {			
+			response.sendRedirect(uri);
+		}
+		*/
 		
-		// 2. Forward or Redirect
-		// ** NullPointExeption 예방
-		// => request.getParameter("send")가 값이 없는경우 NullPointExeption 발생 
-		//    if ( "f".equals(request.getParameter("send")) )
-		
-		if ("f".equals(request.getParameter("send"))) {
+		// 위 코드는 NullPointExeption이 발생할 수 있음
+		// 예방 방법
+		if ( "f".equals(request.getParameter("send"))) {
 			request.getRequestDispatcher(uri).forward(request, response);
 		} else {
 			response.sendRedirect(uri);
 		}
-
-		// => console로 확인
-		System.out.println("** flow02 Test **");
-
-	}// doGet
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+		
+		
+		
+		
 	}
 
-}// class Ex01_Flow01
+
+
+}

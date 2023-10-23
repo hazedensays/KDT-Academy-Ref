@@ -21,55 +21,49 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/getpost")
 public class Ex03_GetPost extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    
+    public Ex03_GetPost() {
+        super();
+    }
 
-	public Ex03_GetPost() {
-		super();
-
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ** Get Test
 		// => 쿼리스트링으로 Test
-		// : http://localhost:8080/Web01/getpost?id=banana&name=홍길동&age=22
-
+		//    = http://localhost:8080/Web01/getpost?id=banana&name=홍길동&age=20
+		
 		// ** 요청분석
 		// => 한글처리
 		// - getParameter 전에 해야함
 		// - Tomcat(WAS) 은 Get 방식요청에서는 "UTF-8" 을 default 로 적용함
-		// ( html 문서에서 "UTF-8" 작성되었고 , Get 방식으로 전송되면 생략가능
-		// 단, post 방식에서는 반드시 처리해야함 )
+		//   ( html 문서에서 "UTF-8" 작성되었고 , Get 방식으로 전송되면 생략가능
+		//   단, post 방식에서는 반드시 처리해야함 ) 
 		request.setCharacterEncoding("UTF-8");
-
-		// => Parameter 로 전달된 Data 처리
+		
+		// => Parameter로 전달된 Data 처리
 		// => request.getParameter("...") 등등
-		// - 해당하는 Parameter (id) 가 없으면 null 을 return \
-		// - 단, Parameter (id) 는 존재하지만 값이 없는 경우와는 구별됨 (null 값이 아님 "")
-
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
+		String id=request.getParameter("id");
+		String name=request.getParameter("name");
 		int age = Integer.parseInt(request.getParameter("age"));
-
+		
 		// *출력(응답, response) 처리
 		// => 한글처리
 		// => 응답객체에 결과물 담기(출력객체 생성)
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print("<html><body>");
-		out.print("<h2 style = 'color : blue;'> ** Get_Post Test ** </h2>");
-		out.print("<h2 style = 'color : hotpink;'>전달된 Data 확인 => </h2>");
-		out.print("<h3>id = " + id + "</h3>");
-		out.print("<h3>name = " + name + "</h3>");
-		out.print("<h3>age = " + age + "</h3>");
+		out.print("<h2 style='color:blue'>** Get_Post Test **</h2>");
+		out.print("<h2>전달된 데이터 확인 => </h2>");
+		out.print("<h3>id =>"+id+"</h3>");
+		out.print("<h3>name =>"+name+"</h3>");
+		out.print("<h3>age =>"+age+"</h3>");
 		out.print("</body></html>");
-
-	} // doGet
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("Post Test");
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	} // doPost
+	}
+	
 
-} // class Ex03_GetPost
+}

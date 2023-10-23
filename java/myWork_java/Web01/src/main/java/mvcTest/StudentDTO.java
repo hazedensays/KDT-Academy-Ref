@@ -53,6 +53,7 @@ package mvcTest;
 //=> 자료확인시 편리성을 위해 toString() 메서드 오버라이딩 
 
 public class StudentDTO {
+
 	private int sno;
 	private String name;
 	private int age;
@@ -61,7 +62,7 @@ public class StudentDTO {
 	private double point;
 	private String birthday;
 	
-	// => getter / setter 자동생성 (Alt + Shift + S / Source)
+	// ** getter / setter
 	public int getSno() {
 		return sno;
 	}
@@ -105,18 +106,13 @@ public class StudentDTO {
 		this.birthday = birthday;
 	}
 	
-	// => toString 자동생성 (Alt + Shift + S / Source)
+	// ** toString
 	@Override
 	public String toString() {
-		return "StudentNo [sno=" + sno + ", name=" + name + ", age=" + age + ", jno=" + jno + ", info=" + info
+		return "StudentVO [sno=" + sno + ", name=" + name + ", age=" + age + ", jno=" + jno + ", info=" + info
 				+ ", point=" + point + ", birthday=" + birthday + "]";
 	}
 	
-
-	
 	
 
-	
-	
-	
-} // class StudentNo
+}
