@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import domain.MemberDTO;
 
 //** DAO(Data Access Object)
@@ -14,6 +16,7 @@ import domain.MemberDTO;
 //=> CRUD 구현 
 // Create(Insert), Read(selectList, selectOne), Update, Delete
 
+@Component
 public class MemberDAO {
 	// ** 전역변수 정의 ==============================================================
 	private static Connection cn = DBConnection.getConnection();
