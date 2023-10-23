@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** Web_MVC2 Member Join **</title>
+<title>** Spring_MVC2 Member Join **</title>
 </head>
 <body>
-	<h2>** Web_MVC2 Member Join**</h2>
+	<h2>** Spring_MVC2 Member Join**</h2>
 
-	<form action="/Web02/join" method="get">
+	<form action="join" method="post">
 		<table border="1" style="width: 90%">
 			<tr height="40">
 				<th bgcolor="hotpink">id</th>
@@ -69,13 +69,13 @@
 	</form>
 	<hr>
 
-	<c:if test="${not empty message}">
+	<c:if test="${not empty requestScope.message}">
 		=> ${message}
 	</c:if>
 	<hr>
 
 	<a href="javascript:history.go(-1)">go back</a>
-	<a href="/Web02/index.jsp">go home</a>&nbsp;&nbsp;&nbsp;
+	<a href="home">go home</a>&nbsp;&nbsp;&nbsp;
 
 
 </body>

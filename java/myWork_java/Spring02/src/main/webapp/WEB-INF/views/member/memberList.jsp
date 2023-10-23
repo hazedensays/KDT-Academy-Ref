@@ -48,7 +48,7 @@
 					<td>${list.birthday}</td>
 					<td>${list.rid}</td>
 					<c:if test="${sessionScope.loginID == 'admin'}">
-						<td align="center"><a href="/Web02/delete?id=${list.id}">삭제</a></td>
+						<td align="center"><a href="mdelete?id=${list.id}">삭제</a></td>
 					</c:if>
 				</tr>
 			</c:forEach>
