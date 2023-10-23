@@ -768,5 +768,64 @@ desc jo;
 desc student;
 alter table student drop column address;
 desc student;
-
-
+select * from student;
+start transaction;
+update student set name = "홍길동";
+select * from student;
+rollback;
+select * from student;
+delete from student where sno = 31;
+drop table member;
+create table member as
+select * from student;
+desc member;
+alter table member change sno id varchar(10);
+alter table member modify point double(5, 2);
+alter table member add password varchar(10);
+alter table member modify point double;
+drop table member;
+create table member(
+id varchar(10) primary key,
+password varchar(10) not null,
+name varchar(10),
+age int(3),
+jno int(3),
+info varchar(30),
+point double,
+birthday varchar(10),
+rid varchar(10)
+);
+insert into member(id,password,name,age,jno,info,point,birthday)
+select s.sno,'12345!', s.name, s.age,s.jno, s.info, s.point, s.birthday
+from student s;
+select * from member;
+update member set id = "zzaeminy" where id = "4";
+update member set id='csh98' where id='20';
+update member set id='haerim' where id='5';
+update member set id='silver' where id='16';
+update member set id = "hyejin11" where name = "신혜진";
+update member set id='sora' where id='1';
+update member set id='ajh97' where id='10';
+update member set id='ruhappy' where id='12';
+update member set id="suehyun" where id='8';
+update member set id="ezirenge" where id='2';
+update member set id='kongbori' where id='19';
+update member set id='wonee512' where id='14';
+update member set id='memoire' where id='18';
+update member set id='jekichan' where name='이성룡';
+update member set id='papipu' where id='15';
+update member set id='ajh97' where id='10';
+update member set id = "nameground" where id ='3';
+update member set id='jeseung' where id='13';
+update member set id="ysh" where id='11';
+update member set id='papipu' where id='15';
+update member set id='bae87' where id='7';
+update member set id='wri' where id='6';
+update member set id = "zzaeminy" where id = "4";
+desc member;
+select * from member;
+update member set name = "관리자" where id = "admin";
+SELECT * FROM CAR_RENTAL_COMPANY_CAR
+WHERE OPTIONS
+LIKE "네비게이션"
+order by d;
