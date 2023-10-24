@@ -28,20 +28,22 @@
 	<hr>
 	<!-- Login 전 -->
 	<c:if test="${empty sessionScope.loginID}">
-		&nbsp;<a href = "login">Login_Get</a>&nbsp;
-		&nbsp;<a href = "join">Join_Get</a>&nbsp;
+		&nbsp;<a href = "member/loginForm">Login_Get</a>&nbsp;
+		&nbsp;<a href = "member/memberJoin">Join_Get</a>&nbsp;
 	</c:if>
 	
 	<!-- Login 후 -->
 
 	<c:if test="${not empty sessionScope.loginID}">
-		&nbsp;<a href = "logout">Logout</a><br>
-		&nbsp;<a href = "mdetail">MyInfo 조회</a><br>
-		&nbsp;<a href = "mdetail">MyInfo 수정</a><br>
-		&nbsp;<a href = "mdelete?id=${sessionScope.loginID}">회원 탈퇴</a><br>
+		&nbsp;<a href = "member/logout">Logout</a><br>
+		&nbsp;<a href = "member/mdetail?id=${sessionScope.loginID}">MyInfo 조회</a><br>
+		&nbsp;<a href = "member/mdetail?jCode=U&id=${sessionScope.loginID}">MyInfo 수정</a><br>
+		&nbsp;<a href = "member/mdelete?id=${sessionScope.loginID}">회원 탈퇴</a><br>
 	</c:if>
 	
-	&nbsp;<a href = "mlist">Member List</a><br>
+<!-- 	&nbsp;<a href = "mlist">Member List</a><br> -->
+	&nbsp;<a href = "member/memberList">Member List</a><br>
+	&nbsp;<a href = "member/log4jTest">log4jTest</a><br>
 	
 </body>
 </html>

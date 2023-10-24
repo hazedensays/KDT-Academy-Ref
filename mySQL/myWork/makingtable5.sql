@@ -829,3 +829,40 @@ SELECT * FROM CAR_RENTAL_COMPANY_CAR
 WHERE OPTIONS
 LIKE "네비게이션"
 order by d;
+
+create  table board (    
+seq int(5) primary key AUTO_Increment,
+id varchar(10) not null,
+title varchar(200) not null,
+content Text(2000),
+regdate datetime DEFAULT CURRENT_TIMESTAMP,
+cnt int default 0
+);
+insert into board(id, title, content) values("sonny","손흥민에 대하여","토트넘 주장");
+insert into board(id, title, content) values("zzaeminy","잼민이의 특기","메롱을 잘한다.");
+insert into board(id, title, content) values("kongbori","학원을 결석하는 11가지 방법","집가고 싶다");
+insert into board(id, title, content) values("admin","관리자","관리자다임마");
+insert into board(id, title, content) values("ezirenge","김이지렁이가 좋아하는 것","햄스터");
+insert into board(id, title, content) values("nameground","비둘기 일상","비둘비둘비둘기");
+insert into board(id, title, content) values("hyejin11","잼민잼민언니","i4최고잼민");
+insert into board(id, title, content) values("32","파리생제르망","강인이는 귀여워");
+insert into board(id, title, content) values("이강인","파리에서의 일상","음바페랑 축구하기");
+insert into board(id, title, content) values("황희찬","희발 씨찬이형","황소");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -61,7 +61,7 @@
 	</table>
 	<hr>
 
-	<a href="home">go home</a>
+	<a href="/best/home">go home</a>
 	<br> &nbsp;
 </body>
 </html>
