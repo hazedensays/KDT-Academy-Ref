@@ -43,7 +43,15 @@
 	
 <!-- 	&nbsp;<a href = "mlist">Member List</a><br> -->
 	&nbsp;<a href = "member/memberList">Member List</a><br>
+	<hr>
 	&nbsp;<a href = "member/log4jTest">log4jTest</a><br>
+	<hr>
+	&nbsp;<a href = "board/boardList">Board List</a><br>
+	<hr>
+	&nbsp;<a href = "jo/joList">Jo List</a><br>
+	
+	
+	
 	
 </body>
 </html>

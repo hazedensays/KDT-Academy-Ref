@@ -3,7 +3,6 @@ package com.green.best;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import domain.MemberDTO;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import service.MemberService;
 
@@ -120,12 +120,21 @@ import service.MemberService;
 //======================================================================================
 
 @Log4j
+@AllArgsConstructor
 @RequestMapping(value = "/member") // "/member"로 시작하는 모든 요청을 처리
 // => 하나의 클래스 안에 메서드 단위로 컨트롤러를 여러 개 만들 수 있음
 @Controller
 public class MemberController {
 
-	@Autowired
+	// @Autowired
+	// => service 인스턴스를 초기화
+	//    MemberService service = new MemberService();
+	//    String name = "홍길동";
+	// => 모든 값을 초기화하는 생성자인 @AllArgsConstructor를 사용하면
+	//    @Autowired를 사용하지 않아도 됨
+	// => 차이점
+	//    : @AllArgsConstructor : 클래스에 1개만 적용하면 됨 (1:N)
+	//    : @Autowired : 멤버들마다 모두 적용해야 함 (1:1)
 	MemberService service;
 	
 	// ** Lombok의 Log4j Test
@@ -159,7 +168,7 @@ public class MemberController {
 
 	// ** MemberDetail
 	//@RequestMapping(value = "/mdetail", method = RequestMethod.GET)
-	@GetMapping(value = "mdetail")
+	@GetMapping(value = "/mdetail")
 	public String mdetial(HttpServletRequest request, Model model, MemberDTO dto) {
 		// dto.setId("검색 id");
 		model.addAttribute("mDetail", service.selectOne(dto));
@@ -214,6 +223,7 @@ public class MemberController {
 		if (dto != null && dto.getPassword().equals(password)) {
 			session.setAttribute("loginID", dto.getId());
 			session.setAttribute("loginName", dto.getName());
+			session.setAttribute("loginJno", dto.getJno());
 		} else {
 			uri = "member/loginForm";
 			model.addAttribute("message", "[로그인 실패] 다시 시도해주세요.");
@@ -283,7 +293,7 @@ public class MemberController {
 	//    : 성공 -> detail 출력
 	//    : 실패 -> 재시도 유도 (memberUpdate.jsp)
 	//@RequestMapping(value = "mupdate", method = RequestMethod.POST)
-	@PostMapping(value = "mupdate")
+	@PostMapping(value = "/mupdate")
 	public String memberUpdate(MemberDTO dto, Model model) {
 		// => 처리 결과에 따른 화면 출력을 위해서 dto의 값을 Attribute에 보관
 		model.addAttribute("mDetail", dto);

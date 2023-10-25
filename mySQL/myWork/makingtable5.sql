@@ -848,13 +848,26 @@ insert into board(id, title, content) values("hyejin11","잼민잼민언니","i4
 insert into board(id, title, content) values("32","파리생제르망","강인이는 귀여워");
 insert into board(id, title, content) values("이강인","파리에서의 일상","음바페랑 축구하기");
 insert into board(id, title, content) values("황희찬","희발 씨찬이형","황소");
-
-
-
-
-
-
-
+select * from board;
+drop table jo;
+drop table jo2;
+drop table jo3;
+drop table jo4;
+create table jo (
+   jno int(1),
+   jname varchar(10) not null,
+   id varchar(10) not null,  
+   project varchar(20) not null,
+   slogan varchar(30) not null,
+   Primary Key(jno)
+);
+insert into jo values(1, '119', 'bae87', '펫밀리', '애완동물을 위한 홈페이지');
+insert into jo values(2, '여우', 'haerim', '여우책방', '책으로 마음의 양식을♡');
+insert into jo values(3, "i4", 'jeseung', "단Dog", "반려동물 한마리 한마리 모두 소중하다");
+insert into jo values(4,"최고조", 'ezirenge',"tbtConcept","열정빼면 시체");
+insert into jo values(5, "오조", 'wonee512', "Ojoa", "완주 아니면 죽음뿐");
+insert into jo values(7, "칠면조", 'admin', "관리팀", "열심히 일하자 !!!");
+select * from jo;
 
 
 

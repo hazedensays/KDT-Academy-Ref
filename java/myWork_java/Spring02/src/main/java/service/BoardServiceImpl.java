@@ -5,46 +5,46 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import domain.MemberDTO;
-import model.MemberDAO;
+import domain.BoardDTO;
+import model.BoardDAO;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class BoardServiceImpl implements BoardService {
 	// ** 전역변수 정의
-	//MemberDAO dao = new MemberDAO();
+	//BoardDAO dao = new BoardDAO();
 	
 	@Autowired
-	MemberDAO dao;
+	BoardDAO dao;
 	
 	// ** selectList
 	@Override
-	public List<MemberDTO> selectList() {
+	public List<BoardDTO> selectList() {
 		return dao.selectList();
 	}
 	
 	// ** selectOne
 	@Override
-	public MemberDTO selectOne(MemberDTO sVO) {
+	public BoardDTO selectOne(BoardDTO sVO) {
 		return dao.selectOne(sVO);
 	}
 		
 	// ** insert
 	@Override
-	public int insert(MemberDTO dto) {
+	public int insert(BoardDTO dto) {
 		return dao.insert(dto);
 	}
 	
 	// ** update
 	@Override
-	public int update(MemberDTO dto) {
+	public int update(BoardDTO dto) {
 		return dao.update(dto);
 	}
 	
 	// ** delete
 	@Override
-	public int delete(MemberDTO dto) {
+	public int delete(BoardDTO dto) {
 		return dao.delete(dto);
 	}
 
 	
-} // MemberService
+} // BoardService

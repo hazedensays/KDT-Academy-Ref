@@ -5,46 +5,45 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import domain.MemberDTO;
-import model.MemberDAO;
+import domain.JoDTO;
+import model.JoDAO;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+public class JoServiceImpl implements JoService {
 	// ** 전역변수 정의
-	//MemberDAO dao = new MemberDAO();
-	
+	// JoDAO dao = new JoDAO();
+
 	@Autowired
-	MemberDAO dao;
-	
+	JoDAO dao;
+
 	// ** selectList
 	@Override
-	public List<MemberDTO> selectList() {
+	public List<JoDTO> selectList() {
 		return dao.selectList();
 	}
-	
+
 	// ** selectOne
 	@Override
-	public MemberDTO selectOne(MemberDTO sVO) {
+	public JoDTO selectOne(JoDTO sVO) {
 		return dao.selectOne(sVO);
 	}
-		
+
 	// ** insert
 	@Override
-	public int insert(MemberDTO dto) {
+	public int insert(JoDTO dto) {
 		return dao.insert(dto);
 	}
-	
+
 	// ** update
 	@Override
-	public int update(MemberDTO dto) {
+	public int update(JoDTO dto) {
 		return dao.update(dto);
 	}
-	
+
 	// ** delete
 	@Override
-	public int delete(MemberDTO dto) {
+	public int delete(JoDTO dto) {
 		return dao.delete(dto);
 	}
 
-	
-} // MemberService
+} // JoService
