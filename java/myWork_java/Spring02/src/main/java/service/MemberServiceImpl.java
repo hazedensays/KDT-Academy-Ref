@@ -16,6 +16,12 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDAO dao;
 	
+	// ** Jo_List 추가
+	@Override
+	public List<MemberDTO> joList(int jno) {
+		return dao.joList(jno);
+	}
+	
 	// ** selectList
 	@Override
 	public List<MemberDTO> selectList() {

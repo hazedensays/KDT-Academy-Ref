@@ -33,7 +33,35 @@ insert into board(id, title, content) values("황희찬","희발 씨찬이형","
 
 =========================================================================
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+3. Spring02 구현2 댓글달기
+
+=> board Table 컬럼추가
+   -> root: 원글표시
+   -> step: 댓글의 출력순서 번호
+   -> indent: 댓글레벨
+   
+=> 원글과 댓글 구분
+   -> 원글:  root_자신의 seq, step_0, indent_0
+   -> 첫댓글: root_원글의 seq, step_1, indent_1 
+
+=> Table 수정
+   -> 컬럼추가
+   alter table board add root int(5)  default 0 ; 
+   alter table board add step int(5) default 0 ;
+   alter table board add indent int(3) default 0 ;  
+   
+   -> root 값에 자신의 seq 넣기
+   update board set root=seq ; 
+   
+   -> 부분 조회 & 댓글 포함 List 출력순서 
+   select seq, title, id, root, step, indent from board order by root desc, step asc;
+   
+=> Application 에 replyInsert 추가
+   -> Java: BoardDTO, BoardDAO, BoardService, BoardServiceImpl, BoardController
+   -> Jsp: boardDetail(메뉴추가), replyInsert, boardList 
+  
 
 
 

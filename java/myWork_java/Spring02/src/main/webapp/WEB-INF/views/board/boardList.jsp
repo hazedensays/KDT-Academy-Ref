@@ -32,8 +32,17 @@
 			<c:forEach var="list" items="${requestScope.bList}">
 				<tr>
 					<td>${list.seq}</td>
-					<!-- Title => 로그인한 경우에만 글 내용을 볼 수 있도록 Link 추가 -->
+			<!--    Title
+					=> 로그인한 경우에만 글 내용을 볼 수 있도록 Link 추가
+					=> 댓글 작성 후에는 indent값에 따른 들여쓰기 기능						-->
 					<td>
+						<c:if test="${list.indent > 0 }">
+							<c:forEach begin="1" end="${list.indent}">
+								<span>&nbsp;&nbsp;</span>
+							</c:forEach>
+							<span style="color:blue">↳</span>
+						</c:if>
+					
 						<c:if test="${not empty sessionScope.loginID}">
 							<a href = "bdetail?seq=${list.seq}">${list.title}</a>
 						</c:if>
@@ -45,7 +54,7 @@
 					<td>${list.id}</td>
 					<td>${list.regdate}</td>
 					<td>${list.cnt}</td>
-				</tr>
+				</tr> 
 			</c:forEach>
 		</c:if>
 		<c:if test="${empty requestScope.bList}">

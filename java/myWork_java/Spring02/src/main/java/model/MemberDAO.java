@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import domain.MemberDTO;
@@ -25,6 +24,39 @@ public class MemberDAO {
 	private static PreparedStatement pst;
 	private static ResultSet rs;
 	private static String sql;
+
+	// ** Jo_List 추가 =============================================================
+	public List<MemberDTO> joList(int jno) {
+		sql = "select * from member where jno=?";
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		try {
+			pst = cn.prepareStatement(sql);
+			pst.setInt(1, jno);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				do {
+					MemberDTO dto = new MemberDTO();
+					dto.setId(rs.getString(1));
+					dto.setPassword(rs.getString(2));
+					dto.setName(rs.getString(3));
+					dto.setAge(rs.getInt(4));
+					dto.setJno(rs.getInt(5));
+					dto.setInfo(rs.getString(6));
+					dto.setPoint(rs.getDouble(7));
+					dto.setBirthday(rs.getString(8));
+					dto.setRid(rs.getString(9));
+					list.add(dto);
+				} while (rs.next());
+			} else {
+				System.out.println("조의 멤버가 존재하지 않습니다.");
+				list = null;
+			} // else
+		} catch (Exception e) {
+			System.out.println("** Member joList Exception => " + e.toString());
+			list = null;
+		} // try
+		return list;
+	} // joList
 
 	// ** selectList ==============================================================
 	public List<MemberDTO> selectList() {

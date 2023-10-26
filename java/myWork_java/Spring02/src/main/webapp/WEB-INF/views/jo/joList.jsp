@@ -9,20 +9,21 @@
 </head>
 <body>
 	<h2>** Spring_MVC2 jo List **</h2>
-	<hr>
-
+	
 	<c:if test="${not empty requestScope.message}">${requestScope.message}</c:if>
 	<hr>
 
 	<c:if test="${not empty sessionScope.loginID}">
 		<a href="joInsert">새로운 조 등록</a>
 	</c:if>
+	<hr>
 
 	<table border="1" style="width: 90%">
 		<tr bgcolor="skyblue">
 			<th>jno</th>
 			<th>jname</th>
 			<th>id</th>
+			<th>name</th>
 			<th>project</th>
 			<th>slogan</th>
 		</tr>
@@ -43,6 +44,7 @@
 					</td>
 				
 					<td>${list.id}</td>
+					<td>${list.name}</td>
 					<td>${list.project}</td>
 					<td>${list.slogan}</td>
 				</tr>

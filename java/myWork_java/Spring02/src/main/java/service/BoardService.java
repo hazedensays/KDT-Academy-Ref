@@ -8,6 +8,8 @@ public interface BoardService {
 
 	// ** selectList
 	List<BoardDTO> selectList();
+	
+	int rinsert(BoardDTO dto);
 
 	// ** selectOne
 	BoardDTO selectOne(BoardDTO sVO);

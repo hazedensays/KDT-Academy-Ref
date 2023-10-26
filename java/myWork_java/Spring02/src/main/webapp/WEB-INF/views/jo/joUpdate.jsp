@@ -53,7 +53,7 @@
 		
 		</table>
 	</form>
-	<hr>
+
 
 	<c:if test="${not empty requestScope.message}">
 		=> ${message}

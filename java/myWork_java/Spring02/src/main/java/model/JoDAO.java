@@ -21,8 +21,16 @@ public class JoDAO {
 	private static String sql;
 
 	// ** selectList ==============================================================
+	// => 1. 기본형 
+	// => 2. 조장 이름 추가
+	//	  : Outer Join -> 조장이 없는 조도 출력되어야 함
+	//	  : (Left/Right : 출력_자료가 있는 쪽 기준)
+	
+	
 	public List<JoDTO> selectList() {
-		sql = "select * from jo order by jno desc";
+		// sql = "select * from jo"; -> 1) 기본형
+		sql="select j.jno, jname, j.id, m.name, project, slogan from jo j left outer join member m on j.id=m.id";
+		
 		List<JoDTO> list = new ArrayList<JoDTO>();
 
 		try {
@@ -35,8 +43,9 @@ public class JoDAO {
 					dto.setJno(rs.getInt(1));
 					dto.setJname(rs.getString(2));
 					dto.setId(rs.getString(3));
-					dto.setProject(rs.getString(4));
-					dto.setSlogan(rs.getString(5));
+					dto.setName(rs.getString(4));
+					dto.setProject(rs.getString(5));
+					dto.setSlogan(rs.getString(6));
 					list.add(dto);
 				} while (rs.next());
 			} else {

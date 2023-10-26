@@ -868,10 +868,14 @@ insert into jo values(4,"최고조", 'ezirenge',"tbtConcept","열정빼면 시�
 insert into jo values(5, "오조", 'wonee512', "Ojoa", "완주 아니면 죽음뿐");
 insert into jo values(7, "칠면조", 'admin', "관리팀", "열심히 일하자 !!!");
 select * from jo;
-
-
-
-
+use mydb;
+alter table board add root int(5)  default 0 ; 
+alter table board add step int(5) default 0 ;
+alter table board add indent int(3) default 0 ;  
+desc board;
+update board set root = seq;
+select * from board;
+select seq, title, id, root, step, indent from board order by root desc, step asc;
 
 
 

@@ -41,7 +41,53 @@
 		</c:if>
 	</table>
 	<hr>
-	
+
+	<h3>** ${mDetail.jno}조 MemberList **</h3>
+	<table border="1" style="width: 90%">
+		<tr bgcolor="skyblue" height="30">
+			<th>ID</th>
+			<th>Password</th>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Jno</th>
+			<th>Info</th>
+			<th>Point</th>
+			<th>Birthday</th>
+			<th>추천인</th>
+		</tr>
+		<c:if test="${not empty requestScope.mList}">
+			<c:forEach var="m" items="${requestScope.mList}">
+				<tr height="30">
+					<td>
+						<!-- 관리자기능 추가하기 --> <c:if test="${sessionScope.loginID=='admin'}">
+							<a href="mdetail?id=${m.id}">${m.id}</a>
+						</c:if> <c:if test="${sessionScope.loginID!='admin'}">
+							${m.id}
+						</c:if>
+					</td>
+					<td>${m.password}</td>
+					<td>${m.name}</td>
+					<td>${m.age}</td>
+					<td>${m.jno}</td>
+					<td>${m.info}</td>
+					<td>${m.point}</td>
+					<td>${m.birthday}</td>
+					<td>${m.rid}</td>
+				</tr>
+			</c:forEach>
+		</c:if>
+		<c:if test="${empty requestScope.mList}">
+			<tr>
+				<td colspan="9">출력할 데이터 없음</td>
+			</tr>
+		</c:if>
+	</table>
+	<hr>
+
+	<c:if test="${not empty requestScope.message}">
+		=> ${message}<br>
+	</c:if>
+
 	<!-- 로그인을 한 경우에는 새로운 조 등록 -->
 	<a href="joInsert">새로운 조 등록</a>
 	<br>
@@ -51,12 +97,13 @@
 	<a href="jdelete?jno=${requestScope.jDetail.jno}">조 삭제</a>
 	<br>
 
-	
-	
+
+
 	<a href="javascript:history.go(-1)">go back</a>
 	<a href="/best/home">go home</a>&nbsp;&nbsp;&nbsp;
-	
+
 	<br>
-	<a href = "joList">Jo List</a><br>
+	<a href="joList">Jo List</a>
+	<br>
 </body>
 </html>

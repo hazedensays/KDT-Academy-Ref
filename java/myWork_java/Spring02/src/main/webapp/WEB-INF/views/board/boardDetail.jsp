@@ -48,7 +48,10 @@
 	
 	<!-- 로그인을 한 경우에는 새글등록, 답글등록 -->
 	<a href="boardInsert">새글등록</a>
-	<a href="replyInsert">답글등록</a>
+	
+	<!-- 댓글 등록을 위해 (부모)글의 root, step, indent 값이 필요하기 때문에 서버로 보내주어야 함
+		 => 쿼리스트링으로 작성 														-->
+	<a href="replyInsert?root=${requestScope.bDetail.root}&step=${requestScope.bDetail.step}&indent=${requestScope.bDetail.indent}">답글등록</a>
 	<br>
 	
 	<!-- 로그인id와 글쓴이id가 동일한 경우에는 수정, 삭제 가능 -->
