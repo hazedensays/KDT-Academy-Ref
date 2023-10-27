@@ -1,12 +1,14 @@
-package service;
+package mapperInterface;
 
 import java.util.List;
 
 import domain.BoardDTO;
 
-public interface BoardService {
+public interface BoardMapper {
 	// ** replyInsert
+	// => rinsert, stepUpdate
 	int rinsert(BoardDTO dto);
+	int stepUpdate(BoardDTO dto);
 	
 	// ** selectList
 	List<BoardDTO> selectList();
@@ -22,5 +24,4 @@ public interface BoardService {
 
 	// ** delete
 	int delete(BoardDTO dto);
-
 }

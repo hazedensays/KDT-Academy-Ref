@@ -1,4 +1,4 @@
-package service;
+package service_OLD;
 
 import java.util.List;
 
@@ -6,51 +6,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.MemberDTO;
-import mapperInterface.MemberMapper;
+import model.MemberDAO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	// ** 전역변수 정의	
+	// ** 전역변수 정의
+	//MemberDAO dao = new MemberDAO();
+	
 	@Autowired
-	// => MemberMapper의 인스턴스를 스프링이 생성해주고 이를 주입받아 실행함
-	// 즉, 위 인터페이스의 구현체(클래스)는 작성할 필요가 없음
-	MemberMapper mapper;
-
+	MemberDAO dao;
 	
 	// ** Jo_List 추가
 	@Override
 	public List<MemberDTO> joList(int jno) {
-		return mapper.joList(jno);
+		return dao.joList(jno);
 	}
 	
 	// ** selectList
 	@Override
 	public List<MemberDTO> selectList() {
-		return mapper.selectList();
+		return dao.selectList();
 	}
 	
 	// ** selectOne
 	@Override
 	public MemberDTO selectOne(MemberDTO sVO) {
-		return mapper.selectOne(sVO);
+		return dao.selectOne(sVO);
 	}
 		
 	// ** insert
 	@Override
 	public int insert(MemberDTO dto) {
-		return mapper.insert(dto);
+		return dao.insert(dto);
 	}
 	
 	// ** update
 	@Override
 	public int update(MemberDTO dto) {
-		return mapper.update(dto);
+		return dao.update(dto);
 	}
 	
 	// ** delete
 	@Override
 	public int delete(MemberDTO dto) {
-		return mapper.delete(dto);
+		return dao.delete(dto);
 	}
 
 	

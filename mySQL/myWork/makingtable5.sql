@@ -876,9 +876,16 @@ desc board;
 update board set root = seq;
 select * from board;
 select seq, title, id, root, step, indent from board order by root desc, step asc;
-
-
-
+alter table member add uploadfile varchar(50) default "resources/uploadImages/aaa.gif";
+select * from member;
+select * from jo;
+update member set uploadfile="resources/uploadImages/bbb.gif" where jno = 1; 
+update member set uploadfile="resources/uploadImages/ccc.gif" where jno = 2; 
+update member set uploadfile="resources/uploadImages/ddd.gif" where jno = 3; 
+update member set uploadfile="resources/uploadImages/eee.gif" where jno = 4; 
+update member set uploadfile="resources/uploadImages/xxx.gif" where jno = 5; 
+update member set uploadfile="resources/uploadImages/ddd.gif" where jno = 7; 
+update member set uploadfile="resources/uploadImages/ccc.gif" where jno = 999; 
 
 
 

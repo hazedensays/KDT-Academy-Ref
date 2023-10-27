@@ -1,4 +1,4 @@
-package service;
+package service_OLD;
 
 import java.util.List;
 
@@ -6,42 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.JoDTO;
-import mapperInterface.JoMapper;
+import model.JoDAO;
 
 @Service
 public class JoServiceImpl implements JoService {
 	// ** 전역변수 정의
+	// JoDAO dao = new JoDAO();
+
 	@Autowired
-	JoMapper mapper;
+	JoDAO dao;
 
 	// ** selectList
 	@Override
 	public List<JoDTO> selectList() {
-		return mapper.selectList();
+		return dao.selectList();
 	}
 
 	// ** selectOne
 	@Override
 	public JoDTO selectOne(JoDTO sVO) {
-		return mapper.selectOne(sVO);
+		return dao.selectOne(sVO);
 	}
 
 	// ** insert
 	@Override
 	public int insert(JoDTO dto) {
-		return mapper.insert(dto);
+		return dao.insert(dto);
 	}
 
 	// ** update
 	@Override
 	public int update(JoDTO dto) {
-		return mapper.update(dto);
+		return dao.update(dto);
 	}
 
 	// ** delete
 	@Override
 	public int delete(JoDTO dto) {
-		return mapper.delete(dto);
+		return dao.delete(dto);
 	}
 
 } // JoService

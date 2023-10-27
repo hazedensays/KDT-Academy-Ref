@@ -57,7 +57,7 @@
 	<!-- 로그인id와 글쓴이id가 동일한 경우에는 수정, 삭제 가능 -->
 		<c:if test="${sessionScope.loginID == requestScope.bDetail.id}">
 		<a href="bdetail?jCode=U&seq=${requestScope.bDetail.seq}">글 수정</a>
-		<a href="bdelete?seq=${requestScope.bDetail.seq}">글 삭제</a>
+		<a href="bdelete?seq=${requestScope.bDetail.seq}&root=${requestScope.bDetail.root}">글 삭제</a>
 		<br>
 	</c:if>
 	
