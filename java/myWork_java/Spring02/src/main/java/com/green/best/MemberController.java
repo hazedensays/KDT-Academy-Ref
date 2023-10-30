@@ -1,21 +1,27 @@
 package com.green.best;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import domain.MemberDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import service.MemberService;
-
 
 //** Spring 의 redirect ===================================================================
 
@@ -128,15 +134,15 @@ public class MemberController {
 
 	// @Autowired
 	// => service 인스턴스를 초기화
-	//    MemberService service = new MemberService();
-	//    String name = "홍길동";
+	// MemberService service = new MemberService();
+	// String name = "홍길동";
 	// => 모든 값을 초기화하는 생성자인 @AllArgsConstructor를 사용하면
-	//    @Autowired를 사용하지 않아도 됨
+	// @Autowired를 사용하지 않아도 됨
 	// => 차이점
-	//    : @AllArgsConstructor : 클래스에 1개만 적용하면 됨 (1:N)
-	//    : @Autowired : 멤버들마다 모두 적용해야 함 (1:1)
+	// : @AllArgsConstructor : 클래스에 1개만 적용하면 됨 (1:N)
+	// : @Autowired : 멤버들마다 모두 적용해야 함 (1:1)
 	MemberService service;
-	
+
 	// ** Lombok의 Log4j Test
 	@GetMapping(value = "/log4jTest")
 	public String log4jTest() {
@@ -146,9 +152,11 @@ public class MemberController {
 		log.info(" Log Level Info of Lombok : name = " + name);
 		log.debug(" Log Level Debug of Lombok : name = " + name);
 		log.trace(" Log Level Trace of Lombok : name = " + name);
-		
+
 		return "redirect:/";
 	}
+	
+	
 
 	// ** MemberList
 //	@RequestMapping(value = "/mlist", method = RequestMethod.GET)
@@ -156,7 +164,7 @@ public class MemberController {
 //		model.addAttribute("mList", service.selectList());
 //		return "member/memberList";
 //	}
-	
+
 //  => 계층적 url 적용
 //	   : home에서의 요청명은 "member/memberList"
 //	   : viewName 생략 시, 요청명을 viewName으로 처리
@@ -167,13 +175,13 @@ public class MemberController {
 	}
 
 	// ** MemberDetail
-	//@RequestMapping(value = "/mdetail", method = RequestMethod.GET)
+	// @RequestMapping(value = "/mdetail", method = RequestMethod.GET)
 	@GetMapping(value = "/mdetail")
 	public String mdetial(HttpServletRequest request, Model model, MemberDTO dto) {
 		// dto.setId("검색 id");
 		model.addAttribute("mDetail", service.selectOne(dto));
-		
-		if("U".equals(request.getParameter("jCode"))) {
+
+		if ("U".equals(request.getParameter("jCode"))) {
 			return "member/memberUpdate";
 		} else {
 			return "member/memberDetail";
@@ -186,19 +194,18 @@ public class MemberController {
 //	public String loginForm() {
 //		return "member/loginForm";
 //	}
-	
+
 //  => 계층적 url 적용
 //	   : home에서의 요청명은 "member/memberJoin"
 //	   : viewName 생략 시, 요청명을 viewName으로 처리
 //	   -> @RequestMapping 대신 @GetMapping 사용 가능
 	@GetMapping(value = "/loginForm")
 	public void loginForm() {
-		
+
 	}
-	
 
 	// => Login처리 : Post
-	//@RequestMapping(value = "/login", method = RequestMethod.POST)
+	// @RequestMapping(value = "/login", method = RequestMethod.POST)
 	@PostMapping(value = "/login")
 	public String login(HttpSession session, Model model, MemberDTO dto) {
 		// ** 로그인 Service처리
@@ -254,7 +261,7 @@ public class MemberController {
 //	public String memberJoin() {
 //		return "member/memberJoin";
 //	}
-	
+
 //  => 계층적 url 적용
 //	   : home에서의 요청명은 "member/memberJoin"
 //	   : viewName 생략 시, 요청명을 viewName으로 처리
@@ -263,17 +270,103 @@ public class MemberController {
 	public void memberJoin() {
 		// viewName 생략
 	}
-	
+
 	// ** Join Service 처리 : Post
-	//@RequestMapping(value = "/join", method = RequestMethod.POST)
+	// @RequestMapping(value = "/join", method = RequestMethod.POST)
 	@PostMapping(value = "/join")
-	public String join(MemberDTO dto, Model model) {
+	public String join(HttpServletRequest request, MemberDTO dto, Model model) throws IOException {
 		// 1) 요청분석 & Service
 		// => 한글처리 필수 : web.xml에서 filter로 처리
 		// => request Parameter 처리 : 매개변수로 MemberDTO 정의하면 자동으로 set
 		// => 성공 : 로그인 유도 (loginForm으로, member/loginForm.jsp)
 		// => 실패 : 재가입 유도 (joinForm으로, member/memberJoin.jsp)
 		String uri = "member/loginForm";
+
+		// ** MultipartFile ***********************
+		// => 전달된 UploadFile 정보 전달
+		// => MultipartFile 타입의 uploadfilef 의 정보에서
+		// upload된 image 화일과 화일명을 get 처리,
+		// => upload된 image 화일은 서버의 정해진 폴더 (물리적위치)에 저장하고, -> file1
+
+		// => 이 위치에 대한 정보를 table에 저장 (vo의 UploadFile 에 set) -> file2
+		// resources/uploadImage/bbb.gif -> Table 의 저장위치
+
+		// ** image 화일명 중복시 : 나중 이미지로 update 됨.
+
+		// ** Image 물리적위치 에 저장
+		// 1-1) 현재 웹어플리케이션의 실행 위치 확인 :
+		// => eclipse 개발환경 (배포전)
+		// D:\MTest\myWork\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Spring02\
+		// C:\eGovFrame-4.0.0\workspace.edu\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Spring02\
+
+		// => 톰캣서버에 배포 후 : 서버내에서의 위치가 됨
+		// D:\MTest\IDESet\apache-tomcat-9.0.41\webapps\Spring02\
+		String realPath = request.getRealPath("/");
+		System.out.println("** realPath => " + realPath);
+
+		// 1-2) 위의 값(realPath) 을 이용해서 실제저장위치 확인
+		// => 개발중인지, 배포했는지에 따라 결정
+		if (realPath.contains(".eclipse.")) { // 개발 중(배포 전 : eclipse 개발 환경)
+			realPath = "D:\\hazedensays\\hazedensays_Ref\\java\\myWork_java\\Spring02\\src\\main\\webapp\\resources\\uploadImages\\";
+		} else {
+			realPath += "resources\\uploadImages\\";
+			// 필요한 경로 : C:\apache-tomcat-9.0.80\webapps\Spring02\resources\~uploadImages
+		}
+
+		// ** 폴더 만들기 (File 클래스활용)
+		// => 위의 저장경로에 폴더가 없는 경우 (uploadImage가 없는경우) 만들어 준다
+		// => file.exists()
+		// -> 파일 또는 폴더가 존재하는지 리턴
+		// -> 폴더가 아닌, 파일존재 확인하려면 file.isDirectory() 도 함께 체크해야함.
+		// ( 참고: https://codechacha.com/ko/java-check-if-file-exists/ )
+		// => file.isDirectory() : 폴더이면 true 그러므로 false 이면 file 이 존재 한다는 의미가 됨.
+		// => file.isFile()
+		// -> 파일이 존재하는 경우 true 리턴,
+		// file의 Path 가 폴더인 경우는 false 리턴
+
+		File f1 = new File(realPath);
+		if (!f1.exists()) {
+			f1.mkdir();
+			// => realPath가 존재하지 않으면 생성
+		}
+
+		// => 기본이미지(basicman4.png) 가 uploadImages 폴더에 없는경우 기본폴더(images) 에서 가져오기
+		f1 = new File(realPath + "basicman4.png"); // uploadImages 폴더에 파일이 존재하는지 확인하기 위함
+		if (!f1.isFile()) { // 존재하지 않는 경우
+			String basicImagePath = "D:\\hazedensays\\hazedensays_Ref\\java\\myWork_java\\Spring02\\src\\main\\webapp\\resources\\images\\basicman4.png";
+			FileInputStream fi = new FileInputStream(new File(basicImagePath));
+			// => basicImage 읽어 파일 입력바이트스트림 생성
+			FileOutputStream fo = new FileOutputStream(f1);
+			// => 목적지 파일(realPath+"basicman4.png") 출력바이트스트림 생성
+			FileCopyUtils.copy(fi, fo);
+			// fi에서 가져와서 fo에 넣어줌
+		}
+
+		// => 기본 이미지 지정하기
+		String file1, file2 = "resources/uploadImages/basicman4.png";
+
+		// ** MultipartFile
+		// => 업로드한 파일에 대한 모든 정보를 가지고 있으며 이의 처리를 위한 메서드를 제공한다.
+		// -> String getOriginalFilename(),
+		// -> void transferTo(File destFile),
+		// -> boolean isEmpty()
+
+		// 1-3) 저장경로 완성
+		MultipartFile uploadfilef = dto.getUploadfilef();
+
+		if (uploadfilef != null && !uploadfilef.isEmpty()) {
+			// => image_File을 선택함 -> 저장 (저장경로 : realPath + 파일명)
+			// 1-3.1) 물리적 위치 저장 (file1)
+			file1 = realPath + uploadfilef.getOriginalFilename(); // 저장경로 완성
+			uploadfilef.transferTo(new File(file1)); // 해당 경로에 저장 (붙여넣기)
+
+			// 1-3.2) 물리적 위치 저장 (file2)
+			file2 = "resources/uploadImages/" + uploadfilef.getOriginalFilename();
+		} // img 선택한 경우
+		
+		// 1-4) 완성된 경로를 dto에 set
+		dto.setUploadfile(file2);
+		
 
 		// 2) Service 처리
 		if (service.insert(dto) > 0) {
@@ -290,15 +383,57 @@ public class MemberController {
 	// ** Member Update
 	// => 요청 : home에서 내정보수정 -> 내정보수정 Form 출력
 	// => 수정 후 submit -> 수정 Service
-	//    : 성공 -> detail 출력
-	//    : 실패 -> 재시도 유도 (memberUpdate.jsp)
-	//@RequestMapping(value = "mupdate", method = RequestMethod.POST)
+	// : 성공 -> detail 출력
+	// : 실패 -> 재시도 유도 (memberUpdate.jsp)
+	// @RequestMapping(value = "mupdate", method = RequestMethod.POST)
 	@PostMapping(value = "/mupdate")
-	public String memberUpdate(MemberDTO dto, Model model) {
-		// => 처리 결과에 따른 화면 출력을 위해서 dto의 값을 Attribute에 보관
+	public String memberUpdate(MemberDTO dto, Model model, HttpServletRequest request) throws IOException {
 		model.addAttribute("mDetail", dto);
 		String uri = "member/memberDetail";
 		
+		String realPath = request.getRealPath("/");
+		
+		if (realPath.contains(".eclipse.")) {
+			realPath = "D:\\hazedensays\\hazedensays_Ref\\java\\myWork_java\\Spring02\\src\\main\\webapp\\resources\\uploadImages\\";
+		} else {
+			realPath += "resources\\uploadImages\\";
+		}
+		
+		File f1 = new File(realPath);
+		if (!f1.exists()) {
+			f1.mkdir();
+		}
+		
+		f1 = new File(realPath + "basicman4.png");
+		if (!f1.isFile()) {
+			String basicImagePath = "D:\\hazedensays\\hazedensays_Ref\\java\\myWork_java\\Spring02\\src\\main\\webapp\\resources\\images\\basicman4.png";
+			FileInputStream fi = new FileInputStream(new File(basicImagePath));
+			FileOutputStream fo = new FileOutputStream(f1);
+			// => 목적지 파일(realPath+"basicman4.png") 출력바이트스트림 생성
+			FileCopyUtils.copy(fi, fo);
+		}
+		
+		// => 기본 이미지 지정하기
+		String file1, file2 = "resources/uploadImages/basicman4.png";
+
+		MultipartFile uploadfilef = dto.getUploadfilef();
+
+		if (uploadfilef != null && !uploadfilef.isEmpty()) {
+			//dto.setUploadfile("resources/uploadImages/" + uploadfilef.getOriginalFilename());
+			
+			file1 = realPath + uploadfilef.getOriginalFilename();
+			uploadfilef.transferTo(new File(file1));
+
+			file2 = "resources/uploadImages/" + uploadfilef.getOriginalFilename();
+		}
+		
+		dto.setUploadfile(file2);
+
+
+
+		
+		
+
 		// => Service 처리
 		if (service.update(dto) > 0) {
 			model.addAttribute("message", "회원정보 수정이 완료되었습니다.");
@@ -306,32 +441,32 @@ public class MemberController {
 			model.addAttribute("message", "[회원정보 수정 실패] 다시 시도하세요.");
 			uri = "member/memberUpdate";
 		}
-		
+
 		return uri;
 	}
-	
+
 	// ** Member Delete : 회원 탈퇴
 	// -> 삭제 대상 : Parameter로 전달, dto에 자동 set
-	//@RequestMapping(value = "mdelete", method = RequestMethod.GET)
+	// @RequestMapping(value = "mdelete", method = RequestMethod.GET)
 	@GetMapping(value = "/mdelete")
 	public String mdelete(MemberDTO dto, Model model, HttpSession session, RedirectAttributes rttr) {
-		
+
 		// 1) 본인 탈퇴
 		// 결과 : message(삭제 성공/실패), home.jsp, session 무효화
-		
+
 		// 2) 관리자에 의한 강제 탈퇴
 		// 결과 : message(삭제 성공/실패), memberList.jsp
-		
+
 		// => 본인 탈퇴 or 관리자에 의한 강제 탈퇴 구분 필요
-		//    : dto의 id와 session의 loginID와 같으면 -------> 본인 탈퇴
-		//    : dto의 id와 session의 loginID와 다르면서
-		//      loginID의 값이 "admin"일 경우 --------------> 강제 탈퇴
-		
+		// : dto의 id와 session의 loginID와 같으면 -------> 본인 탈퇴
+		// : dto의 id와 session의 loginID와 다르면서
+		// loginID의 값이 "admin"일 경우 --------------> 강제 탈퇴
+
 		String uri = "redirect:/";
-		
+
 		if (service.delete(dto) > 0) {
 			rttr.addFlashAttribute("message", "회원탈퇴 되었습니다.");
-			if (((String)session.getAttribute("loginID")).equals("admin")) {
+			if (((String) session.getAttribute("loginID")).equals("admin")) {
 				// => 관리자에 의한 강제 탈퇴
 				uri = "redirect:memberList";
 			} else {
@@ -341,7 +476,7 @@ public class MemberController {
 		} else {
 			model.addAttribute("message", "[탈퇴 실패] 다시 시도하세요.");
 		}
-		
+
 		return uri;
 	}
 

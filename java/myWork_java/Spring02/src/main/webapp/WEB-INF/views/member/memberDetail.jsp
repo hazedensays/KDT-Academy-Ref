@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>** Spring Member Detail **</title>
+<script src="/best/resources/myLib/jquery-3.2.1.min.js"></script>
 </head>
+
 <body>
 	<h2>** Spring Member Detail **</h2>
 
@@ -47,6 +49,12 @@
 			<tr height="40">
 				<th bgcolor="hotpink">rid</th>
 				<td>${requestScope.mDetail.rid}</td>
+			</tr>
+			<tr height="40">
+				<th bgcolor="hotpink">img</th>
+				<td>
+					<img alt="img" src="/best/${requestScope.mDetail.uploadfile}">
+				</td>
 			</tr>
 		</c:if>
 

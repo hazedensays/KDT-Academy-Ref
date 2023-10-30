@@ -1,5 +1,7 @@
 package domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 // ** DTO
@@ -33,5 +35,10 @@ public class MemberDTO {
 	private double point;
 	private String birthday;
 	private String rid; // 추천인
-	private String uploadfile;
+	private String uploadfile; //table에 보관된 file_path
+	
+	private MultipartFile uploadfilef;
+	// => form 의 Upload_File 정보를 전달받기위한 필드
+	//    MultipartFile (Interface) -> CommonsMultipartFile
+	
 }// class MemberDTO

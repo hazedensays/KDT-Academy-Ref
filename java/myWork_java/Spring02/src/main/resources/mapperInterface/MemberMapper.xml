@@ -24,12 +24,12 @@
 <!-- ** insert ============================================================== -->
 <insert id="insert">
 	insert into member
-	values (#{id}, #{password}, #{name}, #{age}, #{jno}, #{info}, #{point}, #{birthday}, #{rid})
+	values (#{id}, #{password}, #{name}, #{age}, #{jno}, #{info}, #{point}, #{birthday}, #{rid}, #{uploadfile})
 </insert>
 
 <!-- ** update ============================================================== -->
 <update id="update">
-	update member set name = #{name}, age = #{age}, jno = #{jno}, info = #{info}, point = #{point}, birthday = #{birthday}, rid = #{rid} where id = #{id}
+	update member set name = #{name}, age = #{age}, jno = #{jno}, info = #{info}, point = #{point}, birthday = #{birthday}, rid = #{rid}, uploadfile = #{uploadfile} where id = #{id}
 </update>
 
 <!-- ** delete ============================================================== -->
