@@ -58,6 +58,6 @@
 	</table>
 	<hr>
 
-	<a href="/best/home">go home</a><br>
+	<a href="/Spring02/home">go home</a><br>
 </body>
 </html>

@@ -26,6 +26,7 @@
 			<th>birthday</th>
 			<th>rid</th>
 			<th>img</th>
+			<th>Download</th>
 
 			<!-- 관리자 기능 추가 -->
 			<c:if test="${sessionScope.loginID == 'admin'}">
@@ -52,7 +53,17 @@
 						<td align="center"><a href="mdelete?id=${list.id}">삭제</a></td>
 					</c:if>
 					<!-- img추가 -->
-					<td><img alt="MyImage" src="/best/${list.uploadfile}"></td>
+					<td>
+						<img alt="MyImage" src="/Spring02/${list.uploadfile}" height="100">
+					</td>
+		<!-- File Download ** 
+         	=> download 요청을 받으면 서버는 해당화일을 찾아 response 에 담아보내면,
+               웹브라우져가 받아 download 시켜줌 
+         	=> 최종적 처리를 웹브라우져가 해주기때문에 일반적으로 a Tag 로 처리함     
+               (즉, 비동기 처리_Ajax 를 하지 않음, 비동기처리에서는 response를 웹브라우져가 받지않기때문)		-->
+					<td>
+						<a href="download?dnfile=${list.uploadfile}">${list.uploadfile}</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</c:if>
@@ -64,7 +75,7 @@
 	</table>
 	<hr>
 
-	<a href="/best/home">go home</a>
+	<a href="/Spring02/home">go home</a>
 	<br> &nbsp;
 </body>
 </html>

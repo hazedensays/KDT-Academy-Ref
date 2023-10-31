@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Home</title>
-<link rel="stylesheet" type="text/css" href="/best/resources/myLib/myStyle.css">
+<link rel="stylesheet" type="text/css" href="/Spring02/resources/myLib/myStyle.css">
 </head>
 <body>
 	<h1 style="color: hotpink">Hello Spring MVC</h1>
@@ -24,7 +24,7 @@
 	</c:if>
 	<hr>
 	
-	<img alt="mainImage" src="/best/resources/images/KakaoTalk_20231023_121144200.jpg" width = "300" height = "300">
+	<img alt="mainImage" src="/Spring02/resources/images/KakaoTalk_20231023_121144200.jpg" width = "300" height = "300">
 	<hr>
 	<!-- Login 전 -->
 	<c:if test="${empty sessionScope.loginID}">
@@ -38,6 +38,7 @@
 		&nbsp;<a href = "member/logout">Logout</a><br>
 		&nbsp;<a href = "member/mdetail?id=${sessionScope.loginID}">MyInfo 조회</a><br>
 		&nbsp;<a href = "member/mdetail?jCode=U&id=${sessionScope.loginID}">MyInfo 수정</a><br>
+		&nbsp;<a href = "member/pUpdateF">Password 수정</a><br>
 		&nbsp;<a href = "member/mdelete?id=${sessionScope.loginID}">회원 탈퇴</a><br>
 	</c:if>
 	
@@ -49,7 +50,8 @@
 	&nbsp;<a href = "board/boardList">Board List</a><br>
 	<hr>
 	&nbsp;<a href = "jo/joList">Jo List</a><br>
-	
+	<hr>
+	&nbsp;<a href = "bcrypt">bcrypt</a><br>
 	
 	
 	

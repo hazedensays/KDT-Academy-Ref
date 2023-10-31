@@ -51,7 +51,7 @@
 	<hr>
 
 	<a href="javascript:history.go(-1)">go back</a>
-	<a href="/best/home">go home</a>&nbsp;&nbsp;&nbsp;
+	<a href="/Spring02/home">go home</a>&nbsp;&nbsp;&nbsp;
 
 
 </body>

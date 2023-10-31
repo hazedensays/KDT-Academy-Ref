@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>** Spring_MVC2 Member Update **</title>
-<script src="/best/resources/myLib/jquery-3.2.1.min.js"></script>
+<script src="/Spring02/resources/myLib/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 	<h2>** Spring_MVC2 Member Update **</h2>
@@ -83,7 +83,7 @@
 			<tr height="40">
 				<th bgcolor="hotpink">img</th>
 				<td>
-					<img class="select_img" alt="img" src="/best/${requestScope.mDetail.uploadfile}" width="80" height="100">
+					<img class="select_img" alt="img" src="/Spring02/${requestScope.mDetail.uploadfile}" width="80" height="100">
 					<input type="hidden" name="uploadfile"><br>
 					<input type="file" name="uploadfilef" id="uploadfilef" size="20">
 				</td>
@@ -125,7 +125,7 @@
 	<hr>
 
 	<a href="javascript:history.go(-1)">go back</a>
-	<a href="/best/home">go home</a>&nbsp;&nbsp;&nbsp;
+	<a href="/Spring02/home">go home</a>&nbsp;&nbsp;&nbsp;
 
 
 </body>

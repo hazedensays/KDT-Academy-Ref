@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>** Spring Member Detail **</title>
-<script src="/best/resources/myLib/jquery-3.2.1.min.js"></script>
+<script src="/Spring02/resources/myLib/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -53,7 +53,7 @@
 			<tr height="40">
 				<th bgcolor="hotpink">img</th>
 				<td>
-					<img alt="img" src="/best/${requestScope.mDetail.uploadfile}">
+					<img alt="img" src="/Spring02/${requestScope.mDetail.uploadfile}" height="400">
 				</td>
 			</tr>
 		</c:if>
@@ -67,6 +67,6 @@
 	<hr>
 	
 	<a href="javascript:history.go(-1)">go back</a>
-	<a href="/best/home">go home</a>&nbsp;&nbsp;&nbsp;
+	<a href="/Spring02/home">go home</a>&nbsp;&nbsp;&nbsp;
 </body>
 </html>

@@ -28,7 +28,7 @@
 	</form>
 	<hr>
 
-	<a href="/best/home">go home</a>
+	<a href="/Spring02/home">go home</a>
 	<br> &nbsp;
 
 	<c:if test="${not empty requestScope.message}">
