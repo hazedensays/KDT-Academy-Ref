@@ -435,6 +435,10 @@ public class MemberController {
 		model.addAttribute("mDetail", dto);
 		String uri = "member/memberDetail";
 		
+		// => password 수정과 나머지 컬럼 수정을 분리
+		//    : mapper에서 이것을 구분할 수 있도록 password 값을 null로
+		dto.setPassword(null);
+		
 		String realPath = request.getRealPath("/");
 		
 		if (realPath.contains(".eclipse.")) {
@@ -519,32 +523,66 @@ public class MemberController {
 		return uri;
 	}
 	
-	
-	@GetMapping(value = "/pUpdateF")
-	public void pUpdateF() {
+
+	@GetMapping(value = "/pUpdateForm")
+	public void pUpdateForm() {
 		// viewName 생략
 	}
 
-	// ** Join Service 처리 : Post
-	// @RequestMapping(value = "/join", method = RequestMethod.POST)
-	@PostMapping(value = "/pUpdateForm")
-	public String pUpdateForm(HttpServletRequest request, MemberDTO dto, Model model) {
-		String uri = "member/memberDetail";
+	// ** Password 수정  =========================================
+	@PostMapping(value = "/passwordUpdate")
+	public String passwordUpdate(HttpServletRequest request, MemberDTO dto, Model model) {
+		// Password Update
+		// => 로그인 확인 : session에서 id get
+		// => passwordEncode(암호화) 처리
+		// => Service
+		//    : 성공 : 재로그인 유도 -> session 무효화, member/loginForm으로
+		//    : 실패 : 재수정 유도 -> pUpdateForm으로
 		
-		if (service.pUpdateForm(dto) > 0) {
-			model.addAttribute("message", "회원정보 수정이 완료되었습니다.");
+		String id = (String)request.getSession().getAttribute("loginID");
+		
+		// => id가 존재하지 않는 경우 : 로그인 유도, 메서드 종료
+		if (id==null) {
+			model.addAttribute("message", "로그인 정보가 없습니다.");
+			return "member/loginForm";
+		}
+		
+		// => id가 존재하는 경우 수정
+		System.out.println("변경 전 패스워드: " + dto.getPassword());
+		dto.setId(id);
+		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+		System.out.println("변경 후 패스워드: " + dto.getPassword());
+		String uri = "member/loginForm";
+		
+		if (service.update(dto) > 0) {
+			// password 수정 성공, session 무효화, loginForm으로
+			request.getSession().invalidate();
+			model.addAttribute("message", "password가 변경되었습니다.");
 		} else {
-			model.addAttribute("message", "[회원정보 수정 실패] 다시 시도하세요.");
+			model.addAttribute("message", "[password 변경실패] 다시 시도하세요.");
 			uri = "member/pUpdateForm";
 		}
-
+		
 		return uri;
 	}
 	
 	
-	
-	
-	
+	// ** ID 중복확인  =========================================
+	@GetMapping("/idDupCheck")
+	public String idDupCheck(MemberDTO dto, Model model) {
+		// 1) newID 확인
+		// idUse가 F면 사용 불가, T면 사용 가능
+		if (service.selectOne(dto) != null) {
+			// => 존재할 경우 : 사용 불가
+			model.addAttribute("idUse", "F");
+		} else {
+			// => 존재하지 않을 경우 : 사용 가능
+			model.addAttribute("idUse", "T");
+		}
+		
+		return "member/idDupCheck";
+	}
 	
 	
 	

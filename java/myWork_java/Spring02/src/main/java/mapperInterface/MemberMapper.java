@@ -22,7 +22,4 @@ public interface MemberMapper {
 
 	// ** delete
 	int delete(MemberDTO dto);
-	
-	// ** password 수정
-	int pUpdateForm(MemberDTO dto);
 }

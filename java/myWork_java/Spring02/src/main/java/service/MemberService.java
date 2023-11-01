@@ -23,9 +23,5 @@ public interface MemberService {
 
 	// ** delete
 	int delete(MemberDTO dto);
-	
-	// ** pw 수정
-	int pUpdateForm(MemberDTO dto);
-
 
 }

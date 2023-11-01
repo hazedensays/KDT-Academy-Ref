@@ -52,11 +52,6 @@ public class MemberServiceImpl implements MemberService {
 	public int delete(MemberDTO dto) {
 		return mapper.delete(dto);
 	}
-	
-	// ** pw 수정
-	@Override
-	public int pUpdateForm(MemberDTO dto) {
-		return mapper.pUpdateForm(dto);
-	}
+
 
 } // MemberService

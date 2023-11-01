@@ -38,7 +38,7 @@
 		&nbsp;<a href = "member/logout">Logout</a><br>
 		&nbsp;<a href = "member/mdetail?id=${sessionScope.loginID}">MyInfo 조회</a><br>
 		&nbsp;<a href = "member/mdetail?jCode=U&id=${sessionScope.loginID}">MyInfo 수정</a><br>
-		&nbsp;<a href = "member/pUpdateF">Password 수정</a><br>
+		&nbsp;<a href = "member/pUpdateForm">Password 수정</a><br>
 		&nbsp;<a href = "member/mdelete?id=${sessionScope.loginID}">회원 탈퇴</a><br>
 	</c:if>
 	
