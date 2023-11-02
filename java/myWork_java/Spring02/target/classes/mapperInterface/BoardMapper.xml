@@ -26,7 +26,67 @@
 4) 조건문, 반복문, sql, include, selectKey 등          
 ============================================================== -->
 
+<!-- ** Board_SearchCri_Paging 
+   => ver02_MySql
+      -> 검색조건: title 에 Spring 이 포함된 글목록
+      select * from board
+      where title LIKE '%Spring%'
+      order by root desc, step asc
+      limit #{sno}, #{rowsPerPage}
+   => 해결
+      -> title : cri 의 searchType 컬럼 -> ${searchType}
+      -> '%Spring%' : cri 의 keyword 
+                  -> % + #{keyword} + %
+                  -> MySql 문법은 불편 : CONCAT('%',#{keyword},'%')
+                  -> Mybatis 구문이 편리 
+   => search SQL 
+      -> % 기호의 문자열 연결 처리
+      -> LIKE 조건문                 
+--> 
+<sql id="search">
+   <!-- 1) CONCAT('%',#{keyword},'%') 처리 -->
+   <if test="keyword!=null">
+      <bind name="keyVal" value="'%'+keyword+'%'"/>
+   </if>
+   <!-- 2) LIKE 조건문 -->
+   <choose>
+      <when test="searchType!=null and searchType!='all'">
+         and ${searchType} LIKE #{keyVal} )
+      </when>   
+      
+      <when test="searchType=='all' and keyword != null">
+         and (title LIKE #{keyVal}
+         or id LIKE #{keyVal}
+         or content LIKE #{keyVal}))
+      </when>   
+      <otherwise>)</otherwise>
+   </choose>
+</sql>
 
+<select id="searchCri" resultType="domain.BoardDTO">
+   select * from board
+      where ( seq>0 <include refid="search"></include>
+      order by root desc, step asc
+      limit #{sno}, #{rowsPerPage}
+</select>
+
+<select id="searchTotalCount" resultType="int">
+   select count(*) from board
+      where ( seq>0 <include refid="search"></include>
+</select>
+
+<!-- ** Board_Cri_Paging ==============================================================
+		=> ver01_Mysql
+		limit a, b (a개 제외하고 (a + 1)부터 b개) 적용    -->
+<select id="bcriList" resultType="domain.BoardDTO">
+	select * from board
+	order by root desc, step asc
+	limit #{sno}, #{rowsPerPage}
+</select>
+
+<select id="criTotalCount" resultType="int">
+	select count(*) from board
+</select>
 
 <!-- ** selectList ==============================================================-->
 <select id="selectList" resultType="domain.BoardDTO">
@@ -110,9 +170,5 @@
 	and step >= #{step}
 	and seq != #{seq}
 </update>
-
-
-
-
 
 </mapper>

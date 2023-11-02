@@ -49,6 +49,8 @@
 	<hr>
 	&nbsp;<a href = "board/boardList">Board List</a><br>
 	<hr>
+	&nbsp;<a href = "board/bcriList">B_Cri_List</a><br>
+	<hr>
 	&nbsp;<a href = "jo/joList">Jo List</a><br>
 	<hr>
 	&nbsp;<a href = "bcrypt">bcrypt</a><br>

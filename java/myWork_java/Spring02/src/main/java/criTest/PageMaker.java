@@ -40,7 +40,7 @@ public class PageMaker {
 	
 	// ** 필요값 set
 	// 1) Criteria
-	// public void setCri(Criteria cri) { -> ver01   
+	//public void setCri(Criteria cri) { //-> ver01   
 	public void setCri(SearchCriteria cri) { //ver02	
 		this.cri=cri;
 	}
@@ -68,13 +68,17 @@ public class PageMaker {
 		//    		         ceil -> 천장, 예) 11/3=3.666..  -> 4
 		// => Math.ceil(12.345) => 13.0
 		epageNo = (int)Math.ceil(cri.getCurrPage()/(double)displayPageNo) * displayPageNo;
-		spageNo = (epageNo-displayPageNo) + 1; 
+				  // 요청받은 pageNo 11인 경우 -> (int)Math.ceil(11 / 3) * 3 = 4 * 4 = 12
+		spageNo = (epageNo-displayPageNo) + 1; // 12 - 3 + 1 = 10
+				  // 12 - 3 + 1 = 10, 결론은 11은 10, 11, 12 그룹에 속함
 		
 		// 3.2) lastPageNo, epageNo 확인 
 		lastPageNo =(int)Math.ceil(totalRowsCount/(double)cri.getRowsPerPage());
 		if ( lastPageNo<epageNo ) epageNo=lastPageNo;
 		
-		// 3.3) prev, next  
+		// 3.3) prev, next
+		// => 사과 13개를 1box에 3개씩 담으려면 필요한 box는
+		//    13 / 3 = 4.3333, 즉 box는 5개 필요 -> 이것을 계산해주는 메서드가 Math.ceil()임
 		prev = spageNo==1 ? false : true;
 		next = epageNo==lastPageNo ? false : true;
 		

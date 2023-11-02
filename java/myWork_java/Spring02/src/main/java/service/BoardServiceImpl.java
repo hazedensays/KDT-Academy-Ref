@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import criTest.SearchCriteria;
 import domain.BoardDTO;
 import mapperInterface.BoardMapper;
 
@@ -31,6 +32,26 @@ public class BoardServiceImpl implements BoardService {
 	// 즉, 위 인터페이스의 구현체(클래스)는 작성할 필요가 없음
 	BoardMapper mapper;
 
+	// ** Board_Cri_Pageing
+	   // => 출력할 Data만 select
+	   @Override
+	   public List<BoardDTO> bcriList(SearchCriteria cri){
+		   // ver02
+		   return mapper.searchCri(cri);
+		   
+		  // ver01
+	      //return mapper.bcriList(cri);
+	   };
+	   
+	   // 전체 row 개수
+	   @Override
+	   public int criTotalCount(SearchCriteria cri) {
+	      // ver02
+		   return mapper.searchTotalCount(cri);
+		   
+		  //return mapper.criTotalCount();
+	   };
+	
 	// ** selectList
 	@Override
 	public List<BoardDTO> selectList() {
