@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.stereotype.Repository;
 
 import domain.MemberDTO;
@@ -134,7 +135,7 @@ public class MemberDAO {
 	// ** insert ==============================================================
 	// => 입력 컬럼 : name, age, jno, info
 	public int insert(MemberDTO dto) {
-		sql = "insert into member values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql = "insert into member values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			pst = cn.prepareStatement(sql);
@@ -148,6 +149,7 @@ public class MemberDAO {
 			pst.setDouble(7, dto.getPoint());
 			pst.setString(8, dto.getBirthday());
 			pst.setString(9, dto.getRid());
+			pst.setString(10, dto.getUploadfile());
 
 			// int count = pst.executeUpdate();
 			// return count;

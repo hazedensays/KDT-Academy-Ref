@@ -7,6 +7,15 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
+
+
+<!-- JUnit Test
+	 => SpringDAO Test Bean 설정 : MemberDAO, MemberDTO   -->
+	<bean class="model.MemberDAO" lazy-init="true"></bean>
+	<bean class="domain.MemberDTO" lazy-init="true"></bean>
+	
+
+
 <!-- ** Mybatis 설정 : interface 방식, root-context 에 설정 *********
 	  	=> DAO 에서의 sql 구문을 xml (Mapper) 로 처리
 	  	=> DB_Connection, Mybatis 설정 1) DB_Connection 									-->
