@@ -249,7 +249,7 @@ function inCheck() {
 
 			<tr height="40">
 				<th bgcolor="hotpink">password 확인</th>
-				<td><input type="password" name="password" id="password2"
+				<td><input type="password" name="password2" id="password2"
 					placeholder="영문, 숫자, 특수문자" size="20"><br> <span
 					id="p2Message" class="eMessage" style="color:red"></span></td>
 			</tr>

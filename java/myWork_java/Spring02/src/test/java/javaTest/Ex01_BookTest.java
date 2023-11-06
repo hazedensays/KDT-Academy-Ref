@@ -29,6 +29,9 @@ class Book {
 	
 }// class Book
 
+// ** 테스트 레벨 4단계
+//    단위테스트 -> 통합테스트 -> 시스템테스트 -> 인수테스트
+
 //** 테스트 주도 개발 (Test-Driven Development , TDD)
 //=> JUnit 활용
 // Java 개발시 가장 많이 이용되는 단위테스트 프레임

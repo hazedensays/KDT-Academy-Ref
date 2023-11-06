@@ -32,10 +32,11 @@ public class Ex02_interfaceMapper {
 	MemberDTO dto;
 
 	// ** mapper의 동작 Test
-	//@Test
+	@Test
 	public void mapperTest() {
 		assertNotNull(mapper);
 		System.out.println("** mapper Interface의 구현객체 => " + mapper.getClass().getName());
+		System.out.println("** dto 인스턴스의 클래스 이동 => " + dto.getClass().getName());
 		// => getClass().getName() : 실제동작하는 클래스(MemberMapper구현객체) 의 이름 확인가능
 		// 이를 통해 우리는 Mapper interface 만 작성했지만,
 		// 내부적으로는 동일한 타입의 클래스가 만들어졌음을 알 수 있다.
@@ -101,7 +102,7 @@ public class Ex02_interfaceMapper {
 		assertNotNull(dto);
 	}
 	
-	@Test
+	//@Test
 	// 5) totalCount
 	// => admin을 제외한 전체 member count, 출력 확인
 	// => interface에 메서드만 추가
