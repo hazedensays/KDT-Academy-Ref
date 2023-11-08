@@ -5,27 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-
 // ** Boot 서버 kill
 // cmd창에서
 // netstat -a -n -o -p tcp -> 8080 port의 pid(812 : 그때그때 다름) 번호 확인
 // taskkill /f /pid  812
-
-//** @SpringBootApplication
-//=> 해당 클래스가 Springboot의 설정 클래스임을 명시하며
-//   해당 클래스를 메인으로 실행됨
-//=> 해당 클래스가 있는 Package를 기본 Package로 간주함
-//  그러므로 같은 Package 내의 클래스들은 Scan 됨.
-//( 즉, @ComponentScan 을 이미 포함하고 있음 ) 
-//=> 소스코드 내부를 보면 다양한 @들을 내포하여 기본동작을 실행하고 자동설정한다  
-
-//=> 기본속성 ( https://mangkyu.tistory.com/211 )
-// - exclude: 특정 클래스를 자동 설정에서 제외함
-// - excludeName: 클래스의 이름으로 자동 설정에서 제외함
-// - scanBasePackages: 컴포넌트 스캔(빈 탐색)을 진행할 베이스 패키지를 설정함
-// - scanBasePackageClasses: 컴포넌트 스캔(빈 탐색)을 진행할 베이스 클래스를 설정함
-// - nameGenerator: 빈 이름 생성을 담당할 클래스를 설정함
-// - proxyBeanMethods: @Bean 메소드를 프록시 방식으로 처리하도록 설정함
 
 //** @SpringBootApplication 의 하위 애너테이션
 
@@ -45,8 +28,15 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 //=> @ComponentScan(basePackages={"service"})
 // - 기본 Package 외의 Package 를 인식시켜 클래스를 Scan할 수 있도록함.  
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-@MapperScan(value={"mapperInterface"})
+//** Mybatis interface 설정
+//=> @MapperScan : Mapper 인터페이스들이 들어있는 패키지들을 인식시켜줌
+//=> ~Mapper.xml 사용시
+// - application.properties 화일에 아래설정 추가
+//   mybatis.mapper-locations=classpath:/mappers/*Mapper.xml
+// - Spring_MVC 와는 다르게 ~Mapper.xml 을 인식시킨다.
+
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@MapperScan(value = { "mapperInterface" })
 public class DemoApplication {
 
 	public static void main(String[] args) {
