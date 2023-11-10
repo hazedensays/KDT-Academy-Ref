@@ -5,9 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>** AjaxTest Main Form **</title>
+<title>AjaxTest Main Form</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/resources/myLib/jquery-3.2.1.min.js"></script>
 <script src="/resources/myLib/axTest01.js"></script>
+<script src="/resources/myLib/axTest02.js"></script>
 </head>
+
 <body>
 	<h2>** AjaxTest Main Form **</h2>
 	<hr>
@@ -21,10 +25,13 @@
 	=> ${requestScope.message}
 	</c:if>
 	<hr>
-	
-	&nbsp;<span style="cursor:pointer" onclick = "rsLoginf()">rsLogin</span>&nbsp;
-	&nbsp;<a href="/home">[HOME]</a>
-	
+
+	&nbsp;
+	<span style="cursor: pointer" onclick="rsLoginf()">rsLogin</span>&nbsp;
+	<span style="cursor: pointer" onclick="rsJoinf()">rsJoin</span>&nbsp;
+	&nbsp;
+	<a href="/home">[HOME]</a>
+
 	<div id="resultArea1"></div>
 	<div id="resultArea2"></div>
 

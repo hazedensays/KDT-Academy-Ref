@@ -180,48 +180,45 @@ function inCheck() {
 <body>
 	<h2>** SpringBoot Member Join**</h2>
 
-	<form action="join" method="post" enctype="multipart/form-data">
+	<form action="join" method="post" enctype="multipart/form-data"  id="myform">
 		<table border="1" style="width: 90%">
 			<tr height="40">
 				<th bgcolor="hotpink">id</th>
-				<td><input type="text" name="id" id="id" placeholder="영문, 10글자 이내"
-					size="20">
-					<button type="button" id="idDup" onclick="idDupCheck()">ID 중복확인</button>
-					<br>
-					<span id="iMessage" class="eMessage" style="color:red"></span>
-				</td>
+				<td><input type="text" name="id" id="id"
+					placeholder="영문, 10글자 이내" size="20">
+					<button type="button" id="idDup" onclick="idDupCheck()">ID
+						중복확인</button> <br> <span id="iMessage" class="eMessage"
+					style="color: red"></span></td>
 			</tr>
-			
+
 			<tr height="40">
 				<th bgcolor="hotpink">password</th>
 				<td><input type="password" name="password" id="password"
-					placeholder="영문, 숫자, 특수문자" size="20"><br>
-					<span id="pMessage" class="eMessage" style="color:red"></span>
-				</td>
+					placeholder="영문, 숫자, 특수문자" size="20"><br> <span
+					id="pMessage" class="eMessage" style="color: red"></span></td>
 			</tr>
 
 			<tr height="40">
 				<th bgcolor="hotpink">password 확인</th>
 				<td><input type="password" name="password2" id="password2"
 					placeholder="영문, 숫자, 특수문자" size="20"><br> <span
-					id="p2Message" class="eMessage" style="color:red"></span></td>
+					id="p2Message" class="eMessage" style="color: red"></span></td>
 			</tr>
 
 			<tr height="40">
 				<th bgcolor="hotpink">name</th>
-				<td><input type="text" name="name" placeholder="한/영문 입력" id="name"
-					size="20"><br>
-					<span id="nMessage" class="eMessage" style="color:red"></span>
-				</td>
+				<td><input type="text" name="name" placeholder="한/영문 입력"
+					id="name" size="20"><br> <span id="nMessage"
+					class="eMessage" style="color: red"></span></td>
 			</tr>
-			
+
 			<tr height="40">
 				<th bgcolor="hotpink">age</th>
-				<td><input type="text" name="age" id="age" placeholder="숫자 입력" size="20"><br>
-					<span id="aMessage" class="eMessage" style="color:red"></span>
-				</td>
+				<td><input type="text" name="age" id="age" placeholder="숫자 입력"
+					size="20"><br> <span id="aMessage" class="eMessage"
+					style="color: red"></span></td>
 			</tr>
-			
+
 			<tr height="40">
 				<th bgcolor="hotpink">jno</th>
 				<td><select name="jno">
@@ -240,33 +237,30 @@ function inCheck() {
 			</tr>
 			<tr height="40">
 				<th bgcolor="hotpink">point</th>
-				<td><input type="text" name="point" placeholder="실수 입력" id="point"
-					size="20"><br>
-					<span id="oMessage" class="eMessage" style="color:red"></span>
-				</td>
+				<td><input type="text" name="point" placeholder="실수 입력"
+					id="point" size="20"><br> <span id="oMessage"
+					class="eMessage" style="color: red"></span></td>
 			</tr>
-			
+
 			<tr height="40">
 				<th bgcolor="hotpink">birthday</th>
 				<td><input type="date" name="birthday" id="birthday" size="20"><br>
-					<span id="bMessage" class="eMessage" style="color:red"></span>
-				</td>
+					<span id="bMessage" class="eMessage" style="color: red"></span></td>
 			</tr>
-			
+
 			<tr height="40">
 				<th bgcolor="hotpink">rid</th>
 				<td><input type="text" name="rid" placeholder="추천인 입력"
 					size="20"></td>
 			</tr>
-			
+
 			<tr height="40">
 				<th bgcolor="hotpink">img</th>
-				<td>
-					<img src="" class="select_img"><br>
-					<input type="file" name="uploadfilef" id="uploadfilef" size="20">
+				<td><img src="" class="select_img"><br> <input
+					type="file" name="uploadfilef" id="uploadfilef" size="20">
 				</td>
 			</tr>
-			
+
 			<script>
 
 				document.getElementById('uploadfilef').onchange = function(e) {
@@ -281,10 +275,13 @@ function inCheck() {
 					} // if   
 				}; //change  -> }); JQ 사용시
 			</script>
-			
+
 			<tr height="40">
-				<td colspan="2"><input type="submit" value="가입" onclick="return inCheck()" id="submitTag" disabled>&nbsp;&nbsp;&nbsp;
-					<input type="reset" value="취소"></td>
+				<td colspan="2"><input type="submit" value="가입"
+					onclick="return inCheck()" id="submitTag" disabled>&nbsp;&nbsp;&nbsp;
+					<input type="reset" value="취소">
+					<span class="textlink" style="cursor:pointer" onclick="rsJoin()">rsJoin</span>
+				</td>
 			</tr>
 		</table>
 	</form>
