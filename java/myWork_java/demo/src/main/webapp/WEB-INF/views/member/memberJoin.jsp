@@ -278,9 +278,10 @@ function inCheck() {
 
 			<tr height="40">
 				<td colspan="2"><input type="submit" value="가입"
-					onclick="return inCheck()" id="submitTag" disabled>&nbsp;&nbsp;&nbsp;
-					<input type="reset" value="취소">
-					<span class="textlink" style="cursor:pointer" onclick="rsJoin()">rsJoin</span>
+					onclick="return inCheck()" id="submitTag" disabled>&nbsp;&nbsp;
+					<input type="reset" value="취소">&nbsp;&nbsp;
+					<span class="textlink" style="cursor:pointer" onclick="rsJoin()">rsJoin</span>&nbsp;&nbsp;
+					<span class="textlink" style="cursor:pointer" onclick="axiJoin()">axiJoin</span>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</table>

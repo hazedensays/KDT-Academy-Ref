@@ -37,6 +37,15 @@ public class MemberController {
 	MemberService service;
 	PasswordEncoder passwordEncoder;
 	
+	// ** Axios_MemberList
+	@GetMapping("/axMemberList")
+	public String axmemberList(Model model) {
+		model.addAttribute("mList", service.selectList());
+		log.info("** MemberList 성공 **");
+		return "axTest/axMemberList";
+	}
+	
+	
 	@GetMapping("/memberList")
 	public void memberList(Model model) {
 		model.addAttribute("mList", service.selectList());

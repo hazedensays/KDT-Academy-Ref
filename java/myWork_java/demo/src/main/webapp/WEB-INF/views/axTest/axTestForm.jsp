@@ -29,6 +29,7 @@
 	&nbsp;
 	<span style="cursor: pointer" onclick="rsLoginf()">rsLogin</span>&nbsp;
 	<span style="cursor: pointer" onclick="rsJoinf()">rsJoin</span>&nbsp;
+	<span style="cursor: pointer" onclick="axiMList()">axiMList</span>&nbsp;
 	&nbsp;
 	<a href="/home">[HOME]</a>
 
