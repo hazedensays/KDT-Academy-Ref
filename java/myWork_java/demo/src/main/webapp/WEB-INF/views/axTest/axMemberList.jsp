@@ -39,7 +39,7 @@
 		<c:if test="${not empty requestScope.mList}">
 			<c:forEach var="list" items="${requestScope.mList}">
 				<tr>
-					<td><a href="mdetail?id=${list.id}">${list.id}</a></td>
+					<td><span style="cursor:pointer" class = "textlink" onclick = "idbList(`${list.id}`)">${list.id}</span></td>
 					<td>${list.name}</td>
 					<td>${list.age}</td>
 					<td>${list.jno}</td>

@@ -33,26 +33,32 @@ public class BoardServiceImpl implements BoardService {
 	// 즉, 위 인터페이스의 구현체(클래스)는 작성할 필요가 없음
 	BoardMapper mapper;
 
+	// ** REST API, Axios Test
+	@Override
+	public List<BoardDTO> idBList(String id) {
+		return mapper.idBList(id);
+	};
+
 	// ** Board_Cri_Pageing
-	   // => 출력할 Data만 select
-	   @Override
-	   public List<BoardDTO> bcriList(SearchCriteria cri){
-		   // ver02
-		   return mapper.searchCri(cri);
-		   
-		  // ver01
-	      //return mapper.bcriList(cri);
-	   };
-	   
-	   // 전체 row 개수
-	   @Override
-	   public int criTotalCount(SearchCriteria cri) {
-	      // ver02
-		   return mapper.searchTotalCount(cri);
-		   
-		  //return mapper.criTotalCount();
-	   };
-	
+	// => 출력할 Data만 select
+	@Override
+	public List<BoardDTO> bcriList(SearchCriteria cri) {
+		// ver02
+		return mapper.searchCri(cri);
+
+		// ver01
+		// return mapper.bcriList(cri);
+	};
+
+	// 전체 row 개수
+	@Override
+	public int criTotalCount(SearchCriteria cri) {
+		// ver02
+		return mapper.searchTotalCount(cri);
+
+		// return mapper.criTotalCount();
+	};
+
 	// ** selectList
 	@Override
 	public List<BoardDTO> selectList() {
@@ -64,7 +70,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int rinsert(BoardDTO dto) {
 		if (mapper.rinsert(dto) > 0) {
-			//stepUpdate
+			// stepUpdate
 			System.out.println("** stepUpdate Count => " + mapper.stepUpdate(dto));
 			return 1;
 		} else {
