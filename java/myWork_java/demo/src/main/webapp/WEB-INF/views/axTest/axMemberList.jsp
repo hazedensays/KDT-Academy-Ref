@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/resources/myLib/myStyle.css">
 <script src="/resources/myLib/axTest02.js"></script>
+<script src="/resources/myLib/axTest03.js"></script>
 <title>** SpringBoot Axios_MemberList **</title>
 </head>
 <body>
@@ -42,7 +44,13 @@
 					<td><span style="cursor:pointer" class = "textlink" onclick = "idbList(`${list.id}`)">${list.id}</span></td>
 					<td>${list.name}</td>
 					<td>${list.age}</td>
-					<td>${list.jno}</td>
+					<td>
+						<span class="textlink" onmouseenter="showJoDetail(event,${list.jno})"
+											   onmouseleave="hideJoDetail()">
+							${list.jno}
+						</span>
+					
+					</td>
 					<td>${list.info}</td>
 					<td>${list.point}</td>
 					<td>${list.birthday}</td>
@@ -78,6 +86,7 @@
 			</tr>
 		</c:if>
 	</table>
+	<div id="content"></div>
 	<hr>
 
 	<a href="/home">go home</a>

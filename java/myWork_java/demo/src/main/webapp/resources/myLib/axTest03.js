@@ -27,8 +27,8 @@ function idbList(id) {
                         <th>Seq</th>
                         <th>Title</th>
                         <th>ID</th>
-                        <th>등록시간</th>
-                        <th>조회수</th>      
+                        <th>Regdate</th>
+                        <th>Count</th>      
                      </tr>`;
 
 		for (let b of list) {
@@ -58,4 +58,70 @@ function idbList(id) {
 		else alert("시스템 오류 " + err.message);
 	})
 
-}
+}//idbList()
+
+// JoDetail
+// 1) showJoDetail(${m.jno})
+// => jno 에 onmouseover : jno 의 detail 을 div(content) 에 출력
+// => Request : axios, get, RTestController 에 jodetail 요청
+// => Response : JoDTO 객체
+
+function showJoDetail(e,jno) {
+	// ** 이벤트객체 활용
+	// => 마우스포인터 위치 확인          
+	//     - event객체 (이벤트핸들러 첫번째 매개변수) 가 제공
+	//    - e.pageX, e.pageY : 전체 Page 기준
+	//     - e.clientX, e.clientY : 보여지는 화면 기준-> page Scroll 시에 불편함
+
+	console.log(`** e.pageX = ${e.pageX}, e.pageY = ${e.pageY}`);
+	console.log(`** e.clientX = ${e.clientX}, e.clientY = ${e.clientY}`);
+
+	let url = "/rest/jodetail?jno=" + jno;
+	let mleft = e.pageX;
+	let mtop = e.pageY;
+	
+	document.getElementById('content').style.left = mleft+"px";
+	document.getElementById('content').style.top = mtop+"px";
+
+	axios.get(url
+	).then(response => {
+		console.log("** response 성공 => " + response.data);
+		let jo = response.data;
+		console.log("** Data: jo.jno => " + jo.jno);
+		let resultHtml = `
+      <table>
+         <tr height="20"><td>Jno</td><td>${jo.jno}</td></tr>
+         <tr height="20"><td>JoName</td><td>${jo.jname}</td></tr>
+         <tr height="20"><td>CaptainID</td><td>${jo.id}</td></tr>
+         <tr height="20"><td>Project</td><td>${jo.project}</td></tr>
+         <tr height="20"><td>Slogan</td><td>${jo.slogan}</td></tr>
+      </table>`;
+		document.getElementById('content').innerHTML = resultHtml;
+		document.getElementById('content').style.display = 'block';
+
+	}).catch(err => {
+		if (err.response.status == '502') alert(err.response.data);
+		else alert("~~ 시스템 오류, 잠시후 다시하세요 => " + err.message);
+	});
+} //showJoDetail
+
+// 2.2.2) MouseOut: hideJoDetail
+// => 화면에 표시되어있는 content div 가 사라짐. 
+
+function hideJoDetail() {
+	document.getElementById('content').style.display = 'none';
+} //hideJoDetail()
+
+
+
+
+
+
+
+
+
+
+
+
+
+

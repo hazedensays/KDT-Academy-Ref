@@ -183,7 +183,7 @@ function inCheck() {
 	<form action="join" method="post" enctype="multipart/form-data"  id="myform">
 		<table border="1" style="width: 90%">
 			<tr height="40">
-				<th bgcolor="hotpink">id</th>
+				<th bgcolor="hotpink">잼민이이름</th>
 				<td><input type="text" name="id" id="id"
 					placeholder="영문, 10글자 이내" size="20">
 					<button type="button" id="idDup" onclick="idDupCheck()">ID
@@ -228,6 +228,22 @@ function inCheck() {
 						<option value="4">4 : 최고조</option>
 						<option value="5">5 : 오조</option>
 						<option value="9">9 : test조</option>
+				</select></td>
+			</tr>
+			<tr height="40">
+				<th bgcolor="hotpink">찐따력</th>
+				<td><select name="jno">
+						<option value="1">100</option>
+						<option value="2">200</option>
+						<option value="3">300</option>
+						<option value="4">400</option>
+						<option value="5">500</option>
+				</select></td>
+			</tr>
+			<tr height="40">
+				<th bgcolor="hotpink">친구여부</th>
+				<td><select name="jno">
+						<option value="1">없음</option>
 				</select></td>
 			</tr>
 			<tr height="40">
