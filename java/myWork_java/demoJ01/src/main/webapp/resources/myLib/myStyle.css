@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+span.textlink{
+   cursor:pointer;   
+}
+
+span.textlink:hover{
+   color:hotpink;
+}
+
+div#content{
+   width:300px;
+   position:absolute;
+   top:0px;
+   left:0px;
+   background-color:#fff;
+}
+
+div#content tr td:nth-child(1){
+	background-color:pink;
+	font-weight:bold;
+	height:40px;
+}
