@@ -886,6 +886,63 @@ update member set uploadfile="resources/uploadImages/eee.gif" where jno = 4;
 update member set uploadfile="resources/uploadImages/xxx.gif" where jno = 5; 
 update member set uploadfile="resources/uploadImages/ddd.gif" where jno = 7; 
 update member set uploadfile="resources/uploadImages/ccc.gif" where jno = 999; 
+use mydb;
+alter table member Modify password varchar(100) not null;
+update member set password = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder";
+
+
+create database tbt_concept;
+
+
+use tbt_concept;
+
+create table user (
+	user_id varchar(25) primary key,
+    user_name varchar(30) not null,
+    user_pw varchar(1000) not null,
+    user_phoneNum int(11) not null,
+    user_birth int(8) not null,
+    user_rank varchar(8) default "white",
+    user_event_check char(1) not null,
+    address_avc int(10) not null,
+    address_city varchar(30) not null,
+    address_detail varchar(20) not null
+);
+
+create table address (
+	user_id varchar(25),
+    address_avc int(10) not null,
+    address_city varchar(30) not null,
+    address_detail varchar(20) not null,
+    address_name varchar(20) not null,
+    address_phoneNum int(11)
+);
+
+create table coupon (
+	coupon_id int(10) primary key auto_increment,
+    coupon_name varchar(20) not null,
+    coupon_disc int(2) not null
+);
+
+create table coupon_list (
+	coupon_list_id int(10) primary key auto_increment,
+    coupon_id int(10),
+    user_id varchar(25),
+    coupon_start int(8) not null,
+    coupon_end int(8) not null
+);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

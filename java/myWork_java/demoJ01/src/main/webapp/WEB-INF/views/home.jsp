@@ -84,7 +84,7 @@
 	<a href="/ginsert">GSave</a>
 	<a href="/guestlist">GList</a> &nbsp;
 	<a href="/gupdate">GUpdate</a> &nbsp;
-	<a href="/metamong">메타몽 김찬미</a>
+	<a href="/gpagelist">gPageList</a>
 	<br>
 
 
