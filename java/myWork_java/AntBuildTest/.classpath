@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/MTest/myMember.jar"/>
+	<classpathentry kind="lib" path="C:/hazedensays_acaRef/java/myWork_java/AntBuild/dist/myMember.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

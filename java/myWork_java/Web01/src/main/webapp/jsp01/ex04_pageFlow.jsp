@@ -18,11 +18,11 @@
 -> 2.1) JSP Action Tag <br>
 Jsp 문서의 완성된 웹페이지가 포함됨, 변수공유 불가능 (코드호환이 안됨)<br>
 <%-- <jsp:forward page="ex01_HelloJSP.jsp"></jsp:forward> --%>
-<jsp:include page="ex01_HelloJSP.jsp"></jsp:include>
+<%-- <jsp:include page="ex01_HelloJSP.jsp"></jsp:include> --%>
 
 -> 2.2) Directive include Test <br>
 Jsp문서의 소스코드가 포함됨, 변수공유 가능 (코드호환이 됨)<br>
-<%@ include file ="ex01_HelloJSP.jsp" %>
+<%-- <%@ include file ="ex01_HelloJSP.jsp" %> --%>
 
 </body>
 </html>

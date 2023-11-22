@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/select")
-public class Ex04_select extends HttpServlet {
+public class Ex04_Select extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public Ex04_select() {
+    public Ex04_Select() {
         super();
     }
 

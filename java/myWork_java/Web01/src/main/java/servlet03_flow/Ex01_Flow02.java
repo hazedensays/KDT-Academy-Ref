@@ -25,11 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 //  => 현재의 요청에 대해 응답 -> 재요청 -> 처리
 
 @WebServlet("/flow02")
-public class Ex01_flow02 extends HttpServlet {
+public class Ex01_Flow02 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public Ex01_flow02() {
+    public Ex01_Flow02() {
         super();
     }
 
