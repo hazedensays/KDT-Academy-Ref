@@ -1,0 +1,4 @@
+INDEX VERSION 1.4+D:\hazedensays\hazedensays_Ref\java\newMyWork_java\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+378929618.index
+3435648363.index
+2409582696.index

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapperInterface.JoMapper">
+
+<!-- ** selectList ==============================================================-->
+<select id="selectList" resultType="com.example.demo.domain.JoDTO">
+	select j.jno, jname, j.id, m.name, project, slogan
+	from jo j
+	left outer join member m on j.id=m.id
+</select>
+
+<!-- ** selectOne ============================================================== -->
+<select id="selectOne" resultType="com.example.demo.domain.JoDTO">
+	select * from jo where jno = #{jno}
+</select>
+
+
+<!-- ** insert ============================================================== -->
+<insert id="insert">
+	insert into jo(jno, jname, id, project, slogan)
+	values(#{jno}, #{jname}, #{id}, #{project}, #{slogan})
+</insert>
+
+<!-- 코딩 능률이 올라간 느낌~~ 너무 좋다아아아ㅏ 하하하하ㅏ카카카아아ㅏㅏㅇ키카이ㅏ -->
+
+<!-- ** update ============================================================== -->
+<update id="update">
+     update jo set id=#{id}, jname=#{jname}, project=#{project}, slogan=#{slogan} where jno=#{jno}
+</update>
+
+<!-- ** delete ============================================================== -->
+<delete id="delete">
+	delete from jo where jno = #{jno}
+</delete>
+
+</mapper>
