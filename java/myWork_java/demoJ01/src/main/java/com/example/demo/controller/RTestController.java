@@ -15,8 +15,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 public class RTestController {
-	
-	
+
 	@GetMapping("/checkdata")
 	public String hello() {
 		log.info("** React Connect Test 중~");
